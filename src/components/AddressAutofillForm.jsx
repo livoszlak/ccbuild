@@ -79,7 +79,7 @@ const AddressAutofillForm = () => {
             none: activePage !== "shipping",
           })}
         >
-          <h4 className="txt-l txt-bold mb6">Shipping Address</h4>
+          <h4 className="txt-l txt-bold mb6">Adress</h4>
 
           <form
             className="flex flex--column"
@@ -87,7 +87,7 @@ const AddressAutofillForm = () => {
             onSubmit={handleFormSubmit}
           >
             {/* first and last name */}
-            <div className="grid grid--gut12">
+            {/*             <div className="grid grid--gut12">
               <div className="col w-1/2">
                 <label className="txt-s txt-bold color-gray mb3">
                   First Name
@@ -100,43 +100,58 @@ const AddressAutofillForm = () => {
                   <input className="input mb12" name="last-name" required />
                 </label>
               </div>
-            </div>
+            </div> */}
 
             {/* address with autofill */}
             <AddressAutofill accessToken={MAPBOX_ACCESS_TOKEN}>
+              <label className="txt-s txt-bold color-gray mb3">Adress</label>
               <input
                 ref={addressRef}
                 className="input mb12"
                 name="address"
-                placeholder="Start typing your address..."
+                placeholder="Upphämtningsadress"
                 required
               />
             </AddressAutofill>
 
             {/* address-line2 */}
-            <label className="txt-s txt-bold color-gray mb3">
+            {/*             <label className="txt-s txt-bold color-gray mb3">
               Apartment, suite, etc. (optional)
               <input
                 className="input mb12"
                 autoComplete="address-line2"
                 name="address-line2"
               />
-            </label>
+            </label> */}
 
             {/* city, state, postal-code */}
+            <div className="col w-1/3">
+              <label className="txt-s txt-bold color-gray mb3">
+                Postkod
+                <input
+                  className="input"
+                  autoComplete="postal-code"
+                  placeholder="Postkod för upphämtning"
+                  name="postcode"
+                  required
+                />
+              </label>
+            </div>
             <div className="grid grid--gut12 mb12">
               <div className="col w-1/3">
                 <label className="txt-s txt-bold color-gray mb3">
-                  City
+                  Postort
                   <input
                     className="input mb12"
                     autoComplete="address-level2"
+                    placeholder="Ort för upphämtning"
                     name="city"
                     required
                   />
                 </label>
               </div>
-              <div className="col w-1/3">
+            </div>
+            {/*               <div className="col w-1/3">
                 <label className="txt-s txt-bold color-gray mb3">
                   State / Region
                   <input
@@ -146,31 +161,19 @@ const AddressAutofillForm = () => {
                     required
                   />
                 </label>
-              </div>
-              <div className="col w-1/3">
-                <label className="txt-s txt-bold color-gray mb3">
-                  ZIP / Postcode
-                  <input
-                    className="input"
-                    autoComplete="postal-code"
-                    name="postcode"
-                    required
-                  />
-                </label>
-              </div>
-            </div>
+              </div> */}
 
             {/* continue button */}
-            <div className="mb12 submit-btns align-r">
+            {/*             <div className="mb12 submit-btns align-r">
               <button type="submit" className="btn round">
                 Continue
               </button>
-            </div>
+            </div> </div> */}
           </form>
-        </div>
+          {/* </div> */}
 
-        {/* confirmation page */}
-        <div
+          {/* confirmation page */}
+          {/*         <div
           className={clsx("confirm-page", {
             none: activePage === "shipping",
           })}
@@ -200,18 +203,18 @@ const AddressAutofillForm = () => {
             >
               Try this example again
             </button>
-          </div>
+          </div> */}
 
           {/* order details */}
-          <div className="round border border--gray-light px18 py6 flex mb24">
+          {/*           <div className="round border border--gray-light px18 py6 flex mb24">
             <div className="txt-bold mr24 w60">Order</div>
             <div className="flex-child-grow">
               1 - Mapbox Developer Tee Shirt
             </div>
-          </div>
+          </div> */}
 
           {/* shipping address */}
-          <div className="round border border--gray-light px18 py6 flex mb24">
+          {/*           <div className="round border border--gray-light px18 py6 flex mb24">
             <div className="txt-bold mr24 w60">Ship To</div>
             <div className="flex-child-grow" id="shipping-address">
               {displayAddress}
@@ -224,9 +227,9 @@ const AddressAutofillForm = () => {
                 Change
               </button>
             </div>
-          </div>
+          </div> */}
 
-          <div
+          {/*           <div
             className={clsx("mb12 submit-btns align-r", {
               none: activePage !== "confirm",
             })}
@@ -238,7 +241,7 @@ const AddressAutofillForm = () => {
             >
               Submit Order
             </button>
-          </div>
+            </div> */}
         </div>
       </div>
     </div>
