@@ -4,15 +4,15 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import { AddressAutofill } from "@mapbox/search-js-react";
 import AddressAutofillForm from "./components/AddressAutofillForm";
-import StepperComponent from "./components/molecules/Stepper/StepperComponent";
+import Stepper from "./components/molecules/Stepper/Stepper";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      <AddressAutofillForm />
-      {/* <StepperComponent/> */}
+      {/* <AddressAutofillForm /> */}
+      <Stepper/>
     </>
   );
 }
