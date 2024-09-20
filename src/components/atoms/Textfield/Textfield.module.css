@@ -1,0 +1,15 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    text-align: left;
+}
+
+.title{
+    font-weight: 600;
+    margin: 0px 0px 0px 0px;
+    font-size: 13;
+}
+.input{
+    font-size: 14;
+}
