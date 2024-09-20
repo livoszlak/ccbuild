@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import Textfield from '../../atoms/Textfield/Textfield';
 import Dropdown from '../../atoms/Dropdown/Dropdown';
 import styles from './Stepper.module.css';
+import RadioButton from '../../atoms/RadioButton/RadioButton';
 
 // define the number of steps //
 const steps = [0, 1, 2, 3, 4];
@@ -25,6 +26,16 @@ const options3 = {
   option2: "Value 2",
   option3: "Value 3"
 };
+const weightUnits = {
+  option1: "Value 1",
+  option2: "Value 2",
+  option3: "Value 3"
+}
+const measurementUnits = {
+  option1: "Value 1",
+  option2: "Value 2",
+  option3: "Value 3"
+}
 
 function StepperComponent() {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -93,7 +104,30 @@ function StepperComponent() {
         return (
           <>
             <h1>Egenskaper</h1>
+            {/* for each prop in properties:  */}
+            <RadioButton title="title" values={options}/>
+            <RadioButton title="title2" values={options2}/>
+
             <h1>Form</h1>
+            <Box className={styles.propertyInputContainer}>
+            <Textfield title="Material"/> 
+            <Textfield title="Färg/Finish"/>
+            </Box>
+            <Box className={styles.propertyInputContainer}>
+            <Textfield title="Bredd"/> 
+            <Textfield title="Djup"/>
+            <Textfield title="Höjd"/>
+            <Dropdown title="Enhet mått" options={measurementUnits} size='small'/>
+            </Box>
+            <Box className={styles.propertyInputContainer}>
+              {/* knappar här */}
+            </Box>
+            <Box className={styles.propertyInputContainer}>
+            <Textfield title="Vikt"/> <Textfield title="vikt"/>
+            <Dropdown title="Enhet vikt" options={weightUnits} size='small'/>
+            </Box>
+
+
           </>
         );
       case 3:

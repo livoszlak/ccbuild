@@ -18,7 +18,7 @@ export default function Dropdown(props) {
             <h2 className={styles.title}>{props.title}</h2>
             <Select 
                 sx={{maxHeight: '33px'}} 
-                className={styles.input}
+                className={props.size === 'small' ? styles.inputSmall :styles.input}
                 placeholder={props.placeholder}
                 value={selectedOption}
                 id={props.id}

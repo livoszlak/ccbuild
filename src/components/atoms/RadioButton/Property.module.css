@@ -1,17 +1,18 @@
 .container{
     display: flex;
     flex-direction: column;
-    justify-content: left;
-    text-align: left;
 }
 
+.radioContainer, .radioButton{
+    display:flex; 
+    flex-direction: row; 
+    align-items: center;
+}
+.radioButton{
+font-weight: 400;
+}
 .title{
     font-weight: 600;
     margin: 0px 0px 0px 0px;
     font-size: 13;
-}
-.input{
-    font-size: 14;
-    height: 33px;
-    margin-right: 8px;
 }
