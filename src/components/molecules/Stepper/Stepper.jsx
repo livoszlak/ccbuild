@@ -1,36 +1,38 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Textfield from '../../atoms/Textfield/Textfield';
-import Dropdown from '../../atoms/Dropdown/Dropdown';
-import styles from './Stepper.module.css';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Textfield from "../../atoms/Textfield/Textfield";
+import Dropdown from "../../atoms/Dropdown/Dropdown";
+import styles from "./Stepper.module.css";
+import { useData } from "../../../contexts/DataContext";
 
 // define the number of steps //
 const steps = [0, 1, 2, 3, 4];
 const options = {
   option1: "Value 1",
   option2: "Value 2",
-  option3: "Value 3"
+  option3: "Value 3",
 };
 const options2 = {
   option1: "Value 1",
   option2: "Value 2",
-  option3: "Value 3"
+  option3: "Value 3",
 };
 const options3 = {
   option1: "Value 1",
   option2: "Value 2",
-  option3: "Value 3"
+  option3: "Value 3",
 };
 
 function StepperComponent() {
   const [activeStep, setActiveStep] = React.useState(0);
-  const [selectedCategory, setCategory] = React.useState('');
-  const [selectedSubCategory, setSubCategory] = React.useState('');
-  const [selectedSubcategory2, setSubCategory2] = React.useState('');
+  const [selectedCategory, setCategory] = React.useState("");
+  const [selectedSubCategory, setSubCategory] = React.useState("");
+  const [selectedSubcategory2, setSubCategory2] = React.useState("");
+  const [selectedProject, setSelectedProject] = React.useState("");
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -43,44 +45,70 @@ function StepperComponent() {
   const handleReset = () => {
     setActiveStep(0);
   };
-  const handleCategoryChange= (setter) => (value) => {
+
+  const handleCategoryChange = (setter) => (value) => {
     setter(value);
-  }
+  };
+
+  const handleProjectChange = (setter) => (value) => {
+    setter(value);
+  };
 
   const getStepContent = (step) => {
+    const { state } = useData();
+
+    const projectOptions = state.projects.reduce((acc, project) => {
+      acc[project.id] = project.name;
+      return acc;
+    }, {});
+
     switch (step) {
       case 0:
         return (
           <>
             <h1>Generell Information</h1>
-            <Textfield title="Projekt" id="project" placeholder="projektnamn" />
+            <Dropdown
+              id="project"
+              title="Välj projekt"
+              placeholder="Välj projekt"
+              options={projectOptions}
+              onOptionChange={handleProjectChange(setSelectedProject)}
+            />
             <h2>Produktnamn</h2>
             <Box className={styles.dropdownContainer}>
-            <Dropdown
-              id="category"
-              placeholder="Produktnamn"
-              options={options}
-              onOptionChange={handleCategoryChange(setCategory)}
-            />
-            {selectedCategory && (
               <Dropdown
-                id="subcategory1"
+                id="category"
                 placeholder="Produktnamn"
-                options={options2}
-                onOptionChange={handleCategoryChange(setSubCategory)}
+                options={options}
+                onOptionChange={handleCategoryChange(setCategory)}
               />
-            )}
-            {selectedSubCategory && (
-              <Dropdown
-                id="subcategory2"
-                placeholder="Produktnamn"
-                options={options3}
-                onOptionChange={handleCategoryChange(setSubCategory2)}
-              />
-            )}
+              {selectedCategory && (
+                <Dropdown
+                  id="subcategory1"
+                  placeholder="Produktnamn"
+                  options={options2}
+                  onOptionChange={handleCategoryChange(setSubCategory)}
+                />
+              )}
+              {selectedSubCategory && (
+                <Dropdown
+                  id="subcategory2"
+                  placeholder="Produktnamn"
+                  options={options3}
+                  onOptionChange={handleCategoryChange(setSubCategory2)}
+                />
+              )}
             </Box>
-            <Textfield title="Eget Id-nummer" id="x" placeholder="EgetIdNummer" />
-            <Textfield title="Produktbeskrivning" id="ProductDescription" placeholder="ProduktBeskrivning" />
+            <Textfield
+              title="Eget Id-nummer"
+              id="x"
+              placeholder="EgetIdNummer"
+            />
+            <Textfield
+              title="Produktbeskrivning"
+              id="ProductDescription"
+              placeholder="ProduktBeskrivning"
+            />
           </>
         );
       case 1:
@@ -114,7 +142,7 @@ function StepperComponent() {
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: "100%" }}>
       <Stepper activeStep={activeStep}>
         {/* Add Step components here if needed */}
       </Stepper>
@@ -123,16 +151,18 @@ function StepperComponent() {
           <Typography sx={{ mt: 2, mb: 1 }}>
             All steps completed - you&apos;re finished
           </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-            <Box sx={{ flex: '1 1 auto' }} />
+          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+            <Box sx={{ flex: "1 1 auto" }} />
             <Button onClick={handleReset}>Reset</Button>
           </Box>
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>Steg {activeStep + 1} av {steps.length} </Typography>
+          <Typography sx={{ mt: 2, mb: 1 }}>
+            Steg {activeStep + 1} av {steps.length}{" "}
+          </Typography>
           {getStepContent(activeStep)}
-          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Button
               color="inherit"
               disabled={activeStep === 0}
@@ -141,9 +171,9 @@ function StepperComponent() {
             >
               Föregående
             </Button>
-            <Box sx={{ flex: '1 1 auto' }} />
+            <Box sx={{ flex: "1 1 auto" }} />
             <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? 'Spara' : 'Nästa'}
+              {activeStep === steps.length - 1 ? "Spara" : "Nästa"}
             </Button>
           </Box>
         </React.Fragment>
