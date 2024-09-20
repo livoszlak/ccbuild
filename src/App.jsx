@@ -11,8 +11,8 @@ function App() {
 
   return (
     <>
-      <StepperComponent/>
-      {/* <AddressAutofillForm /> */}
+      <AddressAutofillForm />
+      {/* <StepperComponent/> */}
     </>
   );
 }
