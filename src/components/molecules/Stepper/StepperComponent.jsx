@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 // define the number of steps //
 const steps = [0,1,2,3,4];
 
-function StepperCard() {
+function StepperComponent() {
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
@@ -79,4 +79,4 @@ function StepperCard() {
     </Box>
   );
 }
-export default StepperCard
+export default StepperComponent
