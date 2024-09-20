@@ -59,7 +59,10 @@ function StepperCard() {
       <Stepper activeStep={activeStep}>
       </Stepper>
       {activeStep === steps.length ? (
+        // this section is not exactly necessary for our project, but i left it for now
+        
         <React.Fragment>
+
           <Typography sx={{ mt: 2, mb: 1 }}>
             All steps completed - you&apos;re finished
           </Typography>
@@ -74,7 +77,7 @@ function StepperCard() {
 
 {/* 
         this is where we want the main content to be located, could have a switch here, like so: 
-        
+
             switch (step) {
                 case 0:
                     return (
