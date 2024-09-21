@@ -9,26 +9,10 @@ import Dropdown from "../../atoms/Dropdown/Dropdown";
 import styles from "./Stepper.module.css";
 import RadioButton from "../../atoms/RadioButton/RadioButton";
 import { useData } from "../../../contexts/DataContext";
-import { useState, useMemo, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 // define the number of steps //
 const steps = [0, 1, 2, 3, 4];
-
-const options = {
-  option1: "Value 1",
-  option2: "Value 2",
-  option3: "Value 3",
-};
-const options2 = {
-  option1: "Value 1",
-  option2: "Value 2",
-  option3: "Value 3",
-};
-const options3 = {
-  option1: "Value 1",
-  option2: "Value 2",
-  option3: "Value 3",
-};
 
 const weightUnits = {
   option1: "Value 1",
@@ -42,9 +26,6 @@ const measurementUnits = {
 };
 
 function StepperComponent() {
-  /*   const [selectedCategory, setCategory] = React.useState("");
-  const [selectedSubcategory, setSubcategory] = React.useState("");
-  const [selectedSubcategory2, setSubcategory2] = React.useState(""); */
   const { state } = useData();
   const [activeStep, setActiveStep] = React.useState(0);
   const [selectedProject, setSelectedProject] = React.useState("");
@@ -57,6 +38,29 @@ function StepperComponent() {
     useState([]);
   const [filteredSubcategoriesSecondary, setFilteredSubcategoriesSecondary] =
     useState([]);
+  const [productName, setProductName] = useState("");
+
+  let productNameConcat = {
+    mainCategory: "",
+    subcategoryPrimary: "",
+    subcategorySecondary: "",
+  };
+
+  const [stepData, setStepData] = useState({
+    step0: {
+      selectedProject: "",
+      selectedMainCategory: "",
+      selectedSubcategoryPrimary: "",
+      selectedSubcategorySecondary: "",
+      productName: "",
+      internalProductId: "",
+      productDescription: "",
+    },
+    step1: {},
+    step2: {},
+    step3: {},
+    step4: {},
+  });
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -68,10 +72,6 @@ function StepperComponent() {
 
   const handleReset = () => {
     setActiveStep(0);
-  };
-
-  const handleCategoryChange = (setter) => (value) => {
-    setter(value);
   };
 
   const handleProjectChange = (setter) => (value) => {
@@ -128,7 +128,7 @@ function StepperComponent() {
     switch (step) {
       case 0:
         return (
-          <>
+          <Box className={styles.step1Container}>
             <h1>Generell Information</h1>
             <Dropdown
               id="project"
@@ -141,51 +141,49 @@ function StepperComponent() {
             <Box className={styles.dropdownContainer}>
               <Dropdown
                 id="category"
-                title="Produktnamn"
-                placeholder="Produktnamn"
+                title="Produktkategori*"
+                placeholder="Välj..."
                 options={state.mainCategories.reduce((acc, category) => {
                   acc[category.id] = category.name;
                   return acc;
                 }, {})}
                 onOptionChange={handleMainCategoryChange}
               />
-              {
-                /* selectedCategory */ selectedMainCategory && (
-                  <Dropdown
-                    id="subcategory1"
-                    placeholder="Produktnamn"
-                    onOptionChange={
-                      /* handleCategoryChange(setSubCategory) */ handleSubcategoryPrimaryChange
-                    }
-                    options={filteredSubcategoriesPrimary.reduce(
-                      (acc, subcategory) => {
-                        acc[subcategory.id] = subcategory.name;
-                        return acc;
-                      },
-                      {}
-                    )}
-                  />
-                )
-              }
-              {
-                /* selectedSubCategory */ selectedSubcategoryPrimary && (
-                  <Dropdown
-                    id="subcategory2"
-                    placeholder="Produktnamn"
-                    options={filteredSubcategoriesSecondary.reduce(
-                      (acc, subcategory) => {
-                        acc[subcategory.id] = subcategory.name;
-                        return acc;
-                      },
-                      {}
-                    )}
-                    onOptionChange={
-                      /* handleCategoryChange(setSubCategory2) */ setSelectedSubcategorySecondary
-                    }
-                  />
-                )
-              }
+              {selectedMainCategory && (
+                <Dropdown
+                  id="subcategory1"
+                  placeholder="Välj..."
+                  onOptionChange={handleSubcategoryPrimaryChange}
+                  options={filteredSubcategoriesPrimary.reduce(
+                    (acc, subcategory) => {
+                      acc[subcategory.id] = subcategory.name;
+                      return acc;
+                    },
+                    {}
+                  )}
+                />
+              )}
+              {selectedSubcategoryPrimary && (
+                <Dropdown
+                  id="subcategory2"
+                  placeholder="Välj..."
+                  options={filteredSubcategoriesSecondary.reduce(
+                    (acc, subcategory) => {
+                      acc[subcategory.id] = subcategory.name;
+                      return acc;
+                    },
+                    {}
+                  )}
+                  onOptionChange={setSelectedSubcategorySecondary}
+                />
+              )}
             </Box>
+            <Textfield
+              title="Produktnamn*"
+              id="productName"
+              placeholder="Produktnamn"
+              onChange={setProductName}
+            />
             <Textfield
               title="Eget Id-nummer"
               id="x"
@@ -196,7 +194,7 @@ function StepperComponent() {
               id="ProductDescription"
               placeholder="ProduktBeskrivning"
             />
-          </>
+          </Box>
         );
       case 1:
         return (
