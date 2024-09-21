@@ -9,9 +9,11 @@ import Dropdown from "../../atoms/Dropdown/Dropdown";
 import styles from "./Stepper.module.css";
 import RadioButton from "../../atoms/RadioButton/RadioButton";
 import { useData } from "../../../contexts/DataContext";
+import { useState, useMemo, useEffect } from "react";
 
 // define the number of steps //
 const steps = [0, 1, 2, 3, 4];
+
 const options = {
   option1: "Value 1",
   option2: "Value 2",
@@ -40,11 +42,21 @@ const measurementUnits = {
 };
 
 function StepperComponent() {
+  /*   const [selectedCategory, setCategory] = React.useState("");
+  const [selectedSubcategory, setSubcategory] = React.useState("");
+  const [selectedSubcategory2, setSubcategory2] = React.useState(""); */
+  const { state } = useData();
   const [activeStep, setActiveStep] = React.useState(0);
-  const [selectedCategory, setCategory] = React.useState("");
-  const [selectedSubCategory, setSubCategory] = React.useState("");
-  const [selectedSubcategory2, setSubCategory2] = React.useState("");
   const [selectedProject, setSelectedProject] = React.useState("");
+  const [selectedMainCategory, setSelectedMainCategory] = useState("");
+  const [selectedSubcategoryPrimary, setSelectedSubcategoryPrimary] =
+    useState("");
+  const [selectedSubcategorySecondary, setSelectedSubcategorySecondary] =
+    useState("");
+  const [filteredSubcategoriesPrimary, setFilteredSubcategoriesPrimary] =
+    useState([]);
+  const [filteredSubcategoriesSecondary, setFilteredSubcategoriesSecondary] =
+    useState([]);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -67,12 +79,51 @@ function StepperComponent() {
   };
 
   const getStepContent = (step) => {
-    const { state } = useData();
-
     const projectOptions = state.projects.reduce((acc, project) => {
       acc[project.id] = project.name;
       return acc;
     }, {});
+
+    useEffect(() => {
+      if (selectedMainCategory) {
+        const filtered = state.subcategoriesPrimary.filter(
+          (subcategory) =>
+            subcategory.mainCategory.toString() ===
+            selectedMainCategory.toString()
+        );
+        setFilteredSubcategoriesPrimary(filtered);
+      } else {
+        setFilteredSubcategoriesPrimary([]);
+      }
+    }, [selectedMainCategory, state.subcategoriesPrimary]);
+
+    useEffect(() => {
+      if (selectedSubcategoryPrimary) {
+        console.log(state.subcategoriesSecondary);
+        const filteredSubs = state.subcategoriesSecondary.filter(
+          (subcategory) =>
+            subcategory.subcategoryPrimary &&
+            subcategory.subcategoryPrimary.toString() ===
+              selectedSubcategoryPrimary.toString()
+        );
+        console.log(filteredSubs);
+        setFilteredSubcategoriesSecondary(filteredSubs);
+      } else {
+        setFilteredSubcategoriesSecondary([]);
+      }
+    }, [selectedSubcategoryPrimary, state.subcategoriesSecondary]);
+
+    const handleMainCategoryChange = (value) => {
+      setSelectedMainCategory(value);
+    };
+
+    const handleSubcategoryPrimaryChange = (value) => {
+      setSelectedSubcategoryPrimary(value);
+    };
+
+    const handleSubcategorySecondaryChange = (value) => {
+      setSelectedSubcategorySecondary(value);
+    };
 
     switch (step) {
       case 0:
@@ -81,35 +132,59 @@ function StepperComponent() {
             <h1>Generell Information</h1>
             <Dropdown
               id="project"
-              title="Välj projekt"
+              title="Projekt*"
               placeholder="Välj projekt"
               options={projectOptions}
               onOptionChange={handleProjectChange(setSelectedProject)}
             />
-            <h2>Produktnamn</h2>
+
             <Box className={styles.dropdownContainer}>
               <Dropdown
                 id="category"
+                title="Produktnamn"
                 placeholder="Produktnamn"
-                options={options}
-                onOptionChange={handleCategoryChange(setCategory)}
+                options={state.mainCategories.reduce((acc, category) => {
+                  acc[category.id] = category.name;
+                  return acc;
+                }, {})}
+                onOptionChange={handleMainCategoryChange}
               />
-              {selectedCategory && (
-                <Dropdown
-                  id="subcategory1"
-                  placeholder="Produktnamn"
-                  options={options2}
-                  onOptionChange={handleCategoryChange(setSubCategory)}
-                />
-              )}
-              {selectedSubCategory && (
-                <Dropdown
-                  id="subcategory2"
-                  placeholder="Produktnamn"
-                  options={options3}
-                  onOptionChange={handleCategoryChange(setSubCategory2)}
-                />
-              )}
+              {
+                /* selectedCategory */ selectedMainCategory && (
+                  <Dropdown
+                    id="subcategory1"
+                    placeholder="Produktnamn"
+                    onOptionChange={
+                      /* handleCategoryChange(setSubCategory) */ handleSubcategoryPrimaryChange
+                    }
+                    options={filteredSubcategoriesPrimary.reduce(
+                      (acc, subcategory) => {
+                        acc[subcategory.id] = subcategory.name;
+                        return acc;
+                      },
+                      {}
+                    )}
+                  />
+                )
+              }
+              {
+                /* selectedSubCategory */ selectedSubcategoryPrimary && (
+                  <Dropdown
+                    id="subcategory2"
+                    placeholder="Produktnamn"
+                    options={filteredSubcategoriesSecondary.reduce(
+                      (acc, subcategory) => {
+                        acc[subcategory.id] = subcategory.name;
+                        return acc;
+                      },
+                      {}
+                    )}
+                    onOptionChange={
+                      /* handleCategoryChange(setSubCategory2) */ setSelectedSubcategorySecondary
+                    }
+                  />
+                )
+              }
             </Box>
             <Textfield
               title="Eget Id-nummer"
