@@ -1,41 +1,46 @@
+import React from "react";
 import { MenuItem, Select, Box } from "@mui/material";
 import styles from "./Dropdown.module.css";
-import { useState } from "react";
 
-export default function Dropdown(props) {
-  const [selectedOption, setOption] = useState("");
-
+export default function Dropdown({
+  title,
+  options,
+  onOptionChange,
+  value,
+  id,
+  size,
+  placeholder = "Välj...",
+}) {
   function handleChange(event) {
-    const value = event.target.value;
-    setOption(value);
-    if (props.onOptionChange) {
-      props.onOptionChange(value);
+    const newValue = event.target.value;
+    if (onOptionChange) {
+      onOptionChange(newValue);
     }
   }
 
   return (
     <Box className={styles.container}>
-      <h2 className={styles.title}>{props.title}</h2>
+      <h2 className={styles.title}>{title}</h2>
       <Select
         sx={{ maxHeight: "33px" }}
-        className={props.size === "small" ? styles.inputSmall : styles.input}
-        placeholder={props.placeholder}
-        value={props.value}
-        id={props.id}
+        className={size === "small" ? styles.inputSmall : styles.input}
+        value={value || ""}
+        id={id}
         onChange={handleChange}
+        displayEmpty
         renderValue={(selected) => {
-          if (selected === "") {
-            return <em>Välj...</em>;
+          if (!selected || selected === "") {
+            return <em>{placeholder}</em>;
           }
-          return props.options[selected];
+          return options[selected] || placeholder;
         }}
       >
         <MenuItem value="">
-          <em>Välj...</em>
+          <em>{placeholder}</em>
         </MenuItem>
-        {Object.keys(props.options).map((option) => (
-          <MenuItem key={option} value={option}>
-            {props.options[option]}
+        {Object.entries(options).map(([key, optionValue]) => (
+          <MenuItem key={key} value={key}>
+            {optionValue}
           </MenuItem>
         ))}
       </Select>

@@ -115,6 +115,14 @@ function StepperComponent() {
       return acc;
     }, {});
 
+    const mainCategoryName = state.mainCategories.find(
+      (category) => category.id.toString() === state.selectedMainCategory
+    )?.name;
+
+    const subcategoryPrimaryName = state.subcategoriesPrimary.find(
+      (category) => category.id.toString() === state.selectedSubcategoryPrimary
+    )?.name;
+
     switch (step) {
       case 0:
         return (
@@ -126,25 +134,26 @@ function StepperComponent() {
               placeholder="Välj projekt"
               options={projectOptions}
               onOptionChange={handleProjectChange(setSelectedProject)}
-              value={selectedProject || ""}
+              value={selectedProject}
             />
 
             <Box className={styles.dropdownContainer}>
               <Dropdown
                 id="category"
                 title="Produktkategori*"
-                placeholder="Välj..."
+                placeholder="Välj huvudkategori..."
                 options={state.mainCategories.reduce((acc, category) => {
                   acc[category.id] = category.name;
                   return acc;
                 }, {})}
                 onOptionChange={handleMainCategoryChange}
-                value={state.selectedMainCategory || ""}
+                value={state.selectedMainCategory}
               />
               {state.selectedMainCategory && (
                 <Dropdown
                   id="subcategory1"
-                  placeholder="Välj..."
+                  title={`Underkategori till ${mainCategoryName}*`}
+                  placeholder="Välj underkategori..."
                   onOptionChange={handleSubcategoryPrimaryChange}
                   options={filteredSubcategoriesPrimary.reduce(
                     (acc, subcategory) => {
@@ -153,13 +162,14 @@ function StepperComponent() {
                     },
                     {}
                   )}
-                  value={state.selectedSubcategoryPrimary || ""}
+                  value={state.selectedSubcategoryPrimary}
                 />
               )}
               {state.selectedSubcategoryPrimary && (
                 <Dropdown
                   id="subcategory2"
-                  placeholder="Välj..."
+                  title={`Underkategori till ${subcategoryPrimaryName}*`}
+                  placeholder="Välj underkategori..."
                   options={filteredSubcategoriesSecondary.reduce(
                     (acc, subcategory) => {
                       acc[subcategory.id] = subcategory.name;
@@ -176,21 +186,19 @@ function StepperComponent() {
               title="Produktnamn*"
               id="productName"
               value={state.productName || ""}
-              onChange={(e) =>
-                console.log("Product name changed:", e.target.value)
-              }
+              onChange={handleProductNameChange}
             />
             <Textfield
-              title="Eget Id-nummer"
-              id="x"
-              placeholder="EgetIdNummer"
+              title="Eget ID-nummer"
+              id="internalId"
+              placeholder="Eget ID-nummer"
               value={state.internalId || ""}
               onChange={handleInternalIdChange}
             />
             <Textfield
               title="Produktbeskrivning"
-              id="ProductDescription"
-              placeholder="ProduktBeskrivning"
+              id="productDescription"
+              placeholder="Produktbeskrivning"
               value={state.productDescription || ""}
               onChange={handleProductDescriptionChange}
             />

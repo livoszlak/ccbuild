@@ -22,6 +22,7 @@ const initialState = {
   selectedSubcategoryPrimary: null,
   selectedSubcategorySecondary: null,
   productName: "",
+  isProductNameManuallyEdited: false,
   interalId: "",
   productDescription: "",
 };
@@ -51,6 +52,8 @@ function dataReducer(state, action) {
       return { ...state, selectedSubcategorySecondary: action.payload };
     case "SET_PRODUCT_NAME":
       return { ...state, productName: action.payload };
+    case "RESET_PRODUCT_NAME_EDIT_FLAG":
+      return { ...state, isProductNameManuallyEdited: false };
     case "SET_INTERNAL_ID":
       return { ...state, internalId: action.payload };
     case "SET_PRODUCT_DESCRIPTION":
@@ -129,6 +132,8 @@ export function DataProvider({ children }) {
   };
 
   const updateProductName = () => {
+    if (state.isProductNameManuallyEdited) return;
+
     const category = state.mainCategories.find(
       (cat) => cat.id.toString() === state.selectedMainCategory
     );
@@ -144,6 +149,7 @@ export function DataProvider({ children }) {
     if (subcategory2) productName += ` - ${subcategory2.name}`;
 
     dispatch({ type: "SET_PRODUCT_NAME", payload: productName });
+    dispatch({ type: "RESET_PRODUCT_NAME_EDIT_FLAG" });
   };
 
   useEffect(() => {
@@ -162,7 +168,7 @@ export function DataProvider({ children }) {
         setMainCategory,
         setSubcategoryPrimary,
         setSubcategorySecondary,
-        /* setProductName, */
+        setProductName,
         setInternalId,
         setProductDescription,
       }}
