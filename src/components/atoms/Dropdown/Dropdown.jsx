@@ -20,7 +20,7 @@ export default function Dropdown(props) {
         sx={{ maxHeight: "33px" }}
         className={props.size === "small" ? styles.inputSmall : styles.input}
         placeholder={props.placeholder}
-        value={selectedOption}
+        value={props.value}
         id={props.id}
         onChange={handleChange}
         renderValue={(selected) => {
@@ -30,6 +30,9 @@ export default function Dropdown(props) {
           return props.options[selected];
         }}
       >
+        <MenuItem value="">
+          <em>Välj...</em>
+        </MenuItem>
         {Object.keys(props.options).map((option) => (
           <MenuItem key={option} value={option}>
             {props.options[option]}

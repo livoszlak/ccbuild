@@ -8,6 +8,7 @@ import Textfield from "../../atoms/Textfield/Textfield";
 import Dropdown from "../../atoms/Dropdown/Dropdown";
 import styles from "./Stepper.module.css";
 import RadioButton from "../../atoms/RadioButton/RadioButton";
+import Step3 from "../Step3/Step3";
 import { useData } from "../../../contexts/DataContext";
 import { useState, useEffect } from "react";
 
@@ -26,41 +27,42 @@ const measurementUnits = {
 };
 
 function StepperComponent() {
-  const { state } = useData();
+  const {
+    state,
+    setMainCategory,
+    setSubcategoryPrimary,
+    setSubcategorySecondary,
+  } = useData();
+
   const [activeStep, setActiveStep] = React.useState(0);
   const [selectedProject, setSelectedProject] = React.useState("");
-  const [selectedMainCategory, setSelectedMainCategory] = useState("");
-  const [selectedSubcategoryPrimary, setSelectedSubcategoryPrimary] =
-    useState("");
-  const [selectedSubcategorySecondary, setSelectedSubcategorySecondary] =
-    useState("");
   const [filteredSubcategoriesPrimary, setFilteredSubcategoriesPrimary] =
     useState([]);
   const [filteredSubcategoriesSecondary, setFilteredSubcategoriesSecondary] =
     useState([]);
   const [productName, setProductName] = useState("");
 
-  let productNameConcat = {
-    mainCategory: "",
-    subcategoryPrimary: "",
-    subcategorySecondary: "",
-  };
+  // initialize state from context
+  useEffect(() => {
+    setFilteredSubcategoriesPrimary(
+      state.subcategoriesPrimary.filter(
+        (subcategory) =>
+          subcategory.mainCategory.toString() ===
+          state.selectedMainCategory?.toString()
+      )
+    );
+  }, [state.selectedMainCategory, state.subcategoriesPrimary]);
 
-  const [stepData, setStepData] = useState({
-    step0: {
-      selectedProject: "",
-      selectedMainCategory: "",
-      selectedSubcategoryPrimary: "",
-      selectedSubcategorySecondary: "",
-      productName: "",
-      internalProductId: "",
-      productDescription: "",
-    },
-    step1: {},
-    step2: {},
-    step3: {},
-    step4: {},
-  });
+  useEffect(() => {
+    setFilteredSubcategoriesSecondary(
+      state.subcategoriesSecondary.filter(
+        (subcategory) =>
+          subcategory.subcategoryPrimary &&
+          subcategory.subcategoryPrimary.toString() ===
+            state.selectedSubcategoryPrimary?.toString()
+      )
+    );
+  }, [state.selectedSubcategoryPrimary, state.subcategoriesSecondary]);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -78,52 +80,26 @@ function StepperComponent() {
     setter(value);
   };
 
+  const handleMainCategoryChange = (id) => {
+    setMainCategory(id);
+    setSubcategoryPrimary("");
+    setSubcategorySecondary("");
+  };
+
+  const handleSubcategoryPrimaryChange = (id) => {
+    setSubcategoryPrimary(id);
+    setSubcategorySecondary("");
+  };
+
+  const handleSubcategorySecondaryChange = (id) => {
+    setSubcategorySecondary(id);
+  };
+
   const getStepContent = (step) => {
     const projectOptions = state.projects.reduce((acc, project) => {
       acc[project.id] = project.name;
       return acc;
     }, {});
-
-    useEffect(() => {
-      if (selectedMainCategory) {
-        const filtered = state.subcategoriesPrimary.filter(
-          (subcategory) =>
-            subcategory.mainCategory.toString() ===
-            selectedMainCategory.toString()
-        );
-        setFilteredSubcategoriesPrimary(filtered);
-      } else {
-        setFilteredSubcategoriesPrimary([]);
-      }
-    }, [selectedMainCategory, state.subcategoriesPrimary]);
-
-    useEffect(() => {
-      if (selectedSubcategoryPrimary) {
-        console.log(state.subcategoriesSecondary);
-        const filteredSubs = state.subcategoriesSecondary.filter(
-          (subcategory) =>
-            subcategory.subcategoryPrimary &&
-            subcategory.subcategoryPrimary.toString() ===
-              selectedSubcategoryPrimary.toString()
-        );
-        console.log(filteredSubs);
-        setFilteredSubcategoriesSecondary(filteredSubs);
-      } else {
-        setFilteredSubcategoriesSecondary([]);
-      }
-    }, [selectedSubcategoryPrimary, state.subcategoriesSecondary]);
-
-    const handleMainCategoryChange = (value) => {
-      setSelectedMainCategory(value);
-    };
-
-    const handleSubcategoryPrimaryChange = (value) => {
-      setSelectedSubcategoryPrimary(value);
-    };
-
-    const handleSubcategorySecondaryChange = (value) => {
-      setSelectedSubcategorySecondary(value);
-    };
 
     switch (step) {
       case 0:
@@ -136,6 +112,7 @@ function StepperComponent() {
               placeholder="Välj projekt"
               options={projectOptions}
               onOptionChange={handleProjectChange(setSelectedProject)}
+              value={selectedProject || ""}
             />
 
             <Box className={styles.dropdownContainer}>
@@ -148,8 +125,9 @@ function StepperComponent() {
                   return acc;
                 }, {})}
                 onOptionChange={handleMainCategoryChange}
+                value={state.selectedMainCategory || ""}
               />
-              {selectedMainCategory && (
+              {state.selectedMainCategory && (
                 <Dropdown
                   id="subcategory1"
                   placeholder="Välj..."
@@ -161,9 +139,10 @@ function StepperComponent() {
                     },
                     {}
                   )}
+                  value={state.selectedSubcategoryPrimary || ""}
                 />
               )}
-              {selectedSubcategoryPrimary && (
+              {state.selectedSubcategoryPrimary && (
                 <Dropdown
                   id="subcategory2"
                   placeholder="Välj..."
@@ -174,25 +153,28 @@ function StepperComponent() {
                     },
                     {}
                   )}
-                  onOptionChange={setSelectedSubcategorySecondary}
+                  onOptionChange={handleSubcategorySecondaryChange}
+                  value={state.selectedSubcategorySecondary || ""}
                 />
               )}
             </Box>
             <Textfield
               title="Produktnamn*"
               id="productName"
-              placeholder="Produktnamn"
-              onChange={setProductName}
+              value={productName || ""}
+              onChange={(e) => setProductName(e.target.value)}
             />
             <Textfield
               title="Eget Id-nummer"
               id="x"
               placeholder="EgetIdNummer"
+              value={state.ownIdNumber || ""}
             />
             <Textfield
               title="Produktbeskrivning"
               id="ProductDescription"
               placeholder="ProduktBeskrivning"
+              value={state.productDescription || ""}
             />
           </Box>
         );
@@ -205,32 +187,37 @@ function StepperComponent() {
       case 2:
         return (
           <>
-            <h1>Egenskaper</h1>
-            {/* for each prop in properties:  */}
-            <RadioButton title="title" values={options} />
-            <RadioButton title="title2" values={options2} />
+            <Step3
+              selectedSubcategorySecondary={state.selectedSubcategorySecondary}
+            />
 
             <h1>Form</h1>
             <Box className={styles.propertyInputContainer}>
-              <Textfield title="Material" />
-              <Textfield title="Färg/Finish" />
+              <Textfield title="Material" value={state.material || ""} />
+              <Textfield title="Färg/Finish" value={state.colorFinish || ""} />
             </Box>
             <Box className={styles.propertyInputContainer}>
-              <Textfield title="Bredd" />
-              <Textfield title="Djup" />
-              <Textfield title="Höjd" />
+              <Textfield title="Bredd" value={state.width || ""} />
+              <Textfield title="Djup" value={state.depth || ""} />
+              <Textfield title="Höjd" value={state.height || ""} />
               <Dropdown
                 title="Enhet mått"
                 options={measurementUnits}
                 size="small"
+                value={state.measurementUnit || ""}
               />
             </Box>
             <Box className={styles.propertyInputContainer}>
               {/* knappar här */}
             </Box>
             <Box className={styles.propertyInputContainer}>
-              <Textfield title="Vikt" /> <Textfield title="vikt" />
-              <Dropdown title="Enhet vikt" options={weightUnits} size="small" />
+              <Textfield title="Vikt" value={state.weight || ""} />
+              <Dropdown
+                title="Enhet vikt"
+                options={weightUnits}
+                size="small"
+                value={state.weightUnit || ""}
+              />
             </Box>
           </>
         );
