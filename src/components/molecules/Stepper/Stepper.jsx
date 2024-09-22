@@ -15,7 +15,7 @@ import { useState, useEffect } from "react";
 // define the number of steps //
 const steps = [0, 1, 2, 3, 4];
 
-const weightUnits = {
+/* const weightUnits = {
   option1: "Value 1",
   option2: "Value 2",
   option3: "Value 3",
@@ -24,7 +24,7 @@ const measurementUnits = {
   option1: "Value 1",
   option2: "Value 2",
   option3: "Value 3",
-};
+}; */
 
 function StepperComponent() {
   const {
@@ -32,6 +32,9 @@ function StepperComponent() {
     setMainCategory,
     setSubcategoryPrimary,
     setSubcategorySecondary,
+    setProductName,
+    setInternalId,
+    setProductDescription,
   } = useData();
 
   const [activeStep, setActiveStep] = React.useState(0);
@@ -40,7 +43,6 @@ function StepperComponent() {
     useState([]);
   const [filteredSubcategoriesSecondary, setFilteredSubcategoriesSecondary] =
     useState([]);
-  const [productName, setProductName] = useState("");
 
   // initialize state from context
   useEffect(() => {
@@ -93,6 +95,18 @@ function StepperComponent() {
 
   const handleSubcategorySecondaryChange = (id) => {
     setSubcategorySecondary(id);
+  };
+
+  const handleProductNameChange = (e) => {
+    setProductName(e.target.value);
+  };
+
+  const handleInternalIdChange = (e) => {
+    setInternalId(e.target.value);
+  };
+
+  const handleProductDescriptionChange = (e) => {
+    setProductDescription(e.target.value);
   };
 
   const getStepContent = (step) => {
@@ -161,20 +175,24 @@ function StepperComponent() {
             <Textfield
               title="Produktnamn*"
               id="productName"
-              value={productName || ""}
-              onChange={(e) => setProductName(e.target.value)}
+              value={state.productName || ""}
+              onChange={(e) =>
+                console.log("Product name changed:", e.target.value)
+              }
             />
             <Textfield
               title="Eget Id-nummer"
               id="x"
               placeholder="EgetIdNummer"
-              value={state.ownIdNumber || ""}
+              value={state.internalId || ""}
+              onChange={handleInternalIdChange}
             />
             <Textfield
               title="Produktbeskrivning"
               id="ProductDescription"
               placeholder="ProduktBeskrivning"
               value={state.productDescription || ""}
+              onChange={handleProductDescriptionChange}
             />
           </Box>
         );
@@ -190,7 +208,8 @@ function StepperComponent() {
             <Step3
               selectedSubcategorySecondary={state.selectedSubcategorySecondary}
             />
-
+          </>
+          /* 
             <h1>Form</h1>
             <Box className={styles.propertyInputContainer}>
               <Textfield title="Material" value={state.material || ""} />
@@ -208,7 +227,7 @@ function StepperComponent() {
               />
             </Box>
             <Box className={styles.propertyInputContainer}>
-              {/* knappar här */}
+              
             </Box>
             <Box className={styles.propertyInputContainer}>
               <Textfield title="Vikt" value={state.weight || ""} />
@@ -219,7 +238,7 @@ function StepperComponent() {
                 value={state.weightUnit || ""}
               />
             </Box>
-          </>
+          </> */
         );
       case 3:
         return (
