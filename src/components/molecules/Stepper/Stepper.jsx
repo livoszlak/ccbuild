@@ -8,27 +8,14 @@ import Textfield from "../../atoms/Textfield/Textfield";
 import Dropdown from "../../atoms/Dropdown/Dropdown";
 import styles from "./Stepper.module.css";
 import RadioButton from "../../atoms/RadioButton/RadioButton";
+import Step3 from "../Step3/Step3";
 import { useData } from "../../../contexts/DataContext";
+import { useState, useEffect } from "react";
 
 // define the number of steps //
 const steps = [0, 1, 2, 3, 4];
-const options = {
-  option1: "Value 1",
-  option2: "Value 2",
-  option3: "Value 3",
-};
-const options2 = {
-  option1: "Value 1",
-  option2: "Value 2",
-  option3: "Value 3",
-};
-const options3 = {
-  option1: "Value 1",
-  option2: "Value 2",
-  option3: "Value 3",
-};
 
-const weightUnits = {
+/* const weightUnits = {
   option1: "Value 1",
   option2: "Value 2",
   option3: "Value 3",
@@ -37,14 +24,47 @@ const measurementUnits = {
   option1: "Value 1",
   option2: "Value 2",
   option3: "Value 3",
-};
+}; */
 
 function StepperComponent() {
+  const {
+    state,
+    setMainCategory,
+    setSubcategoryPrimary,
+    setSubcategorySecondary,
+    setProductName,
+    setInternalId,
+    setProductDescription,
+  } = useData();
+
   const [activeStep, setActiveStep] = React.useState(0);
-  const [selectedCategory, setCategory] = React.useState("");
-  const [selectedSubCategory, setSubCategory] = React.useState("");
-  const [selectedSubcategory2, setSubCategory2] = React.useState("");
   const [selectedProject, setSelectedProject] = React.useState("");
+  const [filteredSubcategoriesPrimary, setFilteredSubcategoriesPrimary] =
+    useState([]);
+  const [filteredSubcategoriesSecondary, setFilteredSubcategoriesSecondary] =
+    useState([]);
+
+  // initialize state from context
+  useEffect(() => {
+    setFilteredSubcategoriesPrimary(
+      state.subcategoriesPrimary.filter(
+        (subcategory) =>
+          subcategory.mainCategory.toString() ===
+          state.selectedMainCategory?.toString()
+      )
+    );
+  }, [state.selectedMainCategory, state.subcategoriesPrimary]);
+
+  useEffect(() => {
+    setFilteredSubcategoriesSecondary(
+      state.subcategoriesSecondary.filter(
+        (subcategory) =>
+          subcategory.subcategoryPrimary &&
+          subcategory.subcategoryPrimary.toString() ===
+            state.selectedSubcategoryPrimary?.toString()
+      )
+    );
+  }, [state.selectedSubcategoryPrimary, state.subcategoriesSecondary]);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -58,70 +78,131 @@ function StepperComponent() {
     setActiveStep(0);
   };
 
-  const handleCategoryChange = (setter) => (value) => {
-    setter(value);
-  };
-
   const handleProjectChange = (setter) => (value) => {
     setter(value);
   };
 
-  const getStepContent = (step) => {
-    const { state } = useData();
+  const handleMainCategoryChange = (id) => {
+    setMainCategory(id);
+    setSubcategoryPrimary("");
+    setSubcategorySecondary("");
+  };
 
+  const handleSubcategoryPrimaryChange = (id) => {
+    setSubcategoryPrimary(id);
+    setSubcategorySecondary("");
+  };
+
+  const handleSubcategorySecondaryChange = (id) => {
+    setSubcategorySecondary(id);
+  };
+
+  const handleProductNameChange = (e) => {
+    setProductName(e.target.value);
+  };
+
+  const handleInternalIdChange = (e) => {
+    setInternalId(e.target.value);
+  };
+
+  const handleProductDescriptionChange = (e) => {
+    setProductDescription(e.target.value);
+  };
+
+  const getStepContent = (step) => {
     const projectOptions = state.projects.reduce((acc, project) => {
       acc[project.id] = project.name;
       return acc;
     }, {});
 
+    const mainCategoryName = state.mainCategories.find(
+      (category) => category.id.toString() === state.selectedMainCategory
+    )?.name;
+
+    const subcategoryPrimaryName = state.subcategoriesPrimary.find(
+      (category) => category.id.toString() === state.selectedSubcategoryPrimary
+    )?.name;
+
     switch (step) {
       case 0:
         return (
-          <>
+          <Box className={styles.step1Container}>
             <h1>Generell Information</h1>
             <Dropdown
               id="project"
-              title="Välj projekt"
+              title="Projekt*"
               placeholder="Välj projekt"
               options={projectOptions}
               onOptionChange={handleProjectChange(setSelectedProject)}
+              value={selectedProject}
             />
-            <h2>Produktnamn</h2>
+
             <Box className={styles.dropdownContainer}>
               <Dropdown
                 id="category"
-                placeholder="Produktnamn"
-                options={options}
-                onOptionChange={handleCategoryChange(setCategory)}
+                title="Produktkategori*"
+                placeholder="Välj huvudkategori..."
+                options={state.mainCategories.reduce((acc, category) => {
+                  acc[category.id] = category.name;
+                  return acc;
+                }, {})}
+                onOptionChange={handleMainCategoryChange}
+                value={state.selectedMainCategory}
               />
-              {selectedCategory && (
+              {state.selectedMainCategory && (
                 <Dropdown
                   id="subcategory1"
-                  placeholder="Produktnamn"
-                  options={options2}
-                  onOptionChange={handleCategoryChange(setSubCategory)}
+                  title={`Underkategori till ${mainCategoryName}*`}
+                  placeholder="Välj underkategori..."
+                  onOptionChange={handleSubcategoryPrimaryChange}
+                  options={filteredSubcategoriesPrimary.reduce(
+                    (acc, subcategory) => {
+                      acc[subcategory.id] = subcategory.name;
+                      return acc;
+                    },
+                    {}
+                  )}
+                  value={state.selectedSubcategoryPrimary}
                 />
               )}
-              {selectedSubCategory && (
+              {state.selectedSubcategoryPrimary && (
                 <Dropdown
                   id="subcategory2"
-                  placeholder="Produktnamn"
-                  options={options3}
-                  onOptionChange={handleCategoryChange(setSubCategory2)}
+                  title={`Underkategori till ${subcategoryPrimaryName}*`}
+                  placeholder="Välj underkategori..."
+                  options={filteredSubcategoriesSecondary.reduce(
+                    (acc, subcategory) => {
+                      acc[subcategory.id] = subcategory.name;
+                      return acc;
+                    },
+                    {}
+                  )}
+                  onOptionChange={handleSubcategorySecondaryChange}
+                  value={state.selectedSubcategorySecondary || ""}
                 />
               )}
             </Box>
             <Textfield
-              title="Eget Id-nummer"
-              id="x"
-              placeholder="EgetIdNummer"
+              title="Produktnamn*"
+              id="productName"
+              value={state.productName || ""}
+              onChange={handleProductNameChange}
+            />
+            <Textfield
+              title="Eget ID-nummer"
+              id="internalId"
+              placeholder="Eget ID-nummer"
+              value={state.internalId || ""}
+              onChange={handleInternalIdChange}
             />
             <Textfield
               title="Produktbeskrivning"
-              id="ProductDescription"
-              placeholder="ProduktBeskrivning"
+              id="productDescription"
+              placeholder="Produktbeskrivning"
+              value={state.productDescription || ""}
+              onChange={handleProductDescriptionChange}
             />
-          </>
+          </Box>
         );
       case 1:
         return (
@@ -132,34 +213,40 @@ function StepperComponent() {
       case 2:
         return (
           <>
-            <h1>Egenskaper</h1>
-            {/* for each prop in properties:  */}
-            <RadioButton title="title" values={options} />
-            <RadioButton title="title2" values={options2} />
-
+            <Step3
+              selectedSubcategorySecondary={state.selectedSubcategorySecondary}
+            />
+          </>
+          /* 
             <h1>Form</h1>
             <Box className={styles.propertyInputContainer}>
-              <Textfield title="Material" />
-              <Textfield title="Färg/Finish" />
+              <Textfield title="Material" value={state.material || ""} />
+              <Textfield title="Färg/Finish" value={state.colorFinish || ""} />
             </Box>
             <Box className={styles.propertyInputContainer}>
-              <Textfield title="Bredd" />
-              <Textfield title="Djup" />
-              <Textfield title="Höjd" />
+              <Textfield title="Bredd" value={state.width || ""} />
+              <Textfield title="Djup" value={state.depth || ""} />
+              <Textfield title="Höjd" value={state.height || ""} />
               <Dropdown
                 title="Enhet mått"
                 options={measurementUnits}
                 size="small"
+                value={state.measurementUnit || ""}
               />
             </Box>
             <Box className={styles.propertyInputContainer}>
-              {/* knappar här */}
+              
             </Box>
             <Box className={styles.propertyInputContainer}>
-              <Textfield title="Vikt" /> <Textfield title="vikt" />
-              <Dropdown title="Enhet vikt" options={weightUnits} size="small" />
+              <Textfield title="Vikt" value={state.weight || ""} />
+              <Dropdown
+                title="Enhet vikt"
+                options={weightUnits}
+                size="small"
+                value={state.weightUnit || ""}
+              />
             </Box>
-          </>
+          </> */
         );
       case 3:
         return (

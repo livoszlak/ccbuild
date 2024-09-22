@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  text-align: left;
+  width: 100%;
+  max-width: 350px;
+  margin-right: 8px;
+}
+.title {
+  font-weight: 600;
+  margin: 0px 0px 0px 0px;
+  font-size: 13;
+}
+.input {
+  font-size: 14;
+  width: 100%;
+}
+.inputSmall {
+  font-size: 14;
+  width: 40%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  text-align: left;
+}
+
+.title {
+  font-weight: 600;
+  margin: 0px 0px 0px 0px;
+  font-size: 13;
+}
+.input {
+  font-size: 14;
+  height: 33px;
+  margin-right: 8px;
+}
+
+.dropdownContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.propertyInputContainer {
+  display: flex;
+  flex-direction: row;
+  margin-right: 8px;
+}
+
+.step1Container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
