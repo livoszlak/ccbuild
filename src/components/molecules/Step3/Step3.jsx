@@ -6,15 +6,15 @@ import Box from "@mui/material/Box";
 import styles from "./Step3.module.css";
 
 const weightUnits = {
-  option1: "Value 1",
-  option2: "Value 2",
-  option3: "Value 3",
+  option1: "g",
+  option2: "kg",
+  option3: "ton",
 };
 
 const measurementUnits = {
-  option1: "Value 1",
-  option2: "Value 2",
-  option3: "Value 3",
+  option1: "mm",
+  option2: "cm",
+  option3: "m",
 };
 
 export default function Step3({ selectedSubcategorySecondary }) {
@@ -62,7 +62,7 @@ export default function Step3({ selectedSubcategorySecondary }) {
             title="Enhet mått"
             options={measurementUnits}
             size="small"
-            value={state.measurementUnit || ""}
+            value={state.measurementUnit || "mm"}
           />
         </Box>
         <Box className={styles.propertyInputContainer}>{/* knappar här */}</Box>
@@ -72,7 +72,7 @@ export default function Step3({ selectedSubcategorySecondary }) {
             title="Enhet vikt"
             options={weightUnits}
             size="small"
-            value={state.weightUnit || ""}
+            value={state.weightUnit || "kg"}
           />
         </Box>
       </div>
