@@ -13,6 +13,7 @@ import Step2 from "../../molecules/Step2/Step2";
 import { useData } from "../../../contexts/DataContext";
 import { useState, useEffect } from "react";
 import { useActiveStep } from "../../../contexts/ActiveStepContext";
+import Step5 from "../../molecules/Step5/Step5";
 
 // define the number of steps //
 const steps = [0, 1, 2, 3, 4];
@@ -60,7 +61,7 @@ function StepperComponent() {
       case 4:
         return (
           <>
-            <h1>Marknadsplatsen</h1>
+            <Step5/>
           </>
         );
       default:

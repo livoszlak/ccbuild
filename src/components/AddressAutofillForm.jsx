@@ -69,8 +69,7 @@ const AddressAutofillForm = () => {
 
   return (
     <div
-      className="round border border--gray-lighter px12 py24"
-      style={{ minHeight: 550 }}
+      className="round border border--gray-lighter"
     >
       <div className="wmax600 mx-auto">
         {/* shipping address page */}
@@ -79,8 +78,6 @@ const AddressAutofillForm = () => {
             none: activePage !== "shipping",
           })}
         >
-          <h4 className="txt-l txt-bold mb6">Adress</h4>
-
           <form
             className="flex flex--column"
             ref={formRef}
@@ -125,7 +122,7 @@ const AddressAutofillForm = () => {
             </label> */}
 
             {/* city, state, postal-code */}
-            <div className="col w-1/3">
+            {/* <div className="col w-1/3">
               <label className="txt-s txt-bold color-gray mb3">
                 Postkod
                 <input
@@ -150,7 +147,7 @@ const AddressAutofillForm = () => {
                   />
                 </label>
               </div>
-            </div>
+            </div> */}
             {/*               <div className="col w-1/3">
                 <label className="txt-s txt-bold color-gray mb3">
                   State / Region
