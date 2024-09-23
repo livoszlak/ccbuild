@@ -8,7 +8,7 @@ import Textfield from "../../atoms/Textfield/Textfield";
 import Dropdown from "../../atoms/Dropdown/Dropdown";
 import styles from "./Stepper.module.css";
 import RadioButton from "../../atoms/RadioButton/RadioButton";
-import Step3 from "../Step3/Step3";
+import Step3 from "../../molecules/Step3/Step3";
 import { useData } from "../../../contexts/DataContext";
 import { useState, useEffect } from "react";
 
