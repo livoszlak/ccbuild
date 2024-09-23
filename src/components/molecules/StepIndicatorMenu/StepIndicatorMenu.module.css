@@ -26,9 +26,3 @@ margin-left: 120px;
     font-size: 43px; 
     font-family: Poppins, sans-serif;
 }
-.StepLabel {
-    color: var(--green);
-}
-.StepLabel.Mui-disabled {
-    color: red;
-}
