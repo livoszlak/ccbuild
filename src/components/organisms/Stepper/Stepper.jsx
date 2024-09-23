@@ -11,6 +11,7 @@ import RadioButton from "../../atoms/RadioButton/RadioButton";
 import Step3 from "../../molecules/Step3/Step3";
 import { useData } from "../../../contexts/DataContext";
 import { useState, useEffect } from "react";
+import { useActiveStep } from "../../../contexts/ActiveStepContext";
 
 // define the number of steps //
 const steps = [0, 1, 2, 3, 4];
@@ -28,6 +29,7 @@ const measurementUnits = {
 
 // Destructure state and setters from context
 function StepperComponent() {
+  const { activeStep, setActiveStep } = useActiveStep();
   const {
     state,
     setMainCategory,
@@ -39,7 +41,6 @@ function StepperComponent() {
   } = useData();
 
   // Local state for active step & selected project (TODO: set project in context state like other variables are being set, doesn't need to be a separate local useState)
-  const [activeStep, setActiveStep] = React.useState(0);
   const [selectedProject, setSelectedProject] = React.useState("");
   const [filteredSubcategoriesPrimary, setFilteredSubcategoriesPrimary] =
     useState([]);
@@ -280,7 +281,7 @@ function StepperComponent() {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%", marginRight: '120px'}}>
       <Stepper activeStep={activeStep}>
         {/* Add Step components here if needed */}
       </Stepper>
@@ -296,20 +297,19 @@ function StepperComponent() {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>
+          <Typography sx={{ mt:'32px', mb: 0, color: 'var(--step-indicator-color)', fontFamily: 'Poppins, sans-serif', fontWeight: 'var(--semibold)' }}>
             Steg {activeStep + 1} av {steps.length}{" "}
           </Typography>
           {getStepContent(activeStep)}
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+          <Box sx={{ display: "flex", flexDirection: "row", pt: 2, mb: 2, justifyContent: 'space-between'}}>
             <Button
               color="inherit"
               disabled={activeStep === 0}
               onClick={handleBack}
-              sx={{ mr: 1 }}
             >
               Föregående
             </Button>
-            <Box sx={{ flex: "1 1 auto" }} />
+            <Box/>
             <Button onClick={handleNext}>
               {activeStep === steps.length - 1 ? "Spara" : "Nästa"}
             </Button>

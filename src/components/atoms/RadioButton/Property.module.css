@@ -9,10 +9,10 @@
     align-items: center;
 }
 .radioButton{
-font-weight: 400;
+font-weight: var(--regular);
 }
 .title{
-    font-weight: 600;
+    font-weight: var(--semibold);
     margin: 0px 0px 0px 0px;
     font-size: 13;
 }

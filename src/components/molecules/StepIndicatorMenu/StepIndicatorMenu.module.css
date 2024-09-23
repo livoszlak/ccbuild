@@ -1,0 +1,34 @@
+.mainContainer{
+    display: flex; 
+    flex-direction: column;
+    width: 360px;
+}
+.container{
+margin-left: 120px;
+}
+.buttonContainer{
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+    gap: 8px;
+}
+.stepLabel {
+    font-size: 14px;
+    font-weight: 500;
+}
+.stepLabelHeader{
+    font-size: 16px;
+    font-weight: var(--semibold);
+    margin-bottom: 24px;
+    padding: 0px; 
+    color: var(  --new-project-color);
+    font-size: 43px; 
+    font-family: Poppins, sans-serif;
+}
+.StepLabel {
+    color: var(--green);
+}
+.StepLabel.Mui-disabled {
+    color: red;
+}
