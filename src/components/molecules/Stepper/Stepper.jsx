@@ -26,6 +26,7 @@ const measurementUnits = {
   option3: "Value 3",
 }; */
 
+// Destructure state and setters from context
 function StepperComponent() {
   const {
     state,
@@ -37,6 +38,7 @@ function StepperComponent() {
     setProductDescription,
   } = useData();
 
+  // Local state for active step & selected project (TODO: set project in context state like other variables are being set, doesn't need to be a separate local useState)
   const [activeStep, setActiveStep] = React.useState(0);
   const [selectedProject, setSelectedProject] = React.useState("");
   const [filteredSubcategoriesPrimary, setFilteredSubcategoriesPrimary] =
@@ -44,7 +46,7 @@ function StepperComponent() {
   const [filteredSubcategoriesSecondary, setFilteredSubcategoriesSecondary] =
     useState([]);
 
-  // initialize state from context
+  // Filter primary subcategories based on selected main category
   useEffect(() => {
     setFilteredSubcategoriesPrimary(
       state.subcategoriesPrimary.filter(
@@ -55,6 +57,7 @@ function StepperComponent() {
     );
   }, [state.selectedMainCategory, state.subcategoriesPrimary]);
 
+  // Filter secondary subcategories based on selected primary subcategory
   useEffect(() => {
     setFilteredSubcategoriesSecondary(
       state.subcategoriesSecondary.filter(
@@ -66,6 +69,7 @@ function StepperComponent() {
     );
   }, [state.selectedSubcategoryPrimary, state.subcategoriesSecondary]);
 
+  // Handlers for step navigation
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -78,10 +82,12 @@ function StepperComponent() {
     setActiveStep(0);
   };
 
+  // Handler for project change (TODO: as mentioned above, should be refactored to match the other setters which use dispatch to context state)
   const handleProjectChange = (setter) => (value) => {
     setter(value);
   };
 
+  // Handlers for category changes (needed to display correct subcategories on id)
   const handleMainCategoryChange = (id) => {
     setMainCategory(id);
     setSubcategoryPrimary("");
@@ -97,6 +103,7 @@ function StepperComponent() {
     setSubcategorySecondary(id);
   };
 
+  // Handlers for product changes of name, internalId and productDescription
   const handleProductNameChange = (e) => {
     setProductName(e.target.value);
   };
@@ -110,15 +117,18 @@ function StepperComponent() {
   };
 
   const getStepContent = (step) => {
+    // Create an object mapping project IDs to project names
     const projectOptions = state.projects.reduce((acc, project) => {
       acc[project.id] = project.name;
       return acc;
     }, {});
 
+    // Find the name of selected main category
     const mainCategoryName = state.mainCategories.find(
       (category) => category.id.toString() === state.selectedMainCategory
     )?.name;
 
+    // Find the name of selected primary subcategory
     const subcategoryPrimaryName = state.subcategoriesPrimary.find(
       (category) => category.id.toString() === state.selectedSubcategoryPrimary
     )?.name;
@@ -131,7 +141,7 @@ function StepperComponent() {
             <Dropdown
               id="project"
               title="Projekt*"
-              placeholder="Välj projekt"
+              placeholder="Ej angivet"
               options={projectOptions}
               onOptionChange={handleProjectChange(setSelectedProject)}
               value={selectedProject}
