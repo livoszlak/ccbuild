@@ -9,7 +9,7 @@ import Dropdown from "../../atoms/Dropdown/Dropdown";
 import styles from "./Stepper.module.css";
 import RadioButton from "../../atoms/RadioButton/RadioButton";
 import Step1 from "../../molecules/Step1/Step1";
-import Step3 from "../../molecules/Step3/Step3";
+import Step2 from "../../molecules/Step2/Step2";
 import { useData } from "../../../contexts/DataContext";
 import { useState, useEffect } from "react";
 
@@ -41,15 +41,15 @@ function StepperComponent() {
         return <Step1 />;
       case 1:
         return (
-          <>
-            <h1>Plats / Status / Antal</h1>
-          </>
+          <Step2
+            selectedSubcategorySecondary={state.selectedSubcategorySecondary}
+          />
         );
       case 2:
         return (
-          <Step3
-            selectedSubcategorySecondary={state.selectedSubcategorySecondary}
-          />
+          <>
+            <h1>Plats/Status/Antal</h1>
+          </>
         );
       case 3:
         return (

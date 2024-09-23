@@ -1,18 +1,26 @@
-.container{
-    display: flex;
-    flex-direction: column;
+.container {
+  display: flex;
+  flex-direction: column;
 }
 
-.radioContainer, .radioButton{
-    display:flex; 
-    flex-direction: row; 
-    align-items: center;
+.radioContainer,
+.radioButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
-.radioButton{
-font-weight: 400;
+
+.radioContainer {
+  gap: 16px;
 }
-.title{
-    font-weight: 600;
-    margin: 0px 0px 0px 0px;
-    font-size: 13;
+
+.radioButton {
+  font-weight: 400;
+}
+
+.title {
+  font-weight: 600;
+  margin: 0px 0px 0px 0px;
+  font-size: 13px;
+  padding-left: 7px;
 }

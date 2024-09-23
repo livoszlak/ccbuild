@@ -6,6 +6,7 @@
   width: 100%;
   max-width: 350px;
   margin-right: 8px;
+  gap: 4px;
 }
 .title {
   font-weight: 600;
@@ -49,6 +50,12 @@
   display: flex;
   flex-direction: row;
   margin-right: 8px;
+}
+
+.propertiesInputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .step1Container {
