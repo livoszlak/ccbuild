@@ -5,6 +5,7 @@ const DataContext = createContext();
 
 // Initial state for data context - we will add more here for each step
 const initialState = {
+
   mainCategories: [],
   organisations: [],
   productCard: [],
