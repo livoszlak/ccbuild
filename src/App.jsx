@@ -4,7 +4,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import { AddressAutofill } from "@mapbox/search-js-react";
 import AddressAutofillForm from "./components/AddressAutofillForm";
-import Stepper from "./components/molecules/Stepper/Stepper";
+import Stepper from "./components/organisms/Stepper/Stepper";
 import Navbar from "./components/molecules/Navbar/Navbar";
 
 function App() {
