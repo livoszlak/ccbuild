@@ -12,7 +12,8 @@ export default function RadioButton(props) {
               type="radio"
               name={props.name}
               value={value}
-              defaultChecked={value === props.selectedValue}
+              checked={props.selectedValue === props.values[value]}
+              onChange={() => props.onChange(props.values[value])}
             />
             {props.values[value]}
           </label>

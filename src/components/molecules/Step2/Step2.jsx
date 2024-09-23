@@ -18,11 +18,19 @@ const measurementUnits = {
 };
 
 export default function Step3({ selectedSubcategorySecondary }) {
-  const { state } = useData();
+  const { state, dispatch } = useData();
 
   const subcategorySecondary = state.subcategoriesSecondary.find(
     (subcategory) => subcategory.id.toString() === selectedSubcategorySecondary
   );
+
+  const handlePropertyKeyChange = (key, value) => {
+    dispatch({
+      type: "UPDATE_PROPERTY_KEY",
+      payload: { key, value },
+    });
+    console.log(state.selectedPropertyKeys);
+  };
 
   return (
     <>
@@ -38,11 +46,17 @@ export default function Step3({ selectedSubcategorySecondary }) {
                     name={`property-${key}`}
                     values={subcategorySecondary.propertyKeys[key]}
                     selectedValue={
-                      Object.keys(subcategorySecondary.propertyKeys[key])[0]
+                      state.selectedPropertyKeys[key] ||
+                      subcategorySecondary.propertyKeys[key][0]
                     }
+                    onChange={(value) => handlePropertyKeyChange(key, value)}
                   />
                 ) : (
-                  <Textfield title={key} />
+                  <Textfield
+                    title={key}
+                    value={state.selectedPropertyKeys[key] || ""}
+                    onChange={(value) => handlePropertyKeyChange(key, value)}
+                  />
                 )}
               </div>
             ))
@@ -53,7 +67,7 @@ export default function Step3({ selectedSubcategorySecondary }) {
           )}
         </div>
       </div>
-
+      {/* 
       <div>
         <h1>Form</h1>
         <Box className={styles.propertyInputContainer}>
@@ -71,7 +85,7 @@ export default function Step3({ selectedSubcategorySecondary }) {
             value={state.measurementUnit || "mm"}
           />
         </Box>
-        <Box className={styles.propertyInputContainer}>{/* knappar här */}</Box>
+        <Box className={styles.propertyInputContainer}></Box>
         <Box className={styles.propertyInputContainer}>
           <Textfield title="Vikt" value={state.weight || ""} />
           <Dropdown
@@ -81,7 +95,7 @@ export default function Step3({ selectedSubcategorySecondary }) {
             value={state.weightUnit || "kg"}
           />
         </Box>
-      </div>
+      </div> */}
     </>
   );
 }
