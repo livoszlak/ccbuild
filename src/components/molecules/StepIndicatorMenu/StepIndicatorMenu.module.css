@@ -1,15 +1,16 @@
 .mainContainer{
     display: flex; 
     flex-direction: column;
-    width: 360px;
+    width: 336px;
+    margin-right: 24px;
 }
 .container{
-margin-left: 120px;
+margin-left: 24px;
 }
 .buttonContainer{
     display: flex;
     flex-direction: row;
-    /* justify-content: center; */
+    justify-content: center; 
     align-items: center;
     gap: 8px;
 }
@@ -21,8 +22,15 @@ margin-left: 120px;
     font-size: 16px;
     font-weight: var(--semibold);
     margin-bottom: 24px;
+    margin-left: 24px;
     padding: 0px; 
     color: var(  --new-project-color);
     font-size: 43px; 
     font-family: Poppins, sans-serif;
 }
+.StepLabelText{
+    font-family: Poppins, sans-serif;
+    font-weight: var(--medium);
+    padding: 0px, 12px
+}
+    

@@ -1,6 +1,6 @@
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 function StepIcon(props) {
     const { active, completed } = props;
@@ -8,7 +8,7 @@ function StepIcon(props) {
     if (completed) {
         return <CheckCircleIcon style={{ color: '#44A036', marginLeft: '24px' }} />;
     } else if (active) {
-        return  <><ArrowRightIcon/> <CheckCircleOutlineIcon style={{ color: 'grey' }}/></>
+        return  <><PlayArrowIcon/> <CheckCircleOutlineIcon style={{ color: 'grey' }}/></>
     } else {
         return <CheckCircleOutlineIcon style={{ color: 'grey', marginLeft: '24px' }} />;
     }
