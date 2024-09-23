@@ -3,6 +3,7 @@ import { useSupabase } from "../hooks/useSupabase";
 
 const DataContext = createContext();
 
+// Initial state for data context - we will add more here for each step
 const initialState = {
   mainCategories: [],
   organisations: [],
@@ -27,6 +28,7 @@ const initialState = {
   productDescription: "",
 };
 
+// Reducer function to manage state updates based on dispatched actions
 function dataReducer(state, action) {
   switch (action.type) {
     case "SET_DATA":
@@ -63,11 +65,13 @@ function dataReducer(state, action) {
   }
 }
 
+// Data provider to wrap the application
 export function DataProvider({ children }) {
   const [state, dispatch] = useReducer(dataReducer, initialState);
   const { fetchData } = useSupabase();
 
   useEffect(() => {
+    // Fetches all data from our database - if we add more tables we need to add them here as well if we want to use the data (obviously)
     async function fetchAllData() {
       const tables = [
         "mainCategories",
@@ -90,7 +94,8 @@ export function DataProvider({ children }) {
           if (data) {
             dispatch({ type: "SET_DATA", table, data });
           }
-          await new Promise((resolve) => setTimeout(resolve, 100)); // Add a delay of 100ms between requests for less risk of overwhelm
+          // Add a delay of 100ms between requests for less risk of overwhelm (which was an issue)
+          await new Promise((resolve) => setTimeout(resolve, 100));
         }
       } catch (error) {
         dispatch({ type: "SET_ERROR", error: error.message });
@@ -100,10 +105,12 @@ export function DataProvider({ children }) {
     fetchAllData();
   }, []); // Empty dependency array to run only once
 
+  // Function to update a specific field in a table
   const updateField = (table, id, field, value) => {
     dispatch({ type: "UPDATE_FIELD", table, id, field, value });
   };
 
+  // Functions to set different states in our context - we will add more here as we go!
   const setMainCategory = (id) => {
     dispatch({ type: "SET_SELECTED_MAIN_CATEGORY", payload: id });
     updateProductName();
@@ -131,6 +138,7 @@ export function DataProvider({ children }) {
     dispatch({ type: "SET_PRODUCT_DESCRIPTION", payload: value });
   };
 
+  // Function to update the product name based on selected categories. Also checks if user has edited the suggested name manually and if so does an early return
   const updateProductName = () => {
     if (state.isProductNameManuallyEdited) return;
 
@@ -152,6 +160,7 @@ export function DataProvider({ children }) {
     dispatch({ type: "RESET_PRODUCT_NAME_EDIT_FLAG" });
   };
 
+  // Updates productName when selected categories change
   useEffect(() => {
     updateProductName();
   }, [
