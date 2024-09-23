@@ -75,6 +75,25 @@ export default function Step1() {
 
   const handleSubcategorySecondaryChange = (id) => {
     setSubcategorySecondary(id);
+
+    const selectedSubcategory = state.subcategoriesSecondary.find(
+      (category) => category.id.toString() === id
+    );
+
+    if (selectedSubcategory) {
+      const propertyKeys = selectedSubcategory.propertyKeys;
+      const initialPropertyKeys = Object.keys(propertyKeys).reduce(
+        (acc, key) => {
+          acc[key] = null;
+          return acc;
+        },
+        {}
+      );
+
+      dispatch({ type: "SET_SELECTED_SUBCATEGORY_SECONDARY", payload: id });
+      dispatch({ type: "SET_PROPERTY_KEYS", payload: initialPropertyKeys });
+      console.log(state.selectedPropertyKeys);
+    }
   };
 
   /* const [selectedProject, setSelectedProject] = React.useState(""); */

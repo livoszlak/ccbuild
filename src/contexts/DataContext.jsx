@@ -27,6 +27,7 @@ const initialState = {
   isProductNameManuallyEdited: false,
   interalId: "",
   productDescription: "",
+  selectedPropertyKeys: {},
 };
 
 // Reducer function to manage state updates based on dispatched actions
@@ -63,6 +64,32 @@ function dataReducer(state, action) {
       return { ...state, internalId: action.payload };
     case "SET_PRODUCT_DESCRIPTION":
       return { ...state, productDescription: action.payload };
+    case "SET_PROPERTY_KEYS":
+      return {
+        ...state,
+        selectedPropertyKeys: action.payload,
+      };
+    case "UPDATE_PROPERTY_KEY":
+      return {
+        ...state,
+        selectedPropertyKeys: {
+          ...state.selectedPropertyKeys,
+          [action.payload.key]: action.payload.value,
+        },
+      };
+    /* case "SET_PROPERTY_KEY":
+      return {
+        ...state,
+        selectedPropertyKeys: {
+          ...state.selectedPropertyKeys,
+          [action.payload.key]: action.payload.value,
+        },
+      };
+    case "RESET_PROPERTY_KEYS":
+      return {
+        ...state,
+        selectedPropertyKeys: {},
+      }; */
     default:
       return state;
   }
@@ -145,6 +172,14 @@ export function DataProvider({ children }) {
     dispatch({ type: "SET_PRODUCT_DESCRIPTION", payload: value });
   };
 
+  const setPropertyKey = (key, value) => {
+    dispatch({ type: "SET_PROPERTY_KEY", payload: { key, value } });
+  };
+
+  const resetPropertyKeys = () => {
+    dispatch({ type: "RESET_PROPERTY_KEYS" });
+  };
+
   // Function to update the product name based on selected categories. Also checks if user has edited the suggested name manually and if so does an early return
   const updateProductName = () => {
     if (state.isProductNameManuallyEdited) return;
@@ -189,6 +224,8 @@ export function DataProvider({ children }) {
         setProductName,
         setInternalId,
         setProductDescription,
+        setPropertyKey,
+        resetPropertyKeys,
       }}
     >
       {children}

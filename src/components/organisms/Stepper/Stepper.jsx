@@ -45,6 +45,7 @@ function StepperComponent() {
             selectedSubcategorySecondary={state.selectedSubcategorySecondary}
           />
         );
+
       case 2:
         return (
           <>
