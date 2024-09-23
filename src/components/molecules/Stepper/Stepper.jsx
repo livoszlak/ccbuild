@@ -198,6 +198,10 @@ function StepperComponent() {
               value={state.productName || ""}
               onChange={handleProductNameChange}
             />
+            <Typography sx={{ fontSize: "11px", width: "fit-content" }}>
+              Om du inte anger något här skapas ett produktnamn när du sparar.
+              Du kan ändra namnet senare.
+            </Typography>
             <Textfield
               title="Eget ID-nummer"
               id="internalId"
