@@ -3,7 +3,7 @@ import Textfield from "../../atoms/Textfield/Textfield";
 import RadioButton from "../../atoms/RadioButton/RadioButton";
 import Dropdown from "../../atoms/Dropdown/Dropdown";
 import Box from "@mui/material/Box";
-import styles from "./Step3.module.css";
+import styles from "./Step2.module.css";
 
 const weightUnits = {
   option1: "g",
@@ -28,24 +28,30 @@ export default function Step3({ selectedSubcategorySecondary }) {
     <>
       <div>
         <h1>Egenskaper</h1>
-        {subcategorySecondary && subcategorySecondary.propertyKeys ? (
-          Object.keys(subcategorySecondary.propertyKeys).map((key) => (
-            <div key={key}>
-              {subcategorySecondary.propertyKeys[key] ? (
-                <RadioButton
-                  title={key}
-                  values={subcategorySecondary.propertyKeys[key]}
-                />
-              ) : (
-                <Textfield title={key} />
-              )}
+        <div className={styles.propertiesInputWrapper}>
+          {subcategorySecondary && subcategorySecondary.propertyKeys ? (
+            Object.keys(subcategorySecondary.propertyKeys).map((key) => (
+              <div key={key}>
+                {subcategorySecondary.propertyKeys[key] ? (
+                  <RadioButton
+                    title={key}
+                    name={`property-${key}`}
+                    values={subcategorySecondary.propertyKeys[key]}
+                    selectedValue={
+                      Object.keys(subcategorySecondary.propertyKeys[key])[0]
+                    }
+                  />
+                ) : (
+                  <Textfield title={key} />
+                )}
+              </div>
+            ))
+          ) : (
+            <div>
+              <p>Det finns inga specifika egenskaper för vald produkttyp.</p>
             </div>
-          ))
-        ) : (
-          <div>
-            <p>Det finns inga specifika egenskaper för vald produkttyp.</p>
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
       <div>
