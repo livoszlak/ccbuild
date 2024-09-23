@@ -23,6 +23,7 @@ const initialState = {
   selectedMainCategory: null,
   selectedSubcategoryPrimary: null,
   selectedSubcategorySecondary: null,
+  project: "",
   productName: "",
   isProductNameManuallyEdited: false,
   interalId: "",
@@ -47,6 +48,8 @@ function dataReducer(state, action) {
             : item
         ),
       };
+    case "SET_PROJECT":
+      return { ...state, project: action.payload };
     case "SET_SELECTED_MAIN_CATEGORY":
       return { ...state, selectedMainCategory: action.payload };
     case "SET_SELECTED_SUBCATEGORY_PRIMARY":
@@ -112,6 +115,10 @@ export function DataProvider({ children }) {
   };
 
   // Functions to set different states in our context - we will add more here as we go!
+  const setProject = (id) => {
+    dispatch({ type: "SET_PROJECT", payload: id });
+  };
+
   const setMainCategory = (id) => {
     dispatch({ type: "SET_SELECTED_MAIN_CATEGORY", payload: id });
     updateProductName();
@@ -174,7 +181,9 @@ export function DataProvider({ children }) {
     <DataContext.Provider
       value={{
         state,
+        dispatch,
         updateField,
+        setProject,
         setMainCategory,
         setSubcategoryPrimary,
         setSubcategorySecondary,
