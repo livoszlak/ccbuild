@@ -31,8 +31,8 @@ export default function StepIndicatorMenu() {
             <Stepper activeStep={activeStep} connector={''} className={styles.mainContainer} orientation="vertical">
                 {steps.map((step, index) => (
                     <Step key={step.label}>
-                        <StepLabel StepIconComponent={StepIcon}>
-                            {step.label}
+                        <StepLabel StepIconComponent={StepIcon} sx={{p:0}}>
+                            <p className={styles.StepLabelText}>{step.label}</p>
                         </StepLabel>
                         <StepContent>
                             <Typography>{step.description}</Typography>
@@ -41,7 +41,8 @@ export default function StepIndicatorMenu() {
                 ))}
                 <Box className={styles.buttonContainer}>
                     <Button
-                        sx={{ mt: 1, mr: '8px', borderRadius: '30px' }}
+                    variant='outlined'
+                        sx={{ mt: 1, mr: '8px', borderRadius: '30px', borderWidth: '2px', fontSize: '14px' }}
                     >
                         Avbryt
                     </Button>
