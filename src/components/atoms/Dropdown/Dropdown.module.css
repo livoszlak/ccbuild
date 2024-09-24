@@ -6,6 +6,7 @@
   margin-right: 8px;
   width: 100%;
   max-width: 350px;
+  gap: 9px;
 }
 
 .containerSmall {
@@ -16,6 +17,7 @@
   margin-right: 8px;
   width: fit-content;
   max-width: 350px;
+  gap: 9px;
 }
 
 .title {

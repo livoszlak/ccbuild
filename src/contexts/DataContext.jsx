@@ -42,6 +42,17 @@ const initialState = {
     weightPer: null,
     weightUnit: "",
   },
+  productInformation: {
+    manufacturer: "",
+    itemNumber: "",
+    manufacturedYear: "",
+    purchasedYear: "",
+    GTIN: "",
+    RSK: "",
+    ENR: "",
+    BSAB: "",
+    BK04: "",
+  },
 };
 
 // Reducer function to manage state updates based on dispatched actions
@@ -121,6 +132,14 @@ function dataReducer(state, action) {
         ...state,
         form: {
           ...state.form,
+          [action.payload.key]: action.payload.value,
+        },
+      };
+    case "UPDATE_PRODUCT_INFO":
+      return {
+        ...state,
+        productInformation: {
+          ...state.productInformation,
           [action.payload.key]: action.payload.value,
         },
       };
@@ -243,6 +262,10 @@ export function DataProvider({ children }) {
     dispatch({ type: "UPDATE_FORM", payload: { key, value } });
   };
 
+  const updateProductInfo = (key, value) => {
+    dispatch({ type: "UPDATE_PRODUCT_INFO", payload: { key, value } });
+  };
+
   return (
     <DataContext.Provider
       value={{
@@ -259,6 +282,7 @@ export function DataProvider({ children }) {
         setPropertyKey,
         resetPropertyKeys,
         updateForm,
+        updateProductInfo,
       }}
     >
       {children}
