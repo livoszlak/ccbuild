@@ -38,9 +38,9 @@
   --dark: #343a40;
   --red: #cc4b3a;
   --orange: #ef772c;
-  --blue: #007bff;
   --green: #44a036;
   --yellow: #efab2c;
+  --btn-blue: #488ac6;
 
   /* SPACING */
 
@@ -60,7 +60,7 @@
 }
 
 * {
-  font-family: Inter, sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 a {

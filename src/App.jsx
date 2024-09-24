@@ -11,11 +11,8 @@ import Box from "@mui/material/Box";
 import { ActiveStepProvider } from "./contexts/ActiveStepContext";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      {/* <AddressAutofillForm /> */}
       <ActiveStepProvider>
       <Navbar />
       <Box className={styles.mainContentContainer}>
