@@ -14,7 +14,7 @@
 
   /* COLORS */
   --new-project-color: #112f5f;
-  --step-indicator-color: #488AC6;
+  --step-indicator-color: #488ac6;
   --indigo: #6610f2;
   --purple: #6f42c1;
   --pink: #e83e8c;
@@ -74,7 +74,7 @@ a:hover {
 
 input,
 select {
-  max-width: 350px;
+  max-width: 420px;
 }
 body {
   margin: 0;

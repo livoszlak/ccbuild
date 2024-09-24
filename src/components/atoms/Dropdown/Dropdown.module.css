@@ -3,19 +3,33 @@
   flex-direction: column;
   justify-content: left;
   text-align: left;
+  margin-right: 8px;
   width: 100%;
   max-width: 350px;
-  margin-right: 8px;
 }
+
+.containerSmall {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  text-align: left;
+  margin-right: 8px;
+  width: fit-content;
+  max-width: 350px;
+}
+
 .title {
   font-weight: var(--semibold);
   margin: 0px 0px 0px 0px;
   font-size: 13;
 }
+
 .input {
   font-size: 14;
   width: 100%;
+  max-width: 350px;
 }
+
 .inputSmall {
   font-size: 14;
   width: 104px;

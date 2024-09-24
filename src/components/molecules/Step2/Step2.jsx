@@ -29,34 +29,8 @@ const measurementUnits = {
   option3: "m",
 };
 
-export default function Step3({ selectedSubcategorySecondary }) {
-  const { state, dispatch } = useData();
-
-  const [expandedFields, setExpandedFields] = useState({
-    diameter: false,
-    langd: false,
-    tjocklek: false,
-  });
-
-  const toggleField = (field) => {
-    setExpandedFields((prev) => ({ ...prev, [field]: !prev[field] }));
-  };
-
-  const ExpandableField = ({ label, expanded, onToggle }) => (
-    <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-      <Typography sx={{ flexGrow: 1 }}>{label}</Typography>
-      <IconButton onClick={onToggle} size="small">
-        <AddIcon />
-      </IconButton>
-      {expanded && (
-        <Textfield
-          sx={{ ml: 2, flexGrow: 1 }}
-          size="small"
-          placeholder={label}
-        />
-      )}
-    </Box>
-  );
+export default function Step2({ selectedSubcategorySecondary }) {
+  const { state, dispatch, updateForm } = useData();
 
   const subcategorySecondary = state.subcategoriesSecondary.find(
     (subcategory) => subcategory.id.toString() === selectedSubcategorySecondary
@@ -67,6 +41,10 @@ export default function Step3({ selectedSubcategorySecondary }) {
       type: "UPDATE_PROPERTY_KEY",
       payload: { key, value },
     });
+  };
+
+  const handleFormChange = (key, value) => {
+    updateForm(key, value);
   };
 
   return (
@@ -108,44 +86,81 @@ export default function Step3({ selectedSubcategorySecondary }) {
       <h1>Form</h1>
       <Box className={styles.formInputWrapper}>
         <Box sx={{ display: "flex", gap: 2, mb: 2 }}>
-          <Textfield title="Material" />
-          <Textfield title="Färg / Finish" />
+          <Textfield
+            title="Material"
+            size="small"
+            value={state.form.material || ""}
+            onChange={(value) => handleFormChange("material", value)}
+          />
+          <Textfield
+            title="Färg / Finish"
+            size="small"
+            value={state.form.finish || ""}
+            onChange={(value) => handleFormChange("finish", value)}
+          />
         </Box>
 
         <Box sx={{ display: "flex", gap: 2, mb: 2 }}>
           <Dropdown
             title="Enhet mått"
-            defaultValue="mm"
+            placeholder="mm"
             options={measurementUnits}
             size="small"
+            value={state.form.measurementUnit || ""}
+            onOptionChange={(value) =>
+              handleFormChange("measurementUnit", value)
+            }
           />
-          <Textfield title="Bredd" />
-          <Textfield title="Djup" />
-          <Textfield title="Höjd" />
+          <Textfield
+            title="Bredd"
+            value={state.form.width || ""}
+            onChange={(value) => handleFormChange("width", value)}
+          />
+          <Textfield
+            title="Djup"
+            value={state.form.depth || ""}
+            onChange={(value) => handleFormChange("depth", value)}
+          />
+          <Textfield
+            title="Höjd"
+            value={state.form.height || ""}
+            onChange={(value) => handleFormChange("height", value)}
+          />
         </Box>
 
-        <ExpandableField
-          label="Diameter"
-          expanded={expandedFields.diameter}
-          onToggle={() => toggleField("diameter")}
+        <Textfield
+          id="diameter"
+          title="Diameter"
+          value={state.form.diameter || ""}
+          onChange={(value) => handleFormChange("diameter", value)}
         />
-        <ExpandableField
-          label="Längd"
-          expanded={expandedFields.langd}
-          onToggle={() => toggleField("langd")}
+        <Textfield
+          id="length"
+          title="Längd"
+          value={state.form.length || ""}
+          onChange={(value) => handleFormChange("length", value)}
         />
-        <ExpandableField
-          label="Tjocklek"
-          expanded={expandedFields.tjocklek}
-          onToggle={() => toggleField("tjocklek")}
+        <Textfield
+          id="thickness"
+          title="Tjocklek"
+          value={state.form.thickness || ""}
+          onChange={(value) => handleFormChange("thickness", value)}
         />
 
         <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
-          <Textfield title="Vikt / st *" fullWidth size="small" />
+          <Textfield
+            title="Vikt / st *"
+            fullWidth
+            size="small"
+            value={state.form.weightPer || ""}
+            onChange={(value) => handleFormChange("weightPer", value)}
+          />
           <Dropdown
             title="Enhet vikt"
-            defaultValue="kg"
+            placeholder="kg"
             options={weightUnits}
+            value={state.form.weightUnit || ""}
+            onOptionChange={(value) => handleFormChange("weightUnit", value)}
           />
           <EstimateButton text="Uppskatta vikt" />
         </Box>

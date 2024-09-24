@@ -3,7 +3,11 @@ import { Box, Typography } from "@mui/material";
 
 export default function Textfield(props) {
   return (
-    <Box className={styles.container}>
+    <Box
+      className={
+        props.size === "small" ? styles.containerSmall : styles.container
+      }
+    >
       <h2 className={styles.title}>{props.title}</h2>
       <input
         className={styles.input}
