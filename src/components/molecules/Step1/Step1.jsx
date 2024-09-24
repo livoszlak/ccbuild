@@ -21,19 +21,18 @@ export default function Step1() {
   } = useData();
 
   // Handlers for changing productName, internalId and productDescription and setting them in context state
-  const handleProductNameChange = (e) => {
-    setProductName(e.target.value);
-    dispatch({ type: "SET_PRODUCT_NAME", payload: e.target.value });
+  const handleProductNameChange = (value) => {
+    setProductName(value, true);
   };
 
-  const handleInternalIdChange = (e) => {
-    setInternalId(e.target.value);
-    dispatch({ type: "SET_INTERNAL_ID", payload: e.target.value });
+  const handleInternalIdChange = (value) => {
+    setInternalId(value);
+    dispatch({ type: "SET_INTERNAL_ID", payload: value });
   };
 
-  const handleProductDescriptionChange = (e) => {
-    setProductDescription(e.target.value);
-    dispatch({ type: "SET_PRODUCT_DESCRIPTION", payload: e.target.value });
+  const handleProductDescriptionChange = (value) => {
+    setProductDescription(value);
+    dispatch({ type: "SET_PRODUCT_DESCRIPTION", payload: value });
   };
 
   // Create an object mapping project IDs to project names
@@ -186,8 +185,8 @@ export default function Step1() {
         onChange={handleProductNameChange}
       />
       <Typography sx={{ fontSize: "11px", width: "fit-content" }}>
-        Om du inte anger något här skapas ett produktnamn när du sparar. Du kan
-        ändra namnet senare.
+        Du kan ändra namnet i den här rutan om du inte är nöjd med det som
+        genererades automatiskt.
       </Typography>
       <Textfield
         title="Eget ID-nummer"
