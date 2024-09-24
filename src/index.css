@@ -6,7 +6,6 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  margin-left: 20%;
   width: 100%;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,6 +13,8 @@
   -moz-osx-font-smoothing: grayscale;
 
   /* COLORS */
+  --new-project-color: #112f5f;
+  --step-indicator-color: #488AC6;
   --blue: #007bff;
   --indigo: #6610f2;
   --purple: #6f42c1;
@@ -44,10 +45,10 @@
   /* SPACING */
 
   /* FONT WEIGHT */
-  --h1-weight: 700;
-  --h2-weight: 600;
-  --h3-weight: 500;
-  --regular-weight: 400;
+  --bold: 700;
+  --semibold: 600;
+  --medium: 500;
+  --regular: 400;
 
   /* FONT SIZE */
 
@@ -80,7 +81,6 @@ body {
   display: flex;
   align-items: end;
   flex-direction: column;
-  min-width: 320px;
   min-height: 100vh;
   background-color: var(--white);
   color: #151515;
