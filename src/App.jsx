@@ -8,11 +8,8 @@ import Stepper from "./components/organisms/Stepper/Stepper";
 import Navbar from "./components/molecules/Navbar/Navbar";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      {/* <AddressAutofillForm /> */}
       <Navbar />
       <Stepper />
     </>

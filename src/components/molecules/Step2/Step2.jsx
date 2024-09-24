@@ -1,8 +1,20 @@
 import { useData } from "../../../contexts/DataContext";
+import { useState } from "react";
 import Textfield from "../../atoms/Textfield/Textfield";
-import RadioButton from "../../atoms/RadioButton/RadioButton";
 import Dropdown from "../../atoms/Dropdown/Dropdown";
-import Box from "@mui/material/Box";
+import RadioButton from "../../atoms/RadioButton/RadioButton";
+import EstimateButton from "../../atoms/EstimateButton/EstimateButton";
+/* import Box from "@mui/material/Box"; */
+import {
+  Select,
+  MenuItem,
+  Button,
+  Box,
+  Typography,
+  IconButton,
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AddIcon from "@mui/icons-material/Add";
 import styles from "./Step2.module.css";
 
 const weightUnits = {
@@ -20,6 +32,32 @@ const measurementUnits = {
 export default function Step3({ selectedSubcategorySecondary }) {
   const { state, dispatch } = useData();
 
+  const [expandedFields, setExpandedFields] = useState({
+    diameter: false,
+    langd: false,
+    tjocklek: false,
+  });
+
+  const toggleField = (field) => {
+    setExpandedFields((prev) => ({ ...prev, [field]: !prev[field] }));
+  };
+
+  const ExpandableField = ({ label, expanded, onToggle }) => (
+    <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+      <Typography sx={{ flexGrow: 1 }}>{label}</Typography>
+      <IconButton onClick={onToggle} size="small">
+        <AddIcon />
+      </IconButton>
+      {expanded && (
+        <Textfield
+          sx={{ ml: 2, flexGrow: 1 }}
+          size="small"
+          placeholder={label}
+        />
+      )}
+    </Box>
+  );
+
   const subcategorySecondary = state.subcategoriesSecondary.find(
     (subcategory) => subcategory.id.toString() === selectedSubcategorySecondary
   );
@@ -29,7 +67,6 @@ export default function Step3({ selectedSubcategorySecondary }) {
       type: "UPDATE_PROPERTY_KEY",
       payload: { key, value },
     });
-    console.log(state.selectedPropertyKeys);
   };
 
   return (
@@ -67,35 +104,52 @@ export default function Step3({ selectedSubcategorySecondary }) {
           )}
         </div>
       </div>
-      {/* 
-      <div>
-        <h1>Form</h1>
-        <Box className={styles.propertyInputContainer}>
-          <Textfield title="Material" value={state.material || ""} />
-          <Textfield title="Färg/Finish" value={state.colorFinish || ""} />
+
+      <h1>Form</h1>
+      <Box className={styles.formInputWrapper}>
+        <Box sx={{ display: "flex", gap: 2, mb: 2 }}>
+          <Textfield title="Material" />
+          <Textfield title="Färg / Finish" />
         </Box>
-        <Box className={styles.propertyInputContainer}>
-          <Textfield title="Bredd" value={state.width || ""} />
-          <Textfield title="Djup" value={state.depth || ""} />
-          <Textfield title="Höjd" value={state.height || ""} />
+
+        <Box sx={{ display: "flex", gap: 2, mb: 2 }}>
           <Dropdown
             title="Enhet mått"
+            defaultValue="mm"
             options={measurementUnits}
             size="small"
-            value={state.measurementUnit || "mm"}
           />
+          <Textfield title="Bredd" />
+          <Textfield title="Djup" />
+          <Textfield title="Höjd" />
         </Box>
-        <Box className={styles.propertyInputContainer}></Box>
-        <Box className={styles.propertyInputContainer}>
-          <Textfield title="Vikt" value={state.weight || ""} />
+
+        <ExpandableField
+          label="Diameter"
+          expanded={expandedFields.diameter}
+          onToggle={() => toggleField("diameter")}
+        />
+        <ExpandableField
+          label="Längd"
+          expanded={expandedFields.langd}
+          onToggle={() => toggleField("langd")}
+        />
+        <ExpandableField
+          label="Tjocklek"
+          expanded={expandedFields.tjocklek}
+          onToggle={() => toggleField("tjocklek")}
+        />
+
+        <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
+          <Textfield title="Vikt / st *" fullWidth size="small" />
           <Dropdown
             title="Enhet vikt"
+            defaultValue="kg"
             options={weightUnits}
-            size="small"
-            value={state.weightUnit || "kg"}
           />
+          <EstimateButton text="Uppskatta vikt" />
         </Box>
-      </div> */}
+      </Box>
     </>
   );
 }

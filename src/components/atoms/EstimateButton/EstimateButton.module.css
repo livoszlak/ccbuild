@@ -1,0 +1,11 @@
+.estimateButton {
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+
+  font-weight: 400;
+  padding: 7px;
+  border-radius: 0;
+  align-self: center;
+  background-color: #488ac6;
+}

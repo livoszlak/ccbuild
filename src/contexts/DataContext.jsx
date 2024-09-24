@@ -29,6 +29,16 @@ const initialState = {
   interalId: "",
   productDescription: "",
   selectedPropertyKeys: {},
+  form: {
+    material: "",
+    finish: "",
+    width: null,
+    depth: null,
+    height: null,
+    measurementUnit: "",
+    weight: "",
+    weightUnit: "",
+  },
 };
 
 // Reducer function to manage state updates based on dispatched actions

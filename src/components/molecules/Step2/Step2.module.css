@@ -63,3 +63,14 @@
   flex-direction: column;
   gap: 16px;
 }
+
+.formInputWrapper {
+}
+
+.large {
+  width: 224px;
+}
+
+.small {
+  width: 104px;
+}
