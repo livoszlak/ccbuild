@@ -16,7 +16,7 @@ export default function StepIndicatorMenu() {
         { label: "Egenskaper*" },
         { label: "Plats / Status / Antal*" },
         { label: "Produktinformation" },
-        { label: "Marknadsplatsen" },
+        { label: "Hantering för marknadsplats" },
     ];
 
     const { activeStep, setActiveStep } = useActiveStep();

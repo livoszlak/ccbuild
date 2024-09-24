@@ -1,0 +1,9 @@
+.smallContainer{
+    display: flex;
+    flex-direction: row;
+}
+.subheader {
+    font-family: Inter;
+    font-weight: var(--dark) !important;
+    font-size: 14px;
+}
