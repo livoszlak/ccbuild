@@ -1,4 +1,3 @@
-// ActiveStepContext.js
 import React, { createContext, useContext, useState } from 'react';
 
 const ActiveStepContext = createContext();

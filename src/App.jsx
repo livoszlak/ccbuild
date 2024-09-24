@@ -17,11 +17,11 @@ function App() {
     <>
       {/* <AddressAutofillForm /> */}
       <ActiveStepProvider>
-      <Navbar />
-      <Box className={styles.mainContentContainer}>
-        <StepIndicatorMenu />
-        <Stepper />
-      </Box>
+        <Navbar />
+        <Box className={styles.mainContentContainer}>
+          <StepIndicatorMenu />
+          <Stepper />
+        </Box>
       </ActiveStepProvider>
     </>
   );
