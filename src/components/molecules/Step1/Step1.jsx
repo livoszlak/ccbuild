@@ -178,30 +178,32 @@ export default function Step1() {
           />
         )}
       </Box>
-      <Textfield
-        title="Produktnamn*"
-        id="productName"
-        value={state.productName || ""}
-        onChange={handleProductNameChange}
-      />
-      <Typography sx={{ fontSize: "11px", width: "fit-content" }}>
-        Du kan ändra namnet i den här rutan om du inte är nöjd med det som
-        genererades automatiskt.
-      </Typography>
-      <Textfield
-        title="Eget ID-nummer"
-        id="internalId"
-        placeholder="Eget ID-nummer"
-        value={state.internalId || ""}
-        onChange={handleInternalIdChange}
-      />
-      <Textfield
-        title="Produktbeskrivning"
-        id="productDescription"
-        placeholder="Produktbeskrivning"
-        value={state.productDescription || ""}
-        onChange={handleProductDescriptionChange}
-      />
+      <Box className={styles.textfieldContainer}>
+        <Textfield
+          title="Produktnamn*"
+          id="productName"
+          value={state.productName || ""}
+          onChange={handleProductNameChange}
+        />
+        <Typography sx={{ fontSize: "11px", width: "fit-content" }}>
+          Du kan ändra namnet i den här rutan om du inte är nöjd med det som
+          genererades automatiskt.
+        </Typography>
+        <Textfield
+          title="Eget ID-nummer"
+          id="internalId"
+          placeholder="Eget ID-nummer"
+          value={state.internalId || ""}
+          onChange={handleInternalIdChange}
+        />
+        <Textfield
+          title="Produktbeskrivning"
+          id="productDescription"
+          placeholder="Produktbeskrivning"
+          value={state.productDescription || ""}
+          onChange={handleProductDescriptionChange}
+        />
+      </Box>
     </Box>
   );
 }

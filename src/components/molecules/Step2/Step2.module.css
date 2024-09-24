@@ -64,10 +64,10 @@
   gap: 16px;
 }
 
-.large {
-  width: 224px;
-}
-
-.small {
-  width: 104px;
+.measurementContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  align-self: stretch;
 }
