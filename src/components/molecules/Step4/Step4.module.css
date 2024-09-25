@@ -74,11 +74,32 @@
   gap: 32px;
 }
 
-.textfieldContainerRow {
+.fieldContainerRow {
   max-width: 420px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   gap: 16px;
   width: 100%;
+}
+
+.expandable {
+  height: 41px;
+  width: 87px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  color: #151515 !important;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  padding: 8px !important;
+  font-weight: 700;
+  border-radius: 2px;
+  border: 1px solid #e2e2e2 !important;
+  background-color: #f9f9f9;
+  text-transform: none;
+}
+
+.addIcon {
+  color: #488ac6;
 }

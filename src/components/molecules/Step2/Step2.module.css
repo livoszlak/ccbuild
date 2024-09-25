@@ -71,3 +71,12 @@
   gap: 32px;
   align-self: stretch;
 }
+
+.buttonContainer {
+  max-width: 480px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 16px;
+  width: 100%;
+}

@@ -2,6 +2,7 @@ import Textfield from "../../atoms/Textfield/Textfield";
 import { useData } from "../../../contexts/DataContext";
 import { Box } from "@mui/material";
 import styles from "./Step4.module.css";
+import ExpandableButton from "../../atoms/ExpandableButton/ExpandableButton";
 
 export default function Step4() {
   const { state, dispatch, updateProductInfo } = useData();
@@ -30,7 +31,7 @@ export default function Step4() {
         />
       </Box>
 
-      <Box className={styles.textfieldContainerRow}>
+      <Box className={styles.fieldContainerRow}>
         <Textfield
           title="Tillverkningsår"
           placeholder="Uppskattat tillverkningsår"
@@ -45,6 +46,14 @@ export default function Step4() {
           value={state.productInformation.purchasedYear || ""}
           onChange={(value) => handleProductInfoChange("purchasedYear", value)}
         />
+      </Box>
+
+      <Box className={styles.fieldContainerRow}>
+        <ExpandableButton text="GTIN" />
+        <ExpandableButton text="RSK" />
+        <ExpandableButton text="E-NR" />
+        <ExpandableButton text="BSAB" />
+        <ExpandableButton text="BK04" />
       </Box>
     </Box>
   );
