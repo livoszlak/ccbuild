@@ -140,7 +140,7 @@ function dataReducer(state, action) {
       return {
         ...state,
         selectedPropertyKeys: {},
-      }; */
+      };
 
       //--- Step 5 - marketplace --- //
       case "SET_NEW_PRICE":
