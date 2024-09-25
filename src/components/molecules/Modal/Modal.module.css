@@ -1,0 +1,23 @@
+.modal{
+    height: 570px;
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.modalContainer{
+    display: flex;
+    gap: 16px;
+    position: relative;
+    align-self: center;
+    justify-content: center;
+}
+.ButtonPosition{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.ratingContainer{
+    display:flex; 
+    flex-direction: row;
+}
