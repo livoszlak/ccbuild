@@ -12,10 +12,10 @@ export default function Step4() {
   };
 
   return (
-    <Box className={styles.step4Container}>
+    <Box className={styles.stepContainer}>
       <h1>Produktinformation</h1>
 
-      <Box className={styles.textfieldContainer}>
+      <Box>
         <Textfield
           title="Tillverkare/leverantör"
           placeholder="Ange tillverkare eller leverantör"
@@ -31,7 +31,7 @@ export default function Step4() {
         />
       </Box>
 
-      <Box className={styles.fieldContainerRow}>
+      <Box className={styles.containerRow}>
         <Textfield
           title="Tillverkningsår"
           placeholder="Uppskattat tillverkningsår"
@@ -48,7 +48,7 @@ export default function Step4() {
         />
       </Box>
 
-      <Box className={styles.fieldContainerRow}>
+      <Box className={styles.buttonContainer}>
         <ExpandableButton text="GTIN" />
         <ExpandableButton text="RSK" />
         <ExpandableButton text="E-NR" />

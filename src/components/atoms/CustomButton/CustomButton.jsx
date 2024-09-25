@@ -1,6 +1,5 @@
 import { Button } from "@mui/material";
 import styles from "./CustomButton.module.css";
-import { StarPurple500Sharp } from "@mui/icons-material";
 
 export default function CustomButton(props) {
   return (
@@ -16,3 +15,4 @@ export default function CustomButton(props) {
     </Button>
   );
 }
+

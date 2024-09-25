@@ -17,7 +17,8 @@
   margin-right: 8px;
   width: fit-content;
   max-width: 350px;
-  gap: 9px;
+  gap: 8px;
+  margin-top: 32px;
 }
 
 .title {

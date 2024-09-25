@@ -82,25 +82,46 @@ export default function Step2({ selectedSubcategorySecondary }) {
           )}
         </div>
       </div>
-
-      <h1>Form</h1>
+      <Box className={styles.formHeader}>
+        <h1>Form</h1>
+      </Box>
       <Box className={styles.formInputWrapper}>
-        <Box sx={{ display: "flex", gap: 2, mb: 2 }}>
+        <Box sx={{ display: "flex", gap: 2 }}>
+          <Textfield
+            title="Vikt / st *"
+            placeholder="Vikt"
+            size="small"
+            value={state.form.weightPer || ""}
+            onChange={(value) => handleFormChange("weightPer", value)}
+          />
+          <Dropdown
+            title="Enhet vikt"
+            placeholder="kg"
+            size="small"
+            options={weightUnits}
+            value={state.form.weightUnit || ""}
+            onOptionChange={(value) => handleFormChange("weightUnit", value)}
+          />
+          <EstimateButton text="Uppskatta vikt" />
+        </Box>
+        <Box sx={{ display: "flex", gap: 2,}}>
           <Textfield
             title="Material"
+            placeholder="Material"
             size="small"
             value={state.form.material || ""}
             onChange={(value) => handleFormChange("material", value)}
           />
           <Textfield
             title="Färg / Finish"
+            placeholder="Färg / Finish"
             size="small"
             value={state.form.finish || ""}
             onChange={(value) => handleFormChange("finish", value)}
           />
         </Box>
 
-        <Box sx={{ display: "flex", gap: 2, mb: 2 }}>
+        <Box sx={{ display: "flex", gap: 2,}}>
           <Dropdown
             title="Enhet mått"
             placeholder="mm"
@@ -113,16 +134,19 @@ export default function Step2({ selectedSubcategorySecondary }) {
           />
           <Textfield
             title="Bredd"
+            placeholder="Bredd"
             value={state.form.width || ""}
             onChange={(value) => handleFormChange("width", value)}
           />
           <Textfield
             title="Djup"
+            placeholder="Djup"
             value={state.form.depth || ""}
             onChange={(value) => handleFormChange("depth", value)}
           />
           <Textfield
             title="Höjd"
+            placeholder="Höjd"
             value={state.form.height || ""}
             onChange={(value) => handleFormChange("height", value)}
           />
@@ -153,23 +177,6 @@ export default function Step2({ selectedSubcategorySecondary }) {
           onChange={(value) => handleFormChange("thickness", value)}
         /> */}
 
-        <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
-          <Textfield
-            title="Vikt / st *"
-            fullWidth
-            size="small"
-            value={state.form.weightPer || ""}
-            onChange={(value) => handleFormChange("weightPer", value)}
-          />
-          <Dropdown
-            title="Enhet vikt"
-            placeholder="kg"
-            options={weightUnits}
-            value={state.form.weightUnit || ""}
-            onOptionChange={(value) => handleFormChange("weightUnit", value)}
-          />
-          <EstimateButton text="Uppskatta vikt" />
-        </Box>
       </Box>
     </>
   );

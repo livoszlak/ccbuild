@@ -71,11 +71,7 @@ export default function Step5() {
   return (
     <>
       <h1>Hantering för marknadsplats</h1>
-      <Typography
-        sx={{ fontWeight: "var(--semibold)", fontSize: "13px", mb: "16px" }}
-      >
-        Alla priser ska anges exklusive moms!
-      </Typography>
+      <Typography sx={{fontWeight: 'var(--semibold)', fontSize: '13px'}}>Alla priser ska anges exklusive moms!</Typography>
       <Box className={styles.smallContainer}>
         <Textfield
           title="Nypris / st"
@@ -138,13 +134,7 @@ export default function Step5() {
           onChange={handlePickUpChange}
         />
       </Box>
-      <Textfield
-        title="Kommentar"
-        placeholder="Ange kompletterande info om prissättningen och eventuella garantier, t.ex. om kostnader tillkommer för demontering och frakt, samt möjliga betalningsmetoder såsom faktura eller andra betalsätt"
-        type="textarea"
-        onChange={handleCommentChange}
-        value={state.marketplace.comment || ""}
-      />
+      <Textfield title="Kommentar" placeholder="Ange kompletterande info om prissättningen och eventuella garantier, tex om kostnader tillkommer för demontering och frakt, samt möjliga betalningsmetoder såsom faktura eller andra betalsätt." type='textarea' onChange={handleCommentChange} value={state.marketplace.comment || ""} />
       <Box className={styles.smallContainer}>
         <Dropdown
           title="Kontaktperson"
