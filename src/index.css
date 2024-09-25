@@ -74,7 +74,9 @@ a:hover {
 input,
 select {
   max-width: 420px;
+  padding: 9px 13px;
 }
+
 body {
   margin: 0;
   display: flex;
@@ -124,7 +126,6 @@ label {
 }
 
 input {
-  height: 35px;
   flex-shrink: 0;
   align-self: stretch;
   border-radius: 2px;

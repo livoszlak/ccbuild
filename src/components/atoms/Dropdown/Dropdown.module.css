@@ -5,15 +5,10 @@
   text-align: left;
   width:100%;
   max-width: 350px;
+  gap: 9px;
   margin-right: 8px;
 }
-.containerSmall {
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-  text-align: left;
-  width: fit-content;
-}
+
 .containerSmall {
   display: flex;
   flex-direction: column;
@@ -22,6 +17,7 @@
   margin-right: 8px;
   width: fit-content;
   max-width: 350px;
+  gap: 9px;
 }
 
 .title {

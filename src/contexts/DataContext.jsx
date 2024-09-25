@@ -42,6 +42,17 @@ const initialState = {
     weightPer: null,
     weightUnit: "",
   },
+  productInformation: {
+    manufacturer: "",
+    itemNumber: "",
+    manufacturedYear: "",
+    purchasedYear: "",
+    GTIN: "",
+    RSK: "",
+    ENR: "",
+    BSAB: "",
+    BK04: "",
+  },
   marketplace: {
     newPrice: "",
     externalPrice: "",
@@ -136,6 +147,16 @@ function dataReducer(state, action) {
           [action.payload.key]: action.payload.value,
         },
       };
+
+    case "UPDATE_PRODUCT_INFO":
+      return {
+        ...state,
+        productInformation: {
+          ...state.productInformation,
+          [action.payload.key]: action.payload.value,
+        },
+      };
+
     case "RESET_PROPERTY_KEYS":
       return {
         ...state,
@@ -353,6 +374,10 @@ export function DataProvider({ children }) {
     dispatch({ type: "UPDATE_FORM", payload: { key, value } });
   };
 
+  const updateProductInfo = (key, value) => {
+    dispatch({ type: "UPDATE_PRODUCT_INFO", payload: { key, value } });
+  };
+
   return (
     <DataContext.Provider
       value={{
@@ -379,6 +404,7 @@ export function DataProvider({ children }) {
         setContactPerson,
         setPhone,
         updateForm,
+        updateProductInfo,
       }}
     >
       {children}

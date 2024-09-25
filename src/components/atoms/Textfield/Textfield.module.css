@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: left;
   text-align: left;
+  gap: 9px;
 }
 
 .containerSmall {
@@ -10,6 +11,7 @@
   flex-direction: column;
   justify-content: left;
   text-align: left;
+  gap: 9px;
   width: 224px;
 }
 
@@ -18,12 +20,15 @@
   margin: 0px 0px 0px 0px;
   font-size: 13;
 }
+
 .input, .textarea {
   font-size: 14;
   margin-right: 8px;
 }
+  
 .input{
-  height: 30px;
+  height: 22px;
+  padding: 9px 13px;
 }
 .textarea {
 height: fit-content;

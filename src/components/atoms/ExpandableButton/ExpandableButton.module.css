@@ -1,0 +1,37 @@
+.expandableLarge {
+  height: 41px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  color: #151515 !important;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  padding: 8px !important;
+  font-weight: 700;
+  border-radius: 2px;
+  border: 1px solid #e2e2e2 !important;
+  background-color: #f9f9f9;
+  text-transform: none !important;
+  width: 104px;
+}
+
+.expandableSmall {
+  height: 41px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  color: #151515 !important;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  padding: 8px !important;
+  font-weight: 700;
+  border-radius: 2px;
+  border: 1px solid #e2e2e2 !important;
+  background-color: #f9f9f9;
+  text-transform: none !important;
+  width: 87px;
+}
+
+.addIcon {
+  color: #488ac6;
+}

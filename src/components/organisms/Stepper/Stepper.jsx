@@ -10,6 +10,7 @@ import styles from "./Stepper.module.css";
 import RadioButton from "../../atoms/RadioButton/RadioButton";
 import Step1 from "../../molecules/Step1/Step1";
 import Step2 from "../../molecules/Step2/Step2";
+import Step4 from "../../molecules/Step4/Step4";
 import { useData } from "../../../contexts/DataContext";
 import { useState, useEffect } from "react";
 import { useActiveStep } from "../../../contexts/ActiveStepContext";
@@ -20,7 +21,6 @@ import Step3 from "../../molecules/Step3/Step3";
 const steps = [0, 1, 2, 3, 4];
 
 function StepperComponent() {
-  
   const { activeStep, setActiveStep } = useActiveStep();
   const { state } = useData();
 
@@ -57,13 +57,13 @@ function StepperComponent() {
       case 3:
         return (
           <>
-            <h1>Produktinformation</h1>
+            <Step4 />
           </>
         );
       case 4:
         return (
           <>
-            <Step5/>
+            <Step5 />
           </>
         );
       default:
@@ -72,7 +72,7 @@ function StepperComponent() {
   };
 
   return (
-    <Box sx={{ width: "100%", marginRight: '120px'}}>
+    <Box sx={{ width: "100%", marginRight: "120px" }}>
       <Stepper activeStep={activeStep}>
         {/* Add Step components here if needed */}
       </Stepper>
@@ -88,11 +88,26 @@ function StepperComponent() {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <Typography color="secondary" sx={{ mt:'32px', mb: 0, fontFamily: 'Poppins, sans-serif', fontWeight: 'var(--semibold)' }}>
+          <Typography
+            sx={{
+              mt: "32px",
+              mb: 0,
+              fontFamily: "Poppins, sans-serif",
+              fontWeight: "var(--semibold)",
+            }}
+          >
             Steg {activeStep + 1} av {steps.length}{" "}
           </Typography>
           {getStepContent(activeStep)}
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2, mb: 2, justifyContent: 'space-between'}}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              pt: 2,
+              mb: 2,
+              justifyContent: "space-between",
+            }}
+          >
             <Button
               color="inherit"
               disabled={activeStep === 0}
@@ -100,7 +115,7 @@ function StepperComponent() {
             >
               Föregående
             </Button>
-            <Box/>
+            <Box />
             <Button onClick={handleNext}>
               {activeStep === steps.length - 1 ? "Spara" : "Nästa"}
             </Button>

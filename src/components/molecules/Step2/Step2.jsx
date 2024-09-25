@@ -4,7 +4,7 @@ import Textfield from "../../atoms/Textfield/Textfield";
 import Dropdown from "../../atoms/Dropdown/Dropdown";
 import RadioButton from "../../atoms/RadioButton/RadioButton";
 import EstimateButton from "../../atoms/EstimateButton/EstimateButton";
-/* import Box from "@mui/material/Box"; */
+import ExpandableButton from "../../atoms/ExpandableButton/ExpandableButton";
 import {
   Select,
   MenuItem,
@@ -128,7 +128,13 @@ export default function Step2({ selectedSubcategorySecondary }) {
           />
         </Box>
 
-        <Textfield
+        <Box className={styles.buttonContainer}>
+          <ExpandableButton text="Diameter" size="large" />
+          <ExpandableButton text="Längd" size="large" />
+          <ExpandableButton text="Tjocklek" size="large" />
+        </Box>
+
+        {/*         <Textfield
           id="diameter"
           title="Diameter"
           value={state.form.diameter || ""}
@@ -145,7 +151,7 @@ export default function Step2({ selectedSubcategorySecondary }) {
           title="Tjocklek"
           value={state.form.thickness || ""}
           onChange={(value) => handleFormChange("thickness", value)}
-        />
+        /> */}
 
         <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
           <Textfield
