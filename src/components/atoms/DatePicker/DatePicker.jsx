@@ -7,8 +7,9 @@ import dayjs from "dayjs";
 import styles from "./DatePicker.module.css";
 
 export default function DatePickerComponent(props) {
-  const [firstValue, setFirstValue] = useState(dayjs());
-  const [secondValue, setSecondValue] = useState(dayjs().add(1, "day"));
+  const today = dayjs();
+  const [firstValue, setFirstValue] = useState(today);
+  const [secondValue, setSecondValue] = useState(today.add(1, "day"));
 
   const handleFirstDateChange = (newValue) => {
     setFirstValue(newValue);
@@ -24,6 +25,7 @@ export default function DatePickerComponent(props) {
           label={props.title1}
           value={firstValue}
           onChange={handleFirstDateChange}
+          minDate={today}
         />
         <DatePicker
           label={props.title2}
