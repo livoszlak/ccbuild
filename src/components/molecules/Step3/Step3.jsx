@@ -30,7 +30,7 @@ export default function Step3() {
   const [rows, setRows] = useState([
     { id: 1, amount: "1", status: "Inventerad", marketplace: "Ej Publicerad" },
   ]);
-  
+
   const handleAmountChange = (id, value) => {
     setRows(
       rows.map((row) => (row.id === id ? { ...row, amount: value } : row))
@@ -84,33 +84,6 @@ export default function Step3() {
               borderRadius: "100px",
             }}
           />
-=======
-    const [rows, setRows] = useState([
-        { id: 1, Amount: '1', Status: 'Inventerad', Marketplace: 'Ej Publicerad' },
-      ]);
-    
-      const handleAmmountChange = (id, value) => {
-        setRows(rows.map(row => row.id === id ? { ...row, Ammount: value } : row));
-      };
-      const handleStatusChange = (id, value) => {
-        console.log('hello')
-      }
-       const handleMarketplaceChange = (id, value) => {
-           console.log('hello')
-        }
-    return(
-        <>
-        <Box className={styles.headerContainer}>
-            <h1>Plats/Status/Antal</h1>
-            <Box className={styles.buttonContainer}>
-                <CustomButton variant='outlined'>
-                  LÄGG TILL NY<AddIcon fontSize="small" />
-                </CustomButton>
-                <CustomButton text="radera" variant='contained' disabled='true'/>
-                <CustomButton text="kommentarer" variant='contained' disabled='true'/>
-                <CustomButton text="öppna planritning" variant='contained' disabled='true'/>
-            </Box>
-
         </Box>
       </Box>
       <table>
