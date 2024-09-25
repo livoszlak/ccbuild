@@ -9,7 +9,7 @@ const initialState = {
   organisations: [],
   productCard: [],
   productIndividual: [],
-  productInformation: [],
+  /*  productInformation: [], */
   product_form: [],
   product_properties: [],
   projects: [],
