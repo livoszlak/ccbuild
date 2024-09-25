@@ -16,6 +16,7 @@ import { useState, useEffect } from "react";
 import { useActiveStep } from "../../../contexts/ActiveStepContext";
 import Step5 from "../../molecules/Step5/Step5";
 import Step3 from "../../molecules/Step3/Step3";
+import CustomButton from "../../atoms/CustomButton/CustomButton";
 
 // define the number of steps //
 const steps = [0, 1, 2, 3, 4];
@@ -89,6 +90,7 @@ function StepperComponent() {
       ) : (
         <React.Fragment>
           <Typography
+          color="primary"
             sx={{
               mt: "32px",
               mb: 0,
@@ -99,26 +101,31 @@ function StepperComponent() {
             Steg {activeStep + 1} av {steps.length}{" "}
           </Typography>
           {getStepContent(activeStep)}
-          <Box
+          <Box 
             sx={{
               display: "flex",
               flexDirection: "row",
-              pt: 2,
-              mb: 2,
+              my: '32px',
+              pt: '32px',
               justifyContent: "space-between",
+              borderTop: '1px solid #E2E2E2',
             }}
           >
-            <Button
-              color="inherit"
-              disabled={activeStep === 0}
+            {activeStep !== 0 ? 
+            <CustomButton
+              variant="outlined"
               onClick={handleBack}
             >
               Föregående
-            </Button>
-            <Box />
-            <Button onClick={handleNext}>
+            </CustomButton>
+          : 
+          <Box/>}
+          <Box/>
+            <CustomButton onClick={handleNext} 
+            variant="contained"
+            >
               {activeStep === steps.length - 1 ? "Spara" : "Nästa"}
-            </Button>
+            </CustomButton>
           </Box>
         </React.Fragment>
       )}
