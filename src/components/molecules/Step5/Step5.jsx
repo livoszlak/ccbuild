@@ -2,6 +2,7 @@ import { Box, Checkbox, Typography } from "@mui/material";
 import Textfield from "../../atoms/Textfield/Textfield";
 import { FormControlLabel } from "@mui/material";
 import AddressAutofillForm from "../../AddressAutofillForm";
+import Dropdown from "../../atoms/Dropdown/Dropdown";
 import styles from "./Step5.module.css";
 import CheckBox from "../../atoms/Checkbox/Checkbox";
 import EstimateButton from "../../atoms/EstimateButton/EstimateButton";
@@ -23,6 +24,18 @@ export default function Step5() {
     setContactPerson,
     setPhone,
   } = useData();
+
+  // Extract the first entry from the options array
+  const contactPersonOptions = state.users.reduce((acc, user) => {
+    acc[user.name] = user.name;
+    return acc;
+  }, {});
+  const firstContactPerson = Object.keys(contactPersonOptions)[0];
+
+  // Set the initial value of contactPerson if not already set
+  if (!state.marketplace.contactPerson && firstContactPerson) {
+    setContactPerson(firstContactPerson);
+  }
 
   const handleNewPriceChange = (value) => {
     setNewPrice(value);
@@ -84,10 +97,7 @@ export default function Step5() {
           onChange={handleExternalPriceChange}
           value={state.marketplace.externalPrice || ""}
         />
-        <EstimateButton
-          text="Uppskatta externt pris"
-          onClick={console.log(state.marketplace)}
-        />
+        <EstimateButton text="Uppskatta externt pris" />
       </Box>
       <Typography sx={{ color: "grey", fontSize: "12px" }}>
         Hur beräknas det uppskattade priset? <a>Läs mer</a>
@@ -136,12 +146,20 @@ export default function Step5() {
         value={state.marketplace.comment || ""}
       />
       <Box className={styles.smallContainer}>
-        <Textfield
+        <Dropdown
+          title="Kontaktperson"
+          options={contactPersonOptions}
+          onOptionChange={handleContactPersonChange}
+          value={state.marketplace.contactPerson || firstContactPerson}
+          id="contactPerson"
+        />
+
+        {/*         <Textfield
           title="Kontaktperson"
           placeholder="Namn Namnsson"
           onChange={handleContactPersonChange}
           value={state.marketplace.contactPerson || ""}
-        />
+        /> */}
         <Textfield
           title="Telefon"
           type="number"
