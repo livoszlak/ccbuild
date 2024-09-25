@@ -87,7 +87,7 @@ function StepperComponent() {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <Typography sx={{ mt:'32px', mb: 0, color: 'var(--step-indicator-color)', fontFamily: 'Poppins, sans-serif', fontWeight: 'var(--semibold)' }}>
+          <Typography color="secondary" sx={{ mt:'32px', mb: 0, fontFamily: 'Poppins, sans-serif', fontWeight: 'var(--semibold)' }}>
             Steg {activeStep + 1} av {steps.length}{" "}
           </Typography>
           {getStepContent(activeStep)}

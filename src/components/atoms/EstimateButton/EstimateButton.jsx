@@ -20,6 +20,7 @@ export default function EstimateButton(props) {
         textTransform: "none",
         fontWeight: "400",
         lineHeight: "21px",
+        mt: "18px",
       }}
     >
       {props.text}

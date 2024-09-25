@@ -1,9 +1,17 @@
-.smallContainer{
+.smallContainer, .checkboxContainer{
     display: flex;
+    width: 100%;
     flex-direction: row;
+    align-items: flex-end;
 }
 .subheader {
     font-family: Inter;
     font-weight: var(--dark) !important;
     font-size: 14px;
+}
+.smallContainer{
+    margin-top: 16px;
+}
+.checkboxContainer{
+    margin-bottom: 16px;
 }

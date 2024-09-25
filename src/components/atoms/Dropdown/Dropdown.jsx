@@ -19,7 +19,7 @@ export default function Dropdown({
   }
 
   return (
-    <Box className={styles.container}>
+    <Box className={size === "small" ?  styles.containerSmall : styles.container}>
       <h2 className={styles.title}>{title}</h2>
       <Select
         sx={{ maxHeight: "33px" }}
