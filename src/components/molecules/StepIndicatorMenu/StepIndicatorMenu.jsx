@@ -12,7 +12,7 @@ import StepIcon from '../../atoms/StepIcon/StepIcon';
 
 export default function StepIndicatorMenu() {
     const steps = [
-        { label: "Generell Information*" },
+        { label: "Generell information*" },
         { label: "Egenskaper*" },
         { label: "Plats / Status / Antal*" },
         { label: "Produktinformation" },
@@ -27,7 +27,7 @@ export default function StepIndicatorMenu() {
 
     return (
         <Box className={styles.container}>
-            <h1 className={styles.stepLabelHeader}>Ny Produkt</h1>
+            <h1 className={styles.stepLabelHeader}>Ny produkt</h1>
             <Stepper activeStep={activeStep} connector={''} className={styles.mainContainer} orientation="vertical">
                 {steps.map((step, index) => (
                     <Step key={step.label}>

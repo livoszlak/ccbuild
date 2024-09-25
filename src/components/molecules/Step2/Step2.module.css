@@ -4,7 +4,6 @@
   justify-content: left;
   text-align: left;
   width: 100%;
-  max-width: 350px;
   margin-right: 8px;
   gap: 4px;
 }
@@ -79,4 +78,9 @@
   justify-content: flex-start;
   gap: 16px;
   width: 100%;
+  margin-top: 32px;
+}
+
+.formHeader{
+  border-top: 1px solid #E2E2E2;
 }

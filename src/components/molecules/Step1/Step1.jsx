@@ -126,7 +126,7 @@ export default function Step1() {
 
   return (
     <Box className={styles.step1Container}>
-      <h1>Generell Information</h1>
+      <h1>Generell information</h1>
       <Dropdown
         id="project"
         title="Projekt*"

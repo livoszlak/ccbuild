@@ -1,103 +1,22 @@
-.title {
-  font-weight: 600;
-  margin: 0px 0px 0px 0px;
-  font-size: 13;
-}
-
-.input {
-  font-size: 14;
-  width: 100%;
-}
-
-.inputSmall {
-  font-size: 14;
-  width: 40%;
-}
-
-.container {
+.stepContainer {
   display: flex;
   flex-direction: column;
-  justify-content: left;
-  text-align: left;
-  gap: 9px;
-  width: 100%;
+  max-width: 480px;
 }
 
-.title {
-  font-weight: 600;
-  margin: 0px 0px 0px 0px;
-  font-size: 13;
-}
-.input {
-  font-size: 14;
-  height: 33px;
-  margin-right: 8px;
-}
-
-.propertyInputContainer {
+.buttonContainer {
+  width: 480px;
   display: flex;
   flex-direction: row;
-  margin-right: 8px;
-}
-
-.propertiesInputWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.step1Container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.measurementContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 32px;
-  align-self: stretch;
-}
-
-.step4Container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  max-width: 420px;
-}
-
-.textfieldContainer {
-  max-width: 420px;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
-.fieldContainerRow {
-  max-width: 420px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 16px;
+ margin-top: 32px;
   width: 100%;
+  gap: 16px;
 }
-
-.expandable {
-  height: 41px;
-  width: 87px;
+.containerRow {
   display: flex;
   flex-direction: row;
-  gap: 10px;
-  color: #151515 !important;
-  font-family: "Inter", sans-serif;
-  font-size: 14px;
-  padding: 8px !important;
-  font-weight: 700;
-  border-radius: 2px;
-  border: 1px solid #e2e2e2 !important;
-  background-color: #f9f9f9;
-  text-transform: none;
+  gap: 16px;
+  width: 480px;
 }
 
 .addIcon {

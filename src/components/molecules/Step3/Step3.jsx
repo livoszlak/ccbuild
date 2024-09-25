@@ -50,7 +50,7 @@ export default function Step3 () {
             <h1>Plats/Status/Antal</h1>
             <Box className={styles.buttonContainer}>
                 <CustomButton variant='outlined'>
-                  Lägg till ny <AddIcon fontSize="small" />
+                  LÄGG TILL NY<AddIcon fontSize="small" />
                 </CustomButton>
                 <CustomButton text="radera" variant='contained' disabled='true'/>
                 <CustomButton text="kommentarer" variant='contained' disabled='true'/>

@@ -73,7 +73,7 @@ a:hover {
 
 input,
 select {
-  max-width: 420px;
+  max-width: 484px;
   padding: 9px 13px;
 }
 
@@ -92,6 +92,8 @@ h1 {
   font-size: 31px;
   line-height: 1.1;
   font-family: Poppins, sans-serif;
+  margin-bottom: 0px;
+  margin-top: 8px;
 }
 h2 {
   font-family: Inter, sans-serif;

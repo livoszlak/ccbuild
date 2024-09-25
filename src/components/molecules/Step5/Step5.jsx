@@ -61,7 +61,7 @@ export default function Step5() {
     <>
     {/* obs adress också!  */}
       <h1>Hantering för marknadsplats</h1>
-      <Typography sx={{fontWeight: 'var(--semibold)', fontSize: '13px', mb: '16px'}}>Alla priser ska anges exklusive moms!</Typography>
+      <Typography sx={{fontWeight: 'var(--semibold)', fontSize: '13px'}}>Alla priser ska anges exklusive moms!</Typography>
       <Box className={styles.smallContainer}>
         <Textfield title="Nypris / st" placeholder="Nypris" type='number' value={state.marketplace.newPrice || ""}
         onChange={handleNewPriceChange} />
@@ -82,7 +82,7 @@ export default function Step5() {
         <CheckBox name="Ship" text="Kan skickas med frakt" onChange={handleShipChange} />
         <CheckBox name="PickUp" text="Kan hämtas på plats" onChange={handlePickUpChange}/>
       </Box>
-      <Textfield  title="Kommentar" placeholder="Ange kompletterande info om prissättningen och eventuella garantier, tex om kostnader tillkommer för demontering och frakt, samt möjliga betalningsmetoder såsom faktura eller andra betalsätt." type='textarea' onChange={handleCommentChange} value={state.marketplace.comment || ""} />
+      <Textfield title="Kommentar" placeholder="Ange kompletterande info om prissättningen och eventuella garantier, tex om kostnader tillkommer för demontering och frakt, samt möjliga betalningsmetoder såsom faktura eller andra betalsätt." type='textarea' onChange={handleCommentChange} value={state.marketplace.comment || ""} />
       <Box className={styles.smallContainer}>
         <Textfield title="Kontaktperson" placeholder="Namn Namnsson" onChange={handleContactPersonChange} value={state.marketplace.contactPerson || ""}/>
         <Textfield title="Telefon" type='number' placeholder="07x xxx xx xx" onChange={handlePhoneChange} value={state.marketplace.phone || ""}/>
