@@ -1,11 +1,13 @@
 import React, { useState, useCallback, useRef } from "react";
 import clsx from "clsx";
 import { AddressAutofill, useConfirmAddress } from "@mapbox/search-js-react";
+import Textfield from "./atoms/Textfield/Textfield";
+import { useData } from "../contexts/DataContext";
 
 const MAPBOX_ACCESS_TOKEN =
   "pk.eyJ1Ijoib3N6bGFrIiwiYSI6ImNtMTd1MzRuYzBzdnEyanI0NGl6eXVoZGkifQ.rETLfeVeOVdVZSpOjR-U4w";
 
-const AddressAutofillForm = () => {
+const AddressAutofillForm = (props) => {
   const [activePage, setActivePage] = useState("shipping");
   const [formData, setFormData] = useState();
   const addressRef = useRef(null);
@@ -101,13 +103,7 @@ const AddressAutofillForm = () => {
 
             {/* address with autofill */}
             <AddressAutofill accessToken={MAPBOX_ACCESS_TOKEN}>
-              <label className="txt-s txt-bold color-gray mb3">Adress</label>
-              <input
-                ref={addressRef}
-                className="input mb12"
-                name="address"
-                placeholder="Upphämtningsadress"
-                required
+              <Textfield title="Adress" placeholder="Upphämtningsadress" type='text' onChange={props.onChange} value={props.value || ""}
               />
             </AddressAutofill>
 

@@ -6,11 +6,11 @@ function StepIcon(props) {
     const { active, completed } = props;
 
     if (completed) {
-        return <CheckCircleIcon style={{ color: '#44A036', marginLeft: '24px' }} />;
+        return <CheckCircleIcon color='success' style={{ marginLeft: '24px' }} />;
     } else if (active) {
-        return  <><PlayArrowIcon/> <CheckCircleOutlineIcon style={{ color: 'grey' }}/></>
+        return  <><PlayArrowIcon/> <CheckCircleOutlineIcon color='disabled'/></>
     } else {
-        return <CheckCircleOutlineIcon style={{ color: 'grey', marginLeft: '24px' }} />;
+        return <CheckCircleOutlineIcon color='disabled' style={{ marginLeft: '24px' }} />;
     }
 }
 

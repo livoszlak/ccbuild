@@ -18,8 +18,17 @@
   margin: 0px 0px 0px 0px;
   font-size: 13;
 }
-.input {
+.input, .textarea {
   font-size: 14;
-  height: 33px;
   margin-right: 8px;
+}
+.input{
+  height: 30px;
+}
+.textarea {
+height: fit-content;
+max-width: 420px;
+background-color: #F9F9F9;
+border-color: #E2E2E2;
+margin-bottom: 16px;
 }

@@ -3,11 +3,17 @@
   flex-direction: column;
   justify-content: left;
   text-align: left;
-  margin-right: 8px;
-  width: 100%;
+  width:100%;
   max-width: 350px;
+  margin-right: 8px;
 }
-
+.containerSmall {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  text-align: left;
+  width: fit-content;
+}
 .containerSmall {
   display: flex;
   flex-direction: column;
