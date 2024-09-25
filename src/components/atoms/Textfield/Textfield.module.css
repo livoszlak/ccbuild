@@ -21,9 +21,19 @@
   font-size: 13;
 }
 
-.input {
+.input, .textarea {
   font-size: 14;
+  margin-right: 8px;
+}
+  
+.input{
   height: 22px;
   padding: 9px 13px;
-  margin-right: 8px;
+}
+.textarea {
+height: fit-content;
+max-width: 420px;
+background-color: #F9F9F9;
+border-color: #E2E2E2;
+margin-bottom: 16px;
 }

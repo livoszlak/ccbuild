@@ -53,6 +53,18 @@ const initialState = {
     BSAB: "",
     BK04: "",
   },
+  marketplace: {
+    newPrice: "",
+    externalPrice: "",
+    internalPrice: "",
+    buyerSuggestPrice: false,
+    ship: false,
+    pickUp: false,
+    adress: "",
+    comment: "",
+    contactPerson: "",
+    phone:"",
+  },
 };
 
 // Reducer function to manage state updates based on dispatched actions
@@ -135,6 +147,7 @@ function dataReducer(state, action) {
           [action.payload.key]: action.payload.value,
         },
       };
+
     case "UPDATE_PRODUCT_INFO":
       return {
         ...state,
@@ -143,6 +156,65 @@ function dataReducer(state, action) {
           [action.payload.key]: action.payload.value,
         },
       };
+
+    case "RESET_PROPERTY_KEYS":
+      return {
+        ...state,
+        selectedPropertyKeys: {},
+      };
+
+      //--- Step 5 - marketplace --- //
+      case "SET_NEW_PRICE":
+      return {
+        ...state,
+        marketplace: { ...state.marketplace, newPrice: action.payload },
+      };
+    case "SET_EXTERNAL_PRICE":
+      return {
+        ...state,
+        marketplace: { ...state.marketplace, externalPrice: action.payload },
+      };
+    case "SET_INTERNAL_PRICE":
+      return {
+        ...state,
+        marketplace: { ...state.marketplace, internalPrice: action.payload },
+      };
+    case "SET_BUYER_SUGGEST_PRICE":
+      return {
+        ...state,
+        marketplace: { ...state.marketplace, buyerSuggestPrice: action.payload },
+      };
+    case "SET_SHIP":
+      return {
+        ...state,
+        marketplace: { ...state.marketplace, ship: action.payload },
+      };
+    case "SET_PICKUP":
+      return {
+        ...state,
+        marketplace: { ...state.marketplace, pickUp: action.payload },
+      };
+    case "SET_ADRESS":
+      return {
+        ...state,
+        marketplace: { ...state.marketplace, adress: action.payload },
+      };
+    case "SET_COMMENT":
+      return {
+        ...state,
+        marketplace: { ...state.marketplace, comment: action.payload },
+      };
+    case "SET_CONTACT_PERSON":
+      return {
+        ...state,
+        marketplace: { ...state.marketplace, contactPerson: action.payload },
+      };
+    case "SET_PHONE":
+      return {
+        ...state,
+        marketplace: { ...state.marketplace, phone: action.payload },
+      };
+
     default:
       return state;
   }
@@ -169,6 +241,7 @@ export function DataProvider({ children }) {
         "subcategoriesSecondary",
         "user_organisations",
         "users",
+        "marketplace",
       ];
       try {
         for (const table of tables) {
@@ -230,6 +303,45 @@ export function DataProvider({ children }) {
     dispatch({ type: "RESET_PROPERTY_KEYS" });
   };
 
+  // --- Step 5 - Marketplace --- //  
+  const setNewPrice = (value) => {
+    dispatch({ type: "SET_NEW_PRICE", payload: value });
+  };
+
+  const setExternalPrice = (value) => {
+    dispatch({ type: "SET_EXTERNAL_PRICE", payload: value });
+  };
+
+  const setInternalPrice = (value) => {
+    dispatch({ type: "SET_INTERNAL_PRICE", payload: value });
+  };
+
+  const setBuyerSuggestPrice = (value) => {
+    dispatch({ type: "SET_BUYER_SUGGEST_PRICE", payload: value });
+  };
+
+  const setShip = (value) => {
+    dispatch({ type: "SET_SHIP", payload: value });
+  };
+
+  const setPickup = (value) => {
+    dispatch({ type: "SET_PICKUP", payload: value });
+  };
+
+  const setAdress = (value) => {
+    dispatch({ type: "SET_ADRESS", payload: value });
+  };
+  const setComment = (value) => {
+    dispatch({ type: "SET_COMMENT", payload: value });
+  };
+
+  const setContactPerson = (value) => {
+    dispatch({ type: "SET_CONTACT_PERSON", payload: value });
+  };
+
+  const setPhone = (value) => {
+    dispatch({ type: "SET_PHONE", payload: value });
+  };
   // Function to update the product name based on selected categories. Also checks if user has edited the suggested name manually and if so does an early return
   const updateProductName = () => {
     const category = state.mainCategories.find(
@@ -281,6 +393,16 @@ export function DataProvider({ children }) {
         setProductDescription,
         setPropertyKey,
         resetPropertyKeys,
+        setNewPrice,
+        setExternalPrice,
+        setInternalPrice,
+        setBuyerSuggestPrice,
+        setShip,
+        setPickup,
+        setAdress,
+        setComment,
+        setContactPerson,
+        setPhone,
         updateForm,
         updateProductInfo,
       }}

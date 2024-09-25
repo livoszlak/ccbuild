@@ -3,10 +3,10 @@
   flex-direction: column;
   justify-content: left;
   text-align: left;
-  margin-right: 8px;
-  width: 100%;
+  width:100%;
   max-width: 350px;
   gap: 9px;
+  margin-right: 8px;
 }
 
 .containerSmall {

@@ -13,8 +13,14 @@ const supabase = createClient(
 
 let theme = createTheme({
   palette: {
+    primary: {
+      main: "#488ac6",
+    },
     secondary: {
       main: "#488ac6",
+    },
+    success: {
+      main: "#44A036",
     },
   },
 });
