@@ -5,6 +5,8 @@ import * as React from 'react';
 import Dropdown from "../../atoms/Dropdown/Dropdown";
 import { useState } from 'react';
 import Individual from "../Individual/Individual";
+import CustomButton from "../../atoms/CustomButton/CustomButton";
+import AddIcon from '@mui/icons-material/Add';
 
 export default function Step3 () {
 
@@ -47,10 +49,12 @@ export default function Step3 () {
         <Box className={styles.headerContainer}>
             <h1>Plats/Status/Antal</h1>
             <Box className={styles.buttonContainer}>
-                <EstimateButton text="ny produkt +"/>
-                <EstimateButton text="radera"/>
-                <EstimateButton text="kommentarer"/>
-                <EstimateButton text="öppna planritning"/>
+                <CustomButton variant='outlined'>
+                  Lägg till ny <AddIcon fontSize="small" />
+                </CustomButton>
+                <CustomButton text="radera" variant='contained' disabled='true'/>
+                <CustomButton text="kommentarer" variant='contained' disabled='true'/>
+                <CustomButton text="öppna planritning" variant='contained' disabled='true'/>
             </Box>
         </Box>
         <table>
