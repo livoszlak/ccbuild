@@ -14,6 +14,7 @@ import { useData } from "../../../contexts/DataContext";
 import { useState, useEffect } from "react";
 import { useActiveStep } from "../../../contexts/ActiveStepContext";
 import Step5 from "../../molecules/Step5/Step5";
+import Step3 from "../../molecules/Step3/Step3";
 
 // define the number of steps //
 const steps = [0, 1, 2, 3, 4];
@@ -50,7 +51,7 @@ function StepperComponent() {
       case 2:
         return (
           <>
-            <h1>Plats/Status/Antal</h1>
+            <Step3/>
           </>
         );
       case 3:
