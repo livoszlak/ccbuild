@@ -63,8 +63,9 @@ const initialState = {
     adress: "",
     comment: "",
     contactPerson: "",
-    phone:"",
+    phone: "",
   },
+  productIndividuals: {},
 };
 
 // Reducer function to manage state updates based on dispatched actions
@@ -163,8 +164,8 @@ function dataReducer(state, action) {
         selectedPropertyKeys: {},
       };
 
-      //--- Step 5 - marketplace --- //
-      case "SET_NEW_PRICE":
+    //--- Step 5 - marketplace --- //
+    case "SET_NEW_PRICE":
       return {
         ...state,
         marketplace: { ...state.marketplace, newPrice: action.payload },
@@ -182,7 +183,10 @@ function dataReducer(state, action) {
     case "SET_BUYER_SUGGEST_PRICE":
       return {
         ...state,
-        marketplace: { ...state.marketplace, buyerSuggestPrice: action.payload },
+        marketplace: {
+          ...state.marketplace,
+          buyerSuggestPrice: action.payload,
+        },
       };
     case "SET_SHIP":
       return {
@@ -303,7 +307,7 @@ export function DataProvider({ children }) {
     dispatch({ type: "RESET_PROPERTY_KEYS" });
   };
 
-  // --- Step 5 - Marketplace --- //  
+  // --- Step 5 - Marketplace --- //
   const setNewPrice = (value) => {
     dispatch({ type: "SET_NEW_PRICE", payload: value });
   };
