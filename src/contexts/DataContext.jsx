@@ -5,7 +5,6 @@ const DataContext = createContext();
 
 // Initial state for data context - we will add more here for each step
 const initialState = {
-
   mainCategories: [],
   organisations: [],
   productCard: [],
@@ -33,11 +32,14 @@ const initialState = {
   form: {
     material: "",
     finish: "",
+    measurementUnit: "",
     width: null,
     depth: null,
     height: null,
-    measurementUnit: "",
-    weight: "",
+    diameter: null,
+    length: null,
+    thickness: null,
+    weightPer: null,
     weightUnit: "",
   },
   marketplace: {
@@ -126,11 +128,11 @@ function dataReducer(state, action) {
           [action.payload.key]: action.payload.value,
         },
       };
-    /* case "SET_PROPERTY_KEY":
+    case "UPDATE_FORM":
       return {
         ...state,
-        selectedPropertyKeys: {
-          ...state.selectedPropertyKeys,
+        form: {
+          ...state.form,
           [action.payload.key]: action.payload.value,
         },
       };
@@ -191,6 +193,7 @@ function dataReducer(state, action) {
         ...state,
         marketplace: { ...state.marketplace, phone: action.payload },
       };
+
     default:
       return state;
   }
@@ -346,6 +349,10 @@ export function DataProvider({ children }) {
     state.selectedSubcategorySecondary,
   ]);
 
+  const updateForm = (key, value) => {
+    dispatch({ type: "UPDATE_FORM", payload: { key, value } });
+  };
+
   return (
     <DataContext.Provider
       value={{
@@ -371,6 +378,7 @@ export function DataProvider({ children }) {
         setComment,
         setContactPerson,
         setPhone,
+        updateForm,
       }}
     >
       {children}

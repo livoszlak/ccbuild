@@ -5,6 +5,14 @@
   text-align: left;
 }
 
+.containerSmall {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  text-align: left;
+  width: 224px;
+}
+
 .title {
   font-weight: 600;
   margin: 0px 0px 0px 0px;
