@@ -4,34 +4,46 @@ import CustomButton from "../../atoms/CustomButton/CustomButton";
 import { useState } from "react";
 import styles from "./Individual.module.css";
 import Modal from "../Modal/Modal";
+import { useData } from "../../../contexts/DataContext";
 
-export default function Individual(props) {
+export default function Individual({ row, statusOptions, marketplaceOptions }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const { handleProductIndividualChange } = useData();
+
+  const handleDropdownChange = (key) => (value) => {
+    handleProductIndividualChange(row.id, key, value);
+  };
+
   return (
     <>
-      <tr key={props.rowId}>
+      <tr key={row.id}>
         <td>
           <Checkbox />
         </td>
         <td>
           <input
             type="number"
-            value={props.row.amount}
+            value={row.amount || 1}
             onChange={(e) =>
-              props.handleAmountChange(props.row.id, e.target.value)
+              handleProductIndividualChange(row.id, "amount", e.target.value)
             }
           />
         </td>
         <td>
-          <Dropdown value={props.row.status} options={props.statusOptions} />
+          <Dropdown
+            options={statusOptions}
+            onOptionChange={handleDropdownChange("status")}
+            value={row.status || ""}
+          />
         </td>
         <td>
           <Dropdown
-            value={props.row.marketplace}
-            options={props.marketplaceOptions}
+            options={marketplaceOptions}
+            onOptionChange={handleDropdownChange("marketplace")}
+            value={row.marketplace || ""}
           />
         </td>
         <td>
@@ -43,7 +55,7 @@ export default function Individual(props) {
           />
         </td>
       </tr>
-      {open && <Modal open={open} handleClose={handleClose} />}
+      {open && <Modal open={open} handleClose={handleClose} rowId={row.id} />}
     </>
   );
 }

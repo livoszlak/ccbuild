@@ -65,20 +65,31 @@ const initialState = {
     contactPerson: "",
     phone: "",
   },
-  productIndividuals: {
-    amount: 0,
+  productIndividual: {
+    productCard: "",
+    amount: 1,
     status: "",
     marketplace: "",
-    locationRefs: {},
-    decisionRefs: {},
-    dateAvailable: null,
-    devliveryDate: null,
+    locationRefs: {
+      house: "",
+      room: "",
+      shelf: "",
+      floor: "",
+    },
+    decisionRefs: {
+      materialChoice: "",
+      budgetAdjustment: "",
+      technicalSolution: "",
+      constructionChange: "",
+    },
+    dateAvailable: "",
+    devliveryDate: "",
     deconstruction: "",
     accessibility: "",
     deconstructionComment: "",
     accessibilityComment: "",
-    aestheticsRating: null,
-    functionalityRating: null,
+    aestheticsRating: "",
+    functionalityRating: "",
   },
 };
 
@@ -176,6 +187,78 @@ function dataReducer(state, action) {
       return {
         ...state,
         selectedPropertyKeys: {},
+      };
+
+    case "ADD_PRODUCT_INDIVIDUAL":
+      return {
+        ...state,
+        productIndividual: [
+          ...state.productIndividual,
+          {
+            id: state.productIndividual.length + 1,
+            productCard: "",
+            amount: 1,
+            status: "",
+            marketplace: "",
+            locationRefs: {
+              house: "",
+              room: "",
+              shelf: "",
+              floor: "",
+            },
+            decisionRefs: {
+              materialChoice: "",
+              budgetAdjustment: "",
+              technicalSolution: "",
+              constructionChange: "",
+            },
+            dateAvailable: "",
+            deliveryDate: "",
+            deconstruction: "",
+            accessibility: "",
+            deconstructionComment: "",
+            accessibilityComment: "",
+            aestheticsRating: "",
+            functionalityRating: "",
+          },
+        ],
+      };
+
+    /*     case "UPDATE_PRODUCT_INDIVIDUAL":
+      return {
+        ...state,
+        productIndividual: state.productIndividual.map((item) =>
+          item.id === action.payload.id
+            ? { ...item, [action.payload.key]: action.payload.value }
+            : item
+        ),
+      }; */
+
+    case "UPDATE_PRODUCT_INDIVIDUAL":
+      return {
+        ...state,
+        productIndividual: state.productIndividual.map((item) =>
+          item.id === action.payload.id
+            ? {
+                ...item,
+                decisionRefs: item.decisionRefs || {},
+                locationRefs: item.locationRefs || {},
+                [action.payload.key.includes(".")
+                  ? action.payload.key.split(".")[0]
+                  : action.payload.key]: action.payload.key.includes(".")
+                  ? {
+                      ...item[action.payload.key.split(".")[0]],
+                      [action.payload.key.split(".")[1]]: action.payload.value,
+                    }
+                  : action.payload.value,
+              }
+            : item
+        ),
+      };
+
+    case "ADD_PRODUCT_INDIVIDUAL_REFS":
+      return {
+        ...state,
       };
 
     //--- Step 5 - marketplace --- //
@@ -321,6 +404,24 @@ export function DataProvider({ children }) {
     dispatch({ type: "RESET_PROPERTY_KEYS" });
   };
 
+  const handleAddProductIndividual = () => {
+    dispatch({ type: "ADD_PRODUCT_INDIVIDUAL" });
+  };
+
+  const handleProductIndividualChange = (id, key, value) => {
+    dispatch({
+      type: "UPDATE_PRODUCT_INDIVIDUAL",
+      payload: { id, key, value },
+    });
+  };
+
+  const addProductIndividualRefs = (id, key, value) => {
+    dispatch({
+      type: "ADD_PRODUCT_INDIVIDUAL_REFS",
+      payload: { id, key, value },
+    });
+  };
+
   // --- Step 5 - Marketplace --- //
   const setNewPrice = (value) => {
     dispatch({ type: "SET_NEW_PRICE", payload: value });
@@ -423,6 +524,8 @@ export function DataProvider({ children }) {
         setPhone,
         updateForm,
         updateProductInfo,
+        handleAddProductIndividual,
+        handleProductIndividualChange,
       }}
     >
       {children}
