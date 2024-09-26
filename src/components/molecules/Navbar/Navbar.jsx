@@ -48,15 +48,15 @@ const Navbar = () => {
   };
 
   return (
-    <Box position="static" sx={{  height: 'fit-content', backgroundColor: "white", color: "black" }}>
+    <Box position="static" sx={{  height: 'fit-content !important', backgroundColor: "white", color: "black" }}>
       <Toolbar
         sx={{
-          height: "70px !important",
+          height: "fit-content !important",
           display: "flex",
           justifyContent: "space-between",
         }}
       >
-        <Box sx={{ height: "70px !important", padding: "11px 0 11px" }}>
+        <Box sx={{ height: "auto", padding: "11px 0 11px" }}>
         <Logo
           src="/logo.svg"
           alt="Logo"
