@@ -17,7 +17,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 const Logo = styled("img")({
-  height: "40px",
+  height: "70px",
   marginRight: "10px",
 });
 
@@ -48,19 +48,21 @@ const Navbar = () => {
   };
 
   return (
-    <Box position="static" sx={{ backgroundColor: "white", color: "black" }}>
+    <Box position="static" sx={{  height: 'fit-content', backgroundColor: "white", color: "black" }}>
       <Toolbar
         sx={{
-          height: "100%",
+          height: "70px !important",
           display: "flex",
           justifyContent: "space-between",
         }}
       >
+        <Box sx={{ height: "70px !important", padding: "11px 0 11px" }}>
         <Logo
           src="/logo.svg"
           alt="Logo"
-          sx={{ height: "70px", padding: "11px 0 11px" }}
+          sx={{height: "70px !important"}}          
         />
+        </Box>
         <Box sx={{ display: "flex", alignItems: "center" }}>
         {
         topSectionTerms.map((term) => (
