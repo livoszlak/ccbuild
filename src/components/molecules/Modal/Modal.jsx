@@ -72,10 +72,12 @@ export default function ModalComponent(props) {
         aria-describedby="modal-modal-description"
       >
         <Paper className={styles.modal}>
+          <Box className={styles.headerContainer}>
+          <h1 id="modal-modal-title">Status och platsinformation</h1>
           <Box className={styles.closeIconContainer}>
             <CloseIcon onClick={props.handleClose} />
           </Box>
-          <h1 id="modal-modal-title">Status och platsinformation</h1>
+          </Box>
           <Box className={styles.ratingContainer}>
             <Rating
               title="Estetiskt skick"
@@ -116,6 +118,7 @@ export default function ModalComponent(props) {
               labels={labels}
             />
           </Box>
+          <Box>
           <DatePicker
             title1="Datum tillgänglig/-a"
             title2="Datum första möjliga leverans"
@@ -127,10 +130,12 @@ export default function ModalComponent(props) {
               )
             }
           />
-
-          <Box className={styles.textfieldContainer}>
+          </Box>
+          <Box>
+          <Box className={styles.dropdownContainer}>
             <Box className={styles.plusCommentContainer}>
               <Dropdown
+              size='large'
                 title="Demonterbarhet"
                 options={deconstructionOptions}
                 onOptionChange={(value) =>
@@ -147,9 +152,9 @@ export default function ModalComponent(props) {
                 Lägg till kommentar
               </Link>
             </Box>
-
             <Box className={styles.plusCommentContainer}>
               <Dropdown
+                size='large'
                 title="Åtkomlighet"
                 options={accessibilityOptions}
                 onOptionChange={(value) =>
@@ -167,10 +172,11 @@ export default function ModalComponent(props) {
               </Link>
             </Box>
           </Box>
-
+          </Box>
           <Box className={styles.textfieldContainer}>
             {locationRefs.map(({ title, key }) => (
               <Textfield
+              size= 'medium'
                 key={key}
                 title={title}
                 onChange={(e) =>
@@ -188,6 +194,7 @@ export default function ModalComponent(props) {
           <Box className={styles.textfieldContainer}>
             {decisionRefs.map(({ title, key }) => (
               <Textfield
+              size= 'medium'
                 key={key}
                 title={title}
                 onChange={(e) =>
@@ -206,26 +213,12 @@ export default function ModalComponent(props) {
           <Box className={styles.buttonContainer}>
             <CustomButton
               text="Stäng"
-              variant="contained"
-              disabled={false}
-              sx={{
-                textTransform: "none",
-                borderRadius: "100px",
-                backgroundColor: "#FFF",
-                border: "1px solid #488AC6",
-                color: "#488AC6",
-              }}
+              variant="outlined"
               onClick={props.handleClose}
             />
             <CustomButton
               text="Spara"
               variant="contained"
-              disabled={false}
-              sx={{
-                textTransform: "none",
-                borderRadius: "100px",
-                border: "1px solid #488AC6;",
-              }}
               onClick={() => console.log(state.productIndividual)}
             />
           </Box>

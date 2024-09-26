@@ -18,9 +18,22 @@ export default function Dropdown({
     }
   }
 
+  const getClassName = (size) => {
+
+    switch (size) {
+      case "inline":
+        return styles.inline;
+        case "large":
+        return styles.containerLarge;
+      case "small":
+        return styles.containerSmall;
+      default:
+        return styles.container;
+    }
+  }
   return (
     <Box
-      className={size === "small" ? styles.containerSmall : styles.container}
+      className={getClassName(size)}
     >
       <h2 className={styles.title}>{title}</h2>
       <Select

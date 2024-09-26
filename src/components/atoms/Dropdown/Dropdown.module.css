@@ -1,20 +1,25 @@
-.container, .containerSmall {
+.container, .containerSmall, .containerLarge {
   display: flex;
   flex-direction: column;
   justify-content: left;
   text-align: left;
-  max-width: 350px;
   gap: 4px;
   margin-top: 32px;
 }
 .container{
   width:100%;
+  max-width: 350px;
+}
+.containerLarge{
+  width: 100%;
 }
 .containerSmall {
   width: fit-content;
   max-width: 350px;
 }
-
+.containerInline{
+  height: fit-content;
+}
 .title {
   font-weight: var(--semibold);
   margin: 0px 0px 0px 0px;
@@ -25,7 +30,6 @@
   font-size: 14;
   font-family: Inter !important;
   width: 100%;
-  max-width: 350px;
   background-color: #F9F9F9;
 }
 

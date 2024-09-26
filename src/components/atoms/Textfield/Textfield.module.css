@@ -1,4 +1,4 @@
-.container, .containerSmall, .containerXs, .containerLarge {
+.container, .containerSmall, .containerXs, .containerLarge, .containerMedium {
   margin-top: 32px;
   display: flex;
   flex-direction: column;
@@ -6,9 +6,11 @@
   text-align: left;
   gap: 4px;
 }
-
 .containerSmall {
   width: 224px;
+}
+.containerMedium {
+  width: 150px;
 }
 
 .containerXs{
