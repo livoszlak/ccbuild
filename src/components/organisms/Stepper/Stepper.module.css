@@ -12,7 +12,7 @@
 
 .step1Container {
   display: flex;
+  gap: 0px;
   flex-direction: column;
-  gap: 16px;
   max-width: 100%;
 }

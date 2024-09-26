@@ -1,13 +1,12 @@
-import { Box, Checkbox, Typography } from "@mui/material";
+import { Box, Typography, IconButton } from "@mui/material";
 import Textfield from "../../atoms/Textfield/Textfield";
-import { FormControlLabel } from "@mui/material";
 import AddressAutofillForm from "../../AddressAutofillForm";
 import Dropdown from "../../atoms/Dropdown/Dropdown";
 import styles from "./Step5.module.css";
 import CheckBox from "../../atoms/Checkbox/Checkbox";
 import EstimateButton from "../../atoms/EstimateButton/EstimateButton";
 import { useData } from "../../../contexts/DataContext";
-import { Height } from "@mui/icons-material";
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
 export default function Step5() {
   const {
@@ -55,8 +54,8 @@ export default function Step5() {
   const handlePickUpChange = (value) => {
     setPickup(value);
   };
-  const handleAdressChange = (address) => {
-    setAdress(address);
+  const handleAdressChange = (value) => {
+    setAdress(value);
   };
   const handleCommentChange = (value) => {
     setComment(value);
@@ -69,36 +68,47 @@ export default function Step5() {
   };
 
   return (
-    <>
+    <Box>
       <h1>Hantering för marknadsplats</h1>
-      <Typography sx={{fontWeight: 'var(--semibold)', fontSize: '13px'}}>Alla priser ska anges exklusive moms!</Typography>
-      <Box className={styles.smallContainer}>
+      <Typography sx={{fontWeight: 'var(--semibold)', fontSize: '13px', mt: '32px', mb: "-16px"}}>Alla priser ska anges exklusive moms!</Typography>
+      <Box className={styles.priceContainer}>
         <Textfield
           title="Nypris / st"
           placeholder="Nypris"
           type="number"
+          size="large"
           value={state.marketplace.newPrice || ""}
           onChange={handleNewPriceChange}
         />
+        <Box>
         <EstimateButton text="Uppskatta nypris" />
+        </Box>
+        <IconButton sx={{marginLeft: '-10px', p: 0, mb: '5px'}}>
+            <HelpOutlineIcon color="primary"/>
+        </IconButton>
       </Box>
-      <Typography sx={{ color: "grey", fontSize: "12px" }}>
+      <Typography sx={{ color: "grey", fontSize: "12px", mb:'-16px' }}>
         Hur beräknas det uppskattade priset? <a>Läs mer</a>
       </Typography>
-      <Box className={styles.smallContainer}>
+      <Box className={styles.priceContainer}>
         <Textfield
           title="Externt pris / st"
           placeholder="Externt Pris"
           type="number"
+          size="large"
           onChange={handleExternalPriceChange}
           value={state.marketplace.externalPrice || ""}
         />
-        <EstimateButton text="Uppskatta externt pris" />
+        <Box>
+        <EstimateButton text="Uppskatta externt pris"/>
+        </Box>
+        <IconButton sx={{marginLeft: '-10px', p: 0, mb: '5px'}}>
+            <HelpOutlineIcon color="primary"/>
+        </IconButton>
       </Box>
-      <Typography sx={{ color: "grey", fontSize: "12px" }}>
+      <Typography sx={{ color: "grey", fontSize: "12px", mb:"-16px"}}>
         Hur beräknas det uppskattade priset? <a>Läs mer</a>
       </Typography>
-      <Box className={styles.smallContainer}>
         <Textfield
           title="Intern pris / st"
           placeholder="Internt Pris"
@@ -106,12 +116,11 @@ export default function Step5() {
           onChange={handleInternalPriceChange}
           value={state.marketplace.internalPrice || ""}
         />
-      </Box>
       <CheckBox
         name="letBuyerSuggestPrice"
         text="Låt köparen föreslå pris"
         onChange={handleBuyerSuggestPriceChange}
-        checked={true}
+        value={state.marketplace.buyerSuggestPrice}
       />
       <AddressAutofillForm
         value={state.marketplace.adress}
@@ -124,11 +133,13 @@ export default function Step5() {
       )}
       <Box className={styles.checkboxContainer}>
         <CheckBox
+        value={state.marketplace.ship}
           name="Ship"
           text="Kan skickas med frakt"
           onChange={handleShipChange}
         />
         <CheckBox
+        value={state.marketplace.pickUp}
           name="PickUp"
           text="Kan hämtas på plats"
           onChange={handlePickUpChange}
@@ -143,13 +154,6 @@ export default function Step5() {
           value={state.marketplace.contactPerson || firstContactPerson}
           id="contactPerson"
         />
-
-        {/*         <Textfield
-          title="Kontaktperson"
-          placeholder="Namn Namnsson"
-          onChange={handleContactPersonChange}
-          value={state.marketplace.contactPerson || ""}
-        /> */}
         <Textfield
           title="Telefon"
           type="number"
@@ -158,6 +162,6 @@ export default function Step5() {
           value={state.marketplace.phone || ""}
         />
       </Box>
-    </>
+    </Box>
   );
 }

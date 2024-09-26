@@ -3,6 +3,9 @@ import { useData } from "../../../contexts/DataContext";
 import { Box } from "@mui/material";
 import styles from "./Step4.module.css";
 import ExpandableButton from "../../atoms/ExpandableButton/ExpandableButton";
+import CustomButton from "../../atoms/CustomButton/CustomButton";
+import IconButton from "@mui/material/IconButton";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
 export default function Step4() {
   const { state, dispatch, updateProductInfo } = useData();
@@ -54,6 +57,14 @@ export default function Step4() {
         <ExpandableButton text="E-NR" />
         <ExpandableButton text="BSAB" />
         <ExpandableButton text="BK04" />
+      </Box>
+      <Box className={styles.buttonContainer}>
+      <CustomButton text="Ladda upp ny fil" variant="outlined"/>
+      <IconButton sx={{ p: 0, mb: '5px'}}>
+            <HelpOutlineIcon color="primary"/>
+        </IconButton>
+      <CustomButton text="Radera" variant="contained" disabled="true"/>
+      <CustomButton text="Ändra" variant="contained" disabled="true"/>
       </Box>
     </Box>
   );

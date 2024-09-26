@@ -54,35 +54,23 @@ export default function Step3() {
       <Box className={styles.headerContainer}>
         <h1>Plats/Status/Antal</h1>
         <Box className={styles.buttonContainer}>
-          <CustomButton variant="outlined" sx={{ borderRadius: "100px" }}>
+          <CustomButton variant="outlined" >
             Lägg till ny <AddIcon fontSize="small" />
           </CustomButton>
           <CustomButton
             text="Radera"
             variant="contained"
             disabled={true}
-            sx={{
-              textTransform: "none",
-              borderRadius: "100px",
-            }}
           />
           <CustomButton
             text="Kommentarer"
             variant="contained"
             disabled={true}
-            sx={{
-              textTransform: "none",
-              borderRadius: "100px",
-            }}
           />
           <CustomButton
             text="Öppna planritning"
             variant="contained"
             disabled={true}
-            sx={{
-              textTransform: "none",
-              borderRadius: "100px",
-            }}
           />
         </Box>
       </Box>

@@ -1,20 +1,22 @@
-.container {
+.container, .containerSmall, .containerXs, .containerLarge {
   margin-top: 32px;
   display: flex;
   flex-direction: column;
   justify-content: left;
   text-align: left;
-  gap: 9px;
+  gap: 4px;
 }
 
 .containerSmall {
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-  text-align: left;
-  gap: 9px;
   width: 224px;
-  margin-top: 32px;
+}
+
+.containerXs{
+  width: fit-content;
+  max-width: 104px;
+}
+.containerLarge{
+  width: 480px;
 }
 
 .title {
@@ -25,17 +27,16 @@
 
 .input, .textarea {
   font-size: 14;
-  margin-right: 8px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
 }
   
 .input{
-  height: 14px;
-  padding: 9px 13px;
+  padding: 9px 10px;
 }
 .textarea {
 height: fit-content;
-max-width: 420px;
+max-width: 480px;
 background-color: #F9F9F9;
 border-color: #E2E2E2;
-margin-bottom: 16px;
 }

@@ -1,24 +1,18 @@
-.container {
+.container, .containerSmall {
   display: flex;
   flex-direction: column;
   justify-content: left;
   text-align: left;
-  width:100%;
   max-width: 350px;
-  gap: 9px;
-  margin-right: 8px;
+  gap: 4px;
+  margin-top: 32px;
 }
-
+.container{
+  width:100%;
+}
 .containerSmall {
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-  text-align: left;
-  margin-right: 8px;
   width: fit-content;
   max-width: 350px;
-  gap: 8px;
-  margin-top: 32px;
 }
 
 .title {
@@ -29,8 +23,10 @@
 
 .input {
   font-size: 14;
+  font-family: Inter !important;
   width: 100%;
   max-width: 350px;
+  background-color: #F9F9F9;
 }
 
 .inputSmall {

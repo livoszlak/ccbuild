@@ -4,22 +4,11 @@
   align-items: flex-end;
 }
 
-.propertyInputContainer {
-  display: flex;
-  flex-direction: row;
-  margin-right: 8px;
-}
-
 .step1Container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
 }
 
 .textfieldContainer {
   max-width: 350px;
-}
-
-.container {
-  width: 100%;
 }

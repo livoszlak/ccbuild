@@ -3,9 +3,19 @@
     width: 100%;
     flex-direction: row;
     align-items: flex-end;
+    gap: 16px;
 }
 .subheader {
     font-family: Inter;
     font-weight: var(--dark) !important;
     font-size: 14px;
+}
+.smallContainer > * {
+    width: 234px;
+}
+.priceContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: self-end;
 }

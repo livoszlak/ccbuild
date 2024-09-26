@@ -9,18 +9,12 @@ export default function EstimateButton(props) {
       className={styles.estimateButton}
       disableElevation={true}
       sx={{
-        fontSize: "14px",
+        fontFamily: "Inter",
         padding: "7px",
-        borderRadius: "2px",
-        display: "flex",
-        height: "32px",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
+        borderRadius: "3px",
+        height: "35px",
         textTransform: "none",
-        fontWeight: "400",
-        lineHeight: "21px",
-        mt: "18px",
+        fontWeight: "var(--regular)",
       }}
     >
       {props.text}
