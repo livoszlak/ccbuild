@@ -189,7 +189,7 @@ export default function Step1() {
         </Typography>
         <Box>
         <Typography sx={{fontSize: "14px", fontWeight:'600', marginTop: '32px', fontFamily: 'inter', mb:'4px'}} >Produktbilder</Typography>
-        <img src="src/assets/button.svg"
+        <img src="/button.svg"
           alt="Logo"/>
         </Box>
         <Textfield
