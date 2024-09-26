@@ -5,13 +5,13 @@
   color: #151515 !important;
   font-family: "Inter", sans-serif;
   font-size: 14px;
-  padding: 8px !important;
-  font-weight: 700 !important;
+  font-weight: 600 !important;
   border-radius: 2px;
   border: 1px solid #e2e2e2 !important;
   background-color: #f9f9f9;
   text-transform: none !important;
   width: 104px;
+  justify-content: space-between;
 }
 
 .expandableSmall {
@@ -32,4 +32,6 @@
 
 .addIcon {
   color: #488ac6;
+  height: 20px !important;
+  width: 20px !important;
 }

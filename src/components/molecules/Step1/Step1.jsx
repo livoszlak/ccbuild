@@ -6,7 +6,6 @@ import { Typography } from "@mui/material";
 import Dropdown from "../../atoms/Dropdown/Dropdown";
 import { Box } from "@mui/material";
 import styles from "./Step1.module.css";
-import { Image } from "@mui/icons-material";
 
 export default function Step1() {
   const {
@@ -135,8 +134,9 @@ export default function Step1() {
         options={projectOptions}
         onOptionChange={handleProjectChange}
         value={state.project || ""}
-      />   
-      <Box className={styles.dropdownContainer}></Box>
+      />
+
+      <Box className={styles.dropdownContainer}>
         <Dropdown
           id="category"
           title="Produktkategori*"
@@ -151,7 +151,6 @@ export default function Step1() {
         {state.selectedMainCategory && (
           <Dropdown
             id="subcategory1"
-            title={`Underkategori till ${mainCategoryName}*`}
             placeholder="Välj underkategori..."
             onOptionChange={handleSubcategoryPrimaryChange}
             options={filteredSubcategoriesPrimary.reduce((acc, subcategory) => {
@@ -164,7 +163,6 @@ export default function Step1() {
         {state.selectedSubcategoryPrimary && (
           <Dropdown
             id="subcategory2"
-            title={`Underkategori till ${subcategoryPrimaryName}*`}
             placeholder="Välj underkategori..."
             options={filteredSubcategoriesSecondary.reduce(
               (acc, subcategory) => {
@@ -177,15 +175,15 @@ export default function Step1() {
             value={state.selectedSubcategorySecondary || ""}
           />
         )}
+      </Box>
       <Box className={styles.textfieldContainer}>
         <Textfield
           title="Produktnamn*"
           id="productName"
-          placeholder="Produktnamn"
           value={state.productName || ""}
           onChange={handleProductNameChange}
         />
-        <Typography sx={{ fontSize: "11px", width: "fit-content", marginBottom: '-10px' }}>
+        <Typography sx={{ fontSize: "11px", width: "fit-content" }}>
           Du kan ändra namnet i den här rutan om du inte är nöjd med det som
           genererades automatiskt.
         </Typography>

@@ -50,8 +50,8 @@ export default function Step2({ selectedSubcategorySecondary }) {
 
   return (
     <>
-      <div>
-        <h1>Egenskaper</h1>
+      <div className={styles.wrapper}>
+        <h1 className={styles.headerText}>Egenskaper</h1>
         <div className={styles.propertiesInputWrapper}>
           {subcategorySecondary && subcategorySecondary.propertyKeys ? (
             Object.keys(subcategorySecondary.propertyKeys).map((key) => (

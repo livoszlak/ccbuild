@@ -6,6 +6,7 @@ import styles from "./ExpandableButton.module.css";
 const ExpandableButton = (props) => {
   return (
     <Button
+    sx={{backgroundColor: '#f9f9f9', textTransform: 'none'}}
       size={props.size}
       className={
         props.size === "large" ? styles.expandableLarge : styles.expandableSmall
