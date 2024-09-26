@@ -8,7 +8,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { useData } from "../../../contexts/DataContext";
 
 export default function Step3() {
-  const { state } = useData();
+  const { state, handleAddProductIndividual } = useData();
 
   const marketplaceOptions = ["Ej Publicerad", "Publicerad"];
   const statusOptions = [
@@ -27,7 +27,7 @@ export default function Step3() {
     "Avfallshanterad (slutstatus)",
   ];
 
-  const [rows, setRows] = useState([
+  /*   const [rows, setRows] = useState([
     { id: 1, amount: "1", status: "Inventerad", marketplace: "Ej Publicerad" },
   ]);
 
@@ -47,14 +47,14 @@ export default function Step3() {
     setRows(
       rows.map((row) => (row.id === id ? { ...row, marketplace: value } : row))
     );
-  };
+  }; */
 
   return (
     <>
       <Box className={styles.headerContainer}>
         <h1>Plats/Status/Antal</h1>
         <Box className={styles.buttonContainer}>
-          <CustomButton variant="outlined" >
+          <CustomButton variant="outlined"  onClick={handleAddProductIndividual} >
             Lägg till ny <AddIcon fontSize="small" />
           </CustomButton>
           <CustomButton
@@ -87,16 +87,12 @@ export default function Step3() {
           </tr>
         </thead>
         <tbody className={styles.individualContainer}>
-          {rows.map((row) => (
+          {state.productIndividual.map((product) => (
             <Individual
-              key={row.id}
-              row={row}
-              rowId={row.id}
+              key={product.id}
+              row={product}
               statusOptions={statusOptions}
               marketplaceOptions={marketplaceOptions}
-              handleAmountChange={handleAmountChange}
-              handleStatusChange={handleStatusChange}
-              handleMarketplaceChange={handleMarketplaceChange}
             />
           ))}
         </tbody>
