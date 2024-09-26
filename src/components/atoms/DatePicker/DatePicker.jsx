@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useData } from "../../../contexts/DataContext";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -11,12 +12,29 @@ export default function DatePickerComponent(props) {
   const today = dayjs();
   const [firstValue, setFirstValue] = useState(today);
   const [secondValue, setSecondValue] = useState(today.add(1, "day"));
+  const { updateProductDates } = useData();
 
   const handleFirstDateChange = (newValue) => {
     setFirstValue(newValue);
+    updateProductDates(
+      props.rowId,
+      newValue.format("YYYY-MM-DD"),
+      secondValue.format("YYYY-MM-DD")
+    );
     if (newValue.isAfter(secondValue) || newValue.isSame(secondValue)) {
-      setSecondValue(newValue.add(1, "day"));
+      const newSecondValue = newValue.add(1, "day");
+      setSecondValue(newSecondValue);
+      updateProductDates(
+        props.rowId,
+        newValue.format("YYYY-MM-DD"),
+        newSecondValue.format("YYYY-MM-DD")
+      );
     }
+  };
+
+  const handleSecondDateChange = (newValue) => {
+    setSecondValue(newValue);
+    updateProductDates(props.rowId, firstValue, newValue);
   };
 
   return (
@@ -35,7 +53,7 @@ export default function DatePickerComponent(props) {
         <DatePicker
           label={props.title2}
           value={secondValue}
-          onChange={(newValue) => setSecondValue(newValue)}
+          onChange={handleSecondDateChange}
           minDate={firstValue.add(1, "day")}
           className={styles.datePicker}
           components={{

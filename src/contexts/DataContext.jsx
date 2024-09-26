@@ -78,18 +78,18 @@ const initialState = {
     accessibilityComment: "",
     aestheticsRating: "",
     functionalityRating: "",
-    locationRefs: {
-      house: "",
-      room: "",
-      shelf: "",
-      floor: "",
-    },
-    decisionRefs: {
-      materialChoice: "",
-      budgetAdjustment: "",
-      technicalSolution: "",
-      constructionChange: "",
-    },
+  },
+  locationRefs: {
+    house: "",
+    room: "",
+    shelf: "",
+    floor: "",
+  },
+  decisionRefs: {
+    materialChoice: "",
+    budgetAdjustment: "",
+    technicalSolution: "",
+    constructionChange: "",
   },
 };
 
@@ -200,18 +200,6 @@ function dataReducer(state, action) {
             amount: 1,
             status: "",
             marketplace: "",
-            locationRefs: {
-              house: "",
-              room: "",
-              shelf: "",
-              floor: "",
-            },
-            decisionRefs: {
-              materialChoice: "",
-              budgetAdjustment: "",
-              technicalSolution: "",
-              constructionChange: "",
-            },
             dateAvailable: "",
             deliveryDate: "",
             deconstruction: "",
@@ -224,7 +212,7 @@ function dataReducer(state, action) {
         ],
       };
 
-    /*     case "UPDATE_PRODUCT_INDIVIDUAL":
+    case "UPDATE_PRODUCT_INDIVIDUAL":
       return {
         ...state,
         productIndividual: state.productIndividual.map((item) =>
@@ -232,33 +220,38 @@ function dataReducer(state, action) {
             ? { ...item, [action.payload.key]: action.payload.value }
             : item
         ),
-      }; */
+      };
 
-    case "UPDATE_PRODUCT_INDIVIDUAL":
+    case "UPDATE_LOCATION_REFS":
+      return {
+        ...state,
+        locationRefs: {
+          ...state.locationRefs,
+          [action.payload.key]: action.payload.value,
+        },
+      };
+
+    case "UPDATE_DECISION_REFS":
+      return {
+        ...state,
+        decisionRefs: {
+          ...state.decisionRefs,
+          [action.payload.key]: action.payload.value,
+        },
+      };
+
+    case "UPDATE_PRODUCT_DATES":
       return {
         ...state,
         productIndividual: state.productIndividual.map((item) =>
           item.id === action.payload.id
             ? {
                 ...item,
-                decisionRefs: item.decisionRefs || {},
-                locationRefs: item.locationRefs || {},
-                [action.payload.key.includes(".")
-                  ? action.payload.key.split(".")[0]
-                  : action.payload.key]: action.payload.key.includes(".")
-                  ? {
-                      ...item[action.payload.key.split(".")[0]],
-                      [action.payload.key.split(".")[1]]: action.payload.value,
-                    }
-                  : action.payload.value,
+                dateAvailable: action.payload.dateAvailable,
+                deliveryDate: action.payload.deliveryDate,
               }
             : item
         ),
-      };
-
-    case "ADD_PRODUCT_INDIVIDUAL_REFS":
-      return {
-        ...state,
       };
 
     //--- Step 5 - marketplace --- //
@@ -415,10 +408,24 @@ export function DataProvider({ children }) {
     });
   };
 
-  const addProductIndividualRefs = (id, key, value) => {
+  const updateLocationRefs = (key, value) => {
     dispatch({
-      type: "ADD_PRODUCT_INDIVIDUAL_REFS",
-      payload: { id, key, value },
+      type: "UPDATE_LOCATION_REFS",
+      payload: { key, value },
+    });
+  };
+
+  const updateDecisionRefs = (key, value) => {
+    dispatch({
+      type: "UPDATE_DECISION_REFS",
+      payload: { key, value },
+    });
+  };
+
+  const updateProductDates = (id, dateAvailable, deliveryDate) => {
+    dispatch({
+      type: "UPDATE_PRODUCT_DATES",
+      payload: { id, dateAvailable, deliveryDate },
     });
   };
 
@@ -526,6 +533,9 @@ export function DataProvider({ children }) {
         updateProductInfo,
         handleAddProductIndividual,
         handleProductIndividualChange,
+        updateLocationRefs,
+        updateDecisionRefs,
+        updateProductDates,
       }}
     >
       {children}

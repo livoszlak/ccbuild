@@ -16,7 +16,12 @@ export default function ModalComponent(props) {
   const [AestheticHover, setAestheticHover] = useState(-1);
   const [FunctionalityHover, setFunctionalityHover] = useState(-1);
 
-  const { state, handleProductIndividualChange } = useData();
+  const {
+    state,
+    handleProductIndividualChange,
+    updateLocationRefs,
+    updateDecisionRefs,
+  } = useData();
 
   const labels = {
     0: "Ej Bedömd",
@@ -61,6 +66,14 @@ export default function ModalComponent(props) {
     (ind) => ind.id === props.rowId
   );
 
+  const handleLocationRefChange = (key, value) => {
+    updateLocationRefs(key, value);
+  };
+
+  const handleDecisionRefChange = (key, value) => {
+    updateDecisionRefs(key, value);
+  };
+
   return (
     <>
       {props.open && <div className={styles.overlay}></div>}
@@ -73,10 +86,10 @@ export default function ModalComponent(props) {
       >
         <Paper className={styles.modal}>
           <Box className={styles.headerContainer}>
-          <h1 id="modal-modal-title">Status och platsinformation</h1>
-          <Box className={styles.closeIconContainer}>
-            <CloseIcon onClick={props.handleClose} />
-          </Box>
+            <h1 id="modal-modal-title">Status och platsinformation</h1>
+            <Box className={styles.closeIconContainer}>
+              <CloseIcon onClick={props.handleClose} />
+            </Box>
           </Box>
           <Box className={styles.ratingContainer}>
             <Rating
@@ -119,74 +132,66 @@ export default function ModalComponent(props) {
             />
           </Box>
           <Box>
-          <DatePicker
-            title1="Datum tillgänglig/-a"
-            title2="Datum första möjliga leverans"
-            onChange={(newValue) =>
-              handleProductIndividualChange(
-                props.rowId,
-                "dateAvailable",
-                newValue
-              )
-            }
-          />
+            <DatePicker
+              title1="Datum tillgänglig/-a"
+              title2="Datum första möjliga leverans"
+              onChange={handleProductIndividualChange}
+              rowId={props.rowId}
+              dateAvailable={individual.dateAvailable}
+              deliveryDate={individual.deliveryDate}
+            />
           </Box>
           <Box>
-          <Box className={styles.dropdownContainer}>
-            <Box className={styles.plusCommentContainer}>
-              <Dropdown
-              size='large'
-                title="Demonterbarhet"
-                options={deconstructionOptions}
-                onOptionChange={(value) =>
-                  handleProductIndividualChange(
-                    props.rowId,
-                    "deconstruction",
-                    value
-                  )
-                }
-                id="deconstruction"
-                value={individual.deconstruction || ""}
-              />
-              <Link href="#" variant="body2">
-                Lägg till kommentar
-              </Link>
-            </Box>
-            <Box className={styles.plusCommentContainer}>
-              <Dropdown
-                size='large'
-                title="Åtkomlighet"
-                options={accessibilityOptions}
-                onOptionChange={(value) =>
-                  handleProductIndividualChange(
-                    props.rowId,
-                    "accessibility",
-                    value
-                  )
-                }
-                id="accessibility"
-                value={individual.accessibility || ""}
-              />
-              <Link href="#" variant="body2" color="primary">
-                Lägg till kommentar
-              </Link>
+            <Box className={styles.dropdownContainer}>
+              <Box className={styles.plusCommentContainer}>
+                <Dropdown
+                  size="large"
+                  title="Demonterbarhet"
+                  options={deconstructionOptions}
+                  onOptionChange={(value) =>
+                    handleProductIndividualChange(
+                      props.rowId,
+                      "deconstruction",
+                      value
+                    )
+                  }
+                  id="deconstruction"
+                  value={individual.deconstruction || ""}
+                />
+                <Link href="#" variant="body2">
+                  Lägg till kommentar
+                </Link>
+              </Box>
+              <Box className={styles.plusCommentContainer}>
+                <Dropdown
+                  size="large"
+                  title="Åtkomlighet"
+                  options={accessibilityOptions}
+                  onOptionChange={(value) =>
+                    handleProductIndividualChange(
+                      props.rowId,
+                      "accessibility",
+                      value
+                    )
+                  }
+                  id="accessibility"
+                  value={individual.accessibility || ""}
+                />
+                <Link href="#" variant="body2" color="primary">
+                  Lägg till kommentar
+                </Link>
+              </Box>
             </Box>
           </Box>
-          </Box>
+
           <Box className={styles.textfieldContainer}>
             {locationRefs.map(({ title, key }) => (
               <Textfield
-              size= 'medium'
+                size="medium"
                 key={key}
                 title={title}
-                onChange={(e) =>
-                  handleProductIndividualChange(
-                    props.rowId,
-                    `locationRefs.${key}`,
-                    e.target.value
-                  )
-                }
-                value={individual.locationRefs?.[key] || ""}
+                onChange={(value) => handleLocationRefChange(key, value)}
+                value={state.locationRefs[key] || ""}
               />
             ))}
             <HelpOutlineIcon className={styles.questionMark} />
@@ -194,22 +199,15 @@ export default function ModalComponent(props) {
           <Box className={styles.textfieldContainer}>
             {decisionRefs.map(({ title, key }) => (
               <Textfield
-              size= 'medium'
+                size="medium"
                 key={key}
                 title={title}
-                onChange={(e) =>
-                  handleProductIndividualChange(
-                    props.rowId,
-                    `decisionRefs.${key}`,
-                    e.target.value
-                  )
-                }
-                value={individual.decisionRefs?.[key] || ""}
+                onChange={(value) => handleDecisionRefChange(key, value)}
+                value={state.decisionRefs[key] || ""}
               />
             ))}
             <HelpOutlineIcon className={styles.questionMark} />
           </Box>
-
           <Box className={styles.buttonContainer}>
             <CustomButton
               text="Stäng"
@@ -219,7 +217,7 @@ export default function ModalComponent(props) {
             <CustomButton
               text="Spara"
               variant="contained"
-              onClick={() => console.log(state.productIndividual)}
+              onClick={() => console.log(state)}
             />
           </Box>
         </Paper>
