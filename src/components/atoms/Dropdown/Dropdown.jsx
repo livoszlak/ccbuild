@@ -31,6 +31,17 @@ export default function Dropdown({
         return styles.container;
     }
   }
+
+  const getInputClassName = (size) => {
+    switch (size) {
+      case "small":
+        return styles.inputSmall;
+      case "inline":
+        return styles.inputInline;
+      default:
+        return styles.input;
+    }
+  }
   return (
     <Box
       className={getClassName(size)}
@@ -38,7 +49,7 @@ export default function Dropdown({
       <h2 className={styles.title}>{title}</h2>
       <Select
         sx={{ maxHeight: "35px", py: '0px !important!', fontSize: '14px !important', fontStyle: 'normal'}}
-        className={size === "small" ? styles.inputSmall : styles.input}
+        className={getInputClassName(size)}
         value={value || ""}
         id={id}
         onChange={handleChange}

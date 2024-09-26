@@ -9,3 +9,6 @@
 .buttonContainer{
     gap: 8px;
 }
+.input{
+    width: 108px;
+}

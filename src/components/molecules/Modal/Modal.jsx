@@ -131,7 +131,7 @@ export default function ModalComponent(props) {
               labels={labels}
             />
           </Box>
-          <Box>
+          <Box sx={{width:'95%'}}>
             <DatePicker
               title1="Datum tillgänglig/-a"
               title2="Datum första möjliga leverans"
@@ -217,7 +217,7 @@ export default function ModalComponent(props) {
             <CustomButton
               text="Spara"
               variant="contained"
-              onClick={() => console.log(state)}
+              onClick={props.handleClose}
             />
           </Box>
         </Paper>

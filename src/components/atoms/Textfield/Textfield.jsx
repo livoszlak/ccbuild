@@ -36,7 +36,7 @@ export default function Textfield(props) {
         />
       ) : (
         <input
-          className={styles.input}
+          className={props.size === 'medium'  ? styles.mediumInput : styles.input}
           type={props.type || "text"}
           placeholder={props.placeholder}
           required={props.required || false}

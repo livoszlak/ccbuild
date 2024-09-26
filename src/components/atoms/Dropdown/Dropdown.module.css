@@ -15,7 +15,6 @@
 }
 .containerSmall {
   width: fit-content;
-  max-width: 350px;
 }
 .containerInline{
   height: fit-content;
@@ -32,8 +31,17 @@
   width: 100%;
   background-color: #F9F9F9;
 }
-
+.inputInline{
+  font-size: 14;
+  font-family: Inter !important;
+  width: fit-content;
+  min-width: 200px;
+  background-color: #F9F9F9;
+  margin-right: 16px;
+}
 .inputSmall {
   font-size: 14;
   width: 104px;
+  background-color: #F9F9F9;
+  font-family: Inter !important;
 }

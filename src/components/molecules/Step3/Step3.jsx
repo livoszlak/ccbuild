@@ -80,7 +80,7 @@ export default function Step3() {
             <th>
               <Checkbox />
             </th>
-            <th>Antal (st)</th>
+            <th className={styles.input}>Antal (st)</th>
             <th>Status</th>
             <th>Marknadsplatsen</th>
             <th></th>

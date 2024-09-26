@@ -10,7 +10,7 @@
   width: 224px;
 }
 .containerMedium {
-  width: 150px;
+  width: 100%;
 }
 
 .containerXs{
@@ -35,6 +35,11 @@
   
 .input{
   padding: 9px 10px;
+}
+.mediumInput{
+  padding: 9px 10px;
+  width: 175px;
+  margin-right: 16px;
 }
 .textarea {
 height: fit-content;

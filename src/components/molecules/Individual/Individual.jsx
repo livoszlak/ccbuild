@@ -30,6 +30,7 @@ export default function Individual({ row, statusOptions, marketplaceOptions }) {
             onChange={(e) =>
               handleProductIndividualChange(row.id, "amount", e.target.value)
             }
+            style={{ width: "108px", marginRight: "16px",}}
           />
         </td>
         <td>
