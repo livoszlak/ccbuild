@@ -1,6 +1,9 @@
 .container {
   display: flex;
   flex-direction: row;
-  max-width: 800px;
-  justify-content: space-between;
+  gap: 32px;
+}
+
+.datePicker {
+  width: 100%;
 }
