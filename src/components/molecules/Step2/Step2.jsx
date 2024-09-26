@@ -13,6 +13,7 @@ import {
   Box,
   Typography,
   IconButton,
+  Paper,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
@@ -32,6 +33,11 @@ const measurementUnits = {
 
 export default function Step2({ selectedSubcategorySecondary }) {
   const { state, dispatch, updateForm } = useData();
+  const [open, setOpen] = useState(false);
+
+  function openTextBox() {
+    setOpen((prevOpen) => !prevOpen);
+  }
 
   const subcategorySecondary = state.subcategoriesSecondary.find(
     (subcategory) => subcategory.id.toString() === selectedSubcategorySecondary
@@ -47,6 +53,7 @@ export default function Step2({ selectedSubcategorySecondary }) {
   const handleFormChange = (key, value) => {
     updateForm(key, value);
   };
+
 
   return (
     <>
@@ -106,9 +113,14 @@ export default function Step2({ selectedSubcategorySecondary }) {
           <Box>
           <EstimateButton text="Uppskatta vikt" />
           </Box>
-          <IconButton sx={{marginLeft: '-10px', p: 0, mb: '5px'}}>
+          <IconButton sx={{marginLeft: '-10px', p: 0, mb: '5px'}}  onClick={openTextBox}>
             <HelpOutlineIcon color="primary"/>
           </IconButton>
+          { open  && 
+            <Paper sx={{width: '150px', height:'fit-content', backgroundColor: '#F9F9F9', paddingX: '8px', border: '1px solid #E2E2E2', boxShadow: 'none'}} >
+            <p>Information angående vikt</p>
+            </Paper>
+          }
         </Box>
         <Box sx={{ display: "flex", gap: '16px'}}>
           <Textfield
@@ -166,26 +178,6 @@ export default function Step2({ selectedSubcategorySecondary }) {
           <ExpandableButton text="Längd" size="large" />
           <ExpandableButton text="Tjocklek" size="large" />
         </Box>
-
-        {/*         <Textfield
-          id="diameter"
-          title="Diameter"
-          value={state.form.diameter || ""}
-          onChange={(value) => handleFormChange("diameter", value)}
-        />
-        <Textfield
-          id="length"
-          title="Längd"
-          value={state.form.length || ""}
-          onChange={(value) => handleFormChange("length", value)}
-        />
-        <Textfield
-          id="thickness"
-          title="Tjocklek"
-          value={state.form.thickness || ""}
-          onChange={(value) => handleFormChange("thickness", value)}
-        /> */}
-
       </Box>
     </>
   );
