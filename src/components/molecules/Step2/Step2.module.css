@@ -1,3 +1,10 @@
+.headerText{
+  margin-bottom: 16px;
+}
+.wrapper{
+  margin-bottom:32px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -5,7 +12,14 @@
   text-align: left;
   width: 100%;
   margin-right: 8px;
-  gap: 4px;
+}
+.horizontalWrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: flex-end;
+  gap: 16px;
+  width: 100%;
 }
 .title {
   font-weight: 600;
@@ -54,7 +68,6 @@
 .propertiesInputWrapper {
   display: flex;
   flex-direction: column;
-  gap: 16px;
 }
 
 .step1Container {
@@ -83,4 +96,5 @@
 
 .formHeader{
   border-top: 1px solid #E2E2E2;
+  padding-top: 32px;
 }

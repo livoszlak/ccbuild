@@ -151,7 +151,6 @@ export default function Step1() {
         {state.selectedMainCategory && (
           <Dropdown
             id="subcategory1"
-            title={`Underkategori till ${mainCategoryName}*`}
             placeholder="Välj underkategori..."
             onOptionChange={handleSubcategoryPrimaryChange}
             options={filteredSubcategoriesPrimary.reduce((acc, subcategory) => {
@@ -164,7 +163,6 @@ export default function Step1() {
         {state.selectedSubcategoryPrimary && (
           <Dropdown
             id="subcategory2"
-            title={`Underkategori till ${subcategoryPrimaryName}*`}
             placeholder="Välj underkategori..."
             options={filteredSubcategoriesSecondary.reduce(
               (acc, subcategory) => {
@@ -189,6 +187,11 @@ export default function Step1() {
           Du kan ändra namnet i den här rutan om du inte är nöjd med det som
           genererades automatiskt.
         </Typography>
+        <Box>
+        <Typography sx={{fontSize: "14px", fontWeight:'600', marginTop: '32px', fontFamily: 'inter', mb:'4px'}} >Produktbilder</Typography>
+        <img src="src/assets/button.svg"
+          alt="Logo"/>
+        </Box>
         <Textfield
           title="Eget ID-nummer"
           id="internalId"

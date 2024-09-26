@@ -18,6 +18,9 @@
   gap: 16px;
   width: 480px;
 }
+.containerRow > * {
+  width: 234px;
+}
 
 .addIcon {
   color: #488ac6;

@@ -5,6 +5,7 @@ import Dropdown from "../../atoms/Dropdown/Dropdown";
 import RadioButton from "../../atoms/RadioButton/RadioButton";
 import EstimateButton from "../../atoms/EstimateButton/EstimateButton";
 import ExpandableButton from "../../atoms/ExpandableButton/ExpandableButton";
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import {
   Select,
   MenuItem,
@@ -49,8 +50,8 @@ export default function Step2({ selectedSubcategorySecondary }) {
 
   return (
     <>
-      <div>
-        <h1>Egenskaper</h1>
+      <div className={styles.wrapper}>
+        <h1 className={styles.headerText}>Egenskaper</h1>
         <div className={styles.propertiesInputWrapper}>
           {subcategorySecondary && subcategorySecondary.propertyKeys ? (
             Object.keys(subcategorySecondary.propertyKeys).map((key) => (
@@ -86,7 +87,7 @@ export default function Step2({ selectedSubcategorySecondary }) {
         <h1>Form</h1>
       </Box>
       <Box className={styles.formInputWrapper}>
-        <Box sx={{ display: "flex", gap: 2 }}>
+        <Box className={styles.horizontalWrapper}>
           <Textfield
             title="Vikt / st *"
             placeholder="Vikt"
@@ -102,9 +103,14 @@ export default function Step2({ selectedSubcategorySecondary }) {
             value={state.form.weightUnit || ""}
             onOptionChange={(value) => handleFormChange("weightUnit", value)}
           />
+          <Box>
           <EstimateButton text="Uppskatta vikt" />
+          </Box>
+          <IconButton sx={{marginLeft: '-10px', p: 0, mb: '5px'}}>
+            <HelpOutlineIcon color="primary"/>
+          </IconButton>
         </Box>
-        <Box sx={{ display: "flex", gap: 2,}}>
+        <Box sx={{ display: "flex", gap: '16px'}}>
           <Textfield
             title="Material"
             placeholder="Material"
@@ -121,7 +127,7 @@ export default function Step2({ selectedSubcategorySecondary }) {
           />
         </Box>
 
-        <Box sx={{ display: "flex", gap: 2,}}>
+        <Box sx={{ display: "flex", gap: 2, alignItems: 'self-end'}}>
           <Dropdown
             title="Enhet mått"
             placeholder="mm"
@@ -136,17 +142,20 @@ export default function Step2({ selectedSubcategorySecondary }) {
             title="Bredd"
             placeholder="Bredd"
             value={state.form.width || ""}
+            size="xs"
             onChange={(value) => handleFormChange("width", value)}
           />
           <Textfield
             title="Djup"
             placeholder="Djup"
+            size="xs"
             value={state.form.depth || ""}
             onChange={(value) => handleFormChange("depth", value)}
           />
           <Textfield
             title="Höjd"
             placeholder="Höjd"
+            size="xs"
             value={state.form.height || ""}
             onChange={(value) => handleFormChange("height", value)}
           />

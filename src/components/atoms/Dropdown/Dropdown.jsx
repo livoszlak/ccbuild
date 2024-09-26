@@ -24,7 +24,7 @@ export default function Dropdown({
     >
       <h2 className={styles.title}>{title}</h2>
       <Select
-        sx={{ maxHeight: "33px" }}
+        sx={{ maxHeight: "35px", py: '0px !important!', fontSize: '14px !important', fontStyle: 'normal'}}
         className={size === "small" ? styles.inputSmall : styles.input}
         value={value || ""}
         id={id}

@@ -2,10 +2,25 @@ import styles from "./Textfield.module.css";
 import { Box, Typography } from "@mui/material";
 
 export default function Textfield(props) {
+
+  const getClassName = (size) => {
+
+    switch (size) {
+      case "large":
+        return styles.containerLarge;
+      case "small":
+        return styles.containerSmall;
+        case "xs":
+        return styles.containerXs;
+      default:
+        return styles.container;
+    }
+  }
+
   return (
     <Box
       className={
-        props.size === "small" ? styles.containerSmall : styles.container
+        getClassName(props.size)
       }
     >
       <h2 className={styles.title}>{props.title}</h2>

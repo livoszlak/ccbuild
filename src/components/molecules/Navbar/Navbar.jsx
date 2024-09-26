@@ -12,6 +12,7 @@ import {
 import { AccountCircle, ExpandMore, Search } from "@mui/icons-material";
 import { styled } from "@mui/system";
 import styles from "./Navbar.module.css";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const Logo = styled("img")({
   height: "40px",
@@ -25,6 +26,13 @@ const SearchInput = styled("input")({
   padding: "5px 10px",
   marginLeft: "10px",
 });
+
+const topSectionTerms = [
+  { text: "CCBUILD", hasIcon: false },
+  { text: "TJÄNSTER", hasIcon: false },
+  { text: "MARKNADSPLATSEN", hasIcon: true },
+  { text: "PRODUKTBANKEN", hasIcon: true },
+];
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -49,13 +57,18 @@ const Navbar = () => {
         <Logo
           src="src/assets/logo.svg"
           alt="Logo"
-          sx={{ height: "100px", padding: "11px 0 11px" }}
+          sx={{ height: "70px", padding: "11px 0 11px" }}
         />
         <Box sx={{ display: "flex", alignItems: "center" }}>
+        {
+        topSectionTerms.map((term) => (
+
           <Button
+          key={term}
             color="inherit"
             sx={{
               fontSize: "11px",
+              textTransform: "none !important",
               fontFamily: "'Inter', sans-serif",
               fontWeight: "bold",
               border: "none",
@@ -63,37 +76,10 @@ const Navbar = () => {
               borderRadius: "50px",
             }}
           >
-            CCBUILD
+            {term.text}
+            {term.hasIcon && <ArrowDropDownIcon sx={{width:"16px"}}/>}
           </Button>
-          <Button
-            color="inherit"
-            sx={{ fontSize: "11px", fontFamily: "'Inter', sans-serif" }}
-          >
-            TJÄNSTER
-          </Button>
-          <Button
-            color="inherit"
-            endIcon={<ExpandMore />}
-            onClick={handleClick}
-            sx={{ fontSize: "11px", fontFamily: "'Inter', sans-serif" }}
-          >
-            MARKNADSPLATSEN
-          </Button>
-          <Menu
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            <MenuItem onClick={handleClose}>Option 1</MenuItem>
-            <MenuItem onClick={handleClose}>Option 2</MenuItem>
-          </Menu>
-          <Button
-            color="inherit"
-            sx={{ fontSize: "11px", fontFamily: "'Inter', sans-serif" }}
-            endIcon={<ExpandMore />}
-          >
-            PRODUKTBANKEN
-          </Button>
+          ))}
           <IconButton color="inherit">
             <AccountCircle />
           </IconButton>

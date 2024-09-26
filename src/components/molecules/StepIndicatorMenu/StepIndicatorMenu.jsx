@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import styles from "./StepIndicatorMenu.module.css";
 import { useActiveStep } from '../../../contexts/ActiveStepContext';
 import StepIcon from '../../atoms/StepIcon/StepIcon';
+import CustomButton from '../../atoms/CustomButton/CustomButton';
 
 export default function StepIndicatorMenu() {
     const steps = [
@@ -40,19 +41,17 @@ export default function StepIndicatorMenu() {
                     </Step>
                 ))}
                 <Box className={styles.buttonContainer}>
-                    <Button
+                    <CustomButton
                     variant='outlined'
-                        sx={{ mt: 1, mr: '8px', borderRadius: '30px', borderWidth: '2px', fontSize: '14px' }}
                     >
                         Avbryt
-                    </Button>
-                    <Button
+                    </CustomButton>
+                    <CustomButton
                         variant="contained"
                         onClick={handleNext}
-                        sx={{ mt: 1, borderRadius: '30px' }}
                     >
                         Spara
-                    </Button>
+                    </CustomButton>
                 </Box>
             </Stepper>
         </Box>

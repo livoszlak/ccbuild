@@ -4,13 +4,13 @@ import Checkbox from '@mui/material/Checkbox';
 import Typography from '@mui/material/Typography';
 
 export default function CheckBox(props) {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(props.value || false);
 
   const handleChange = (event) => {
     const isChecked = event.target.checked;
     setChecked(isChecked);
     if (props.onChange) {
-      props.onChange(isChecked);
+      props.onChange(isChecked, isChecked ? true : false);
     }
   };
 
@@ -19,6 +19,7 @@ export default function CheckBox(props) {
       control={
         <Checkbox
           size="small"
+          sx={{ py: '0px'}}
           onChange={handleChange}
           checked={checked}
           name={props.name}
@@ -27,9 +28,9 @@ export default function CheckBox(props) {
       label={
         <Typography
           sx={{
-            fontSize: '14px',
+            fontSize: '14px !important',
             fontFamily: 'Inter, sans-serif',
-            fontWeight: 'var(--semibold)',
+            fontWeight: '600',
           }}
         >
           {props.text}
