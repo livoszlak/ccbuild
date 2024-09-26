@@ -9,6 +9,7 @@ import Navbar from "./components/molecules/Navbar/Navbar";
 import StepIndicatorMenu from "./components/molecules/StepIndicatorMenu/StepIndicatorMenu";
 import Box from "@mui/material/Box";
 import { ActiveStepProvider } from "./contexts/ActiveStepContext";
+import Footer from "./components/molecules/Footer/Footer";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <StepIndicatorMenu />
           <Stepper />
         </Box>
+        <Footer />
       </ActiveStepProvider>
     </>
   );
