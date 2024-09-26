@@ -1,10 +1,13 @@
 .modal {
   height: 570px;
-  width: 1000px;
+  width: 870px;
   display: flex;
   flex-direction: column;
   position: relative;
+  padding: 50px;
+  gap: 16px;
 }
+
 .modalContainer {
   display: flex;
   gap: 16px;
@@ -12,11 +15,7 @@
   align-self: center;
   justify-content: center;
 }
-.ButtonPosition {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-}
+
 .ratingContainer {
   display: flex;
   flex-direction: row;
@@ -31,4 +30,21 @@
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(2px);
   z-index: 999;
+}
+
+.closeIconContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 32px;
+}
+
+.textfieldContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 }

@@ -5,10 +5,12 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Box } from "@mui/material";
 import dayjs from "dayjs";
 import styles from "./DatePicker.module.css";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 
 export default function DatePickerComponent(props) {
-  const [firstValue, setFirstValue] = useState(dayjs());
-  const [secondValue, setSecondValue] = useState(dayjs().add(1, "day"));
+  const today = dayjs();
+  const [firstValue, setFirstValue] = useState(today);
+  const [secondValue, setSecondValue] = useState(today.add(1, "day"));
 
   const handleFirstDateChange = (newValue) => {
     setFirstValue(newValue);
@@ -24,12 +26,21 @@ export default function DatePickerComponent(props) {
           label={props.title1}
           value={firstValue}
           onChange={handleFirstDateChange}
+          minDate={today}
+          className={styles.datePicker}
+          components={{
+            OpenPickerIcon: CalendarTodayIcon,
+          }}
         />
         <DatePicker
           label={props.title2}
           value={secondValue}
           onChange={(newValue) => setSecondValue(newValue)}
           minDate={firstValue.add(1, "day")}
+          className={styles.datePicker}
+          components={{
+            OpenPickerIcon: CalendarTodayIcon,
+          }}
         />
       </LocalizationProvider>
     </Box>
