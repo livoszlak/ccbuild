@@ -1,4 +1,4 @@
-import { Modal, Typography, Paper, Box } from "@mui/material";
+import { Modal, Link, Paper, Box } from "@mui/material";
 import styles from "./Modal.module.css";
 import { useState } from "react";
 import Rating from "../../atoms/Rating/Rating";
@@ -8,6 +8,7 @@ import CustomButton from "../../atoms/CustomButton/CustomButton";
 import Dropdown from "../../atoms/Dropdown/Dropdown";
 import { useData } from "../../../contexts/DataContext";
 import Textfield from "../../atoms/Textfield/Textfield";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
 export default function ModalComponent(props) {
   const [AestheticScore, setAestheticScore] = useState(0);
@@ -15,7 +16,7 @@ export default function ModalComponent(props) {
   const [AestheticHover, setAestheticHover] = useState(-1);
   const [FunctionalityHover, setFunctionalityHover] = useState(-1);
 
-  const { state } = useData();
+  const { state, handleProductIndividualChange } = useData();
 
   const labels = {
     0: "Ej Bedömd",
@@ -38,9 +39,27 @@ export default function ModalComponent(props) {
     "Begränsad åtkomlighet",
   ];
 
+  const locationRefs = [
+    { title: "Hus", key: "house" },
+    { title: "Rum", key: "room" },
+    { title: "Hylla", key: "shelf" },
+    { title: "Våning", key: "floor" },
+  ];
+
+  const decisionRefs = [
+    { title: "Materialval", key: "materialChoice" },
+    { title: "Budgetjustering", key: "budgetAdjustment" },
+    { title: "Teknisk lösning", key: "technicalSolution" },
+    { title: "Konstruktionsförändring", key: "constructionChange" },
+  ];
+
   function getLabelText(value) {
     return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
   }
+
+  const individual = state.productIndividual.find(
+    (ind) => ind.id === props.rowId
+  );
 
   return (
     <>
@@ -60,12 +79,17 @@ export default function ModalComponent(props) {
           <Box className={styles.ratingContainer}>
             <Rating
               title="Estetiskt skick"
-              id="functionality"
+              id="aesthetic"
               value={AestheticScore}
               hover={AestheticHover}
               getLabelText={getLabelText}
               onChange={(event, newValue) => {
                 setAestheticScore(newValue);
+                handleProductIndividualChange(
+                  props.rowId,
+                  "aesthetic",
+                  newValue
+                );
               }}
               onChangeActive={(event, newHover) => {
                 setAestheticHover(newHover);
@@ -73,13 +97,18 @@ export default function ModalComponent(props) {
               labels={labels}
             />
             <Rating
-              title="Estetiskt skick"
+              title="Funktionellt skick"
               id="functionality"
               value={FunctionalityScore}
               hover={FunctionalityHover}
               getLabelText={getLabelText}
               onChange={(event, newValue) => {
                 setFunctionalityScore(newValue);
+                handleProductIndividualChange(
+                  props.rowId,
+                  "functionality",
+                  newValue
+                );
               }}
               onChangeActive={(event, newHover) => {
                 setFunctionalityHover(newHover);
@@ -90,23 +119,88 @@ export default function ModalComponent(props) {
           <DatePicker
             title1="Datum tillgänglig/-a"
             title2="Datum första möjliga leverans"
+            onChange={(newValue) =>
+              handleProductIndividualChange(
+                props.rowId,
+                "dateAvailable",
+                newValue
+              )
+            }
           />
 
           <Box className={styles.textfieldContainer}>
-            <Dropdown
-              title="Demonterbarhet"
-              options={deconstructionOptions}
-              onOptionChange=""
-              id="deconstruction"
-              value=""
-            />
-            <Dropdown
-              title="Åtkomlighet"
-              options={accessibilityOptions}
-              onOptionChange=""
-              id="accessibility"
-              value=""
-            />
+            <Box className={styles.plusCommentContainer}>
+              <Dropdown
+                title="Demonterbarhet"
+                options={deconstructionOptions}
+                onOptionChange={(value) =>
+                  handleProductIndividualChange(
+                    props.rowId,
+                    "deconstruction",
+                    value
+                  )
+                }
+                id="deconstruction"
+                value={individual.deconstruction || ""}
+              />
+              <Link href="#" variant="body2">
+                Lägg till kommentar
+              </Link>
+            </Box>
+
+            <Box className={styles.plusCommentContainer}>
+              <Dropdown
+                title="Åtkomlighet"
+                options={accessibilityOptions}
+                onOptionChange={(value) =>
+                  handleProductIndividualChange(
+                    props.rowId,
+                    "accessibility",
+                    value
+                  )
+                }
+                id="accessibility"
+                value={individual.accessibility || ""}
+              />
+              <Link href="#" variant="body2" color="primary">
+                Lägg till kommentar
+              </Link>
+            </Box>
+          </Box>
+
+          <Box className={styles.textfieldContainer}>
+            {locationRefs.map(({ title, key }) => (
+              <Textfield
+                key={key}
+                title={title}
+                onChange={(e) =>
+                  handleProductIndividualChange(
+                    props.rowId,
+                    `locationRefs.${key}`,
+                    e.target.value
+                  )
+                }
+                value={individual.locationRefs?.[key] || ""}
+              />
+            ))}
+            <HelpOutlineIcon className={styles.questionMark} />
+          </Box>
+          <Box className={styles.textfieldContainer}>
+            {decisionRefs.map(({ title, key }) => (
+              <Textfield
+                key={key}
+                title={title}
+                onChange={(e) =>
+                  handleProductIndividualChange(
+                    props.rowId,
+                    `decisionRefs.${key}`,
+                    e.target.value
+                  )
+                }
+                value={individual.decisionRefs?.[key] || ""}
+              />
+            ))}
+            <HelpOutlineIcon className={styles.questionMark} />
           </Box>
 
           <Box className={styles.buttonContainer}>
@@ -132,7 +226,7 @@ export default function ModalComponent(props) {
                 borderRadius: "100px",
                 border: "1px solid #488AC6;",
               }}
-              onClick={console.log(state)}
+              onClick={() => console.log(state.productIndividual)}
             />
           </Box>
         </Paper>
