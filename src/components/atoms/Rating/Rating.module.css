@@ -1,6 +1,10 @@
-.Wrapper{
+.wrapper{
     display: flex;
     flex-direction: column;
+    width: 100%;
+}
+.wrapper > h3 {
+    margin-bottom: 4px;
 }
 .container{
     display: flex;
@@ -8,10 +12,8 @@
     gap: 5px;
     background-color: #F9F9F9;
     height: 32px;
-    width: fit-content;
     align-items: center;
     border: 2px solid #E2E2E2;
-    margin-right: 32px;
     padding: 0px 4px;
 }
 .ratingText{

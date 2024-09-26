@@ -34,6 +34,7 @@ export default function Individual({ row, statusOptions, marketplaceOptions }) {
         </td>
         <td>
           <Dropdown
+            size='inline'
             options={statusOptions}
             onOptionChange={handleDropdownChange("status")}
             value={row.status || ""}
@@ -41,6 +42,7 @@ export default function Individual({ row, statusOptions, marketplaceOptions }) {
         </td>
         <td>
           <Dropdown
+            size='inline'
             options={marketplaceOptions}
             onOptionChange={handleDropdownChange("marketplace")}
             value={row.marketplace || ""}
